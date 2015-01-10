@@ -17,6 +17,7 @@ public class ParasolLabel extends JLabel{
 	
 	public ParasolLabel(int id, String state)
 	{
+		super();
 		this.id = id;
 		this.state = state;
 		setHorizontalAlignment(JLabel.CENTER);
