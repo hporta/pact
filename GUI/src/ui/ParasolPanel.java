@@ -11,12 +11,13 @@ public class ParasolPanel extends JPanel{
 		super();
 		setLayout(new GridLayout(3,2));
 	
-		for(int i=0; i < 6; i++)
-		{
-			JLabel temp = new JLabel("Parasol " + (i+1));
-			temp.setHorizontalAlignment(JLabel.CENTER);
-			add(temp);
-		}
+		add(new ParasolLabel(1,"L"));
+		add(new ParasolLabel(2,"O"));
+		add(new ParasolLabel(3,"C"));
+		add(new ParasolLabel(4,"L"));
+		add(new ParasolLabel(5,"L"));
+		add(new ParasolLabel(6,"O"));
+		
 	}
 
 }
