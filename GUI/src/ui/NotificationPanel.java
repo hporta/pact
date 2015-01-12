@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -15,11 +17,15 @@ public class NotificationPanel extends JPanel{
 		super();
 		liste = new ArrayList<Notification>();
 		
-		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+		setLayout(new BorderLayout());
+		JPanel temp = new JPanel();
+		temp.setLayout(new GridLayout(0,1));
 		
-		add(new CommandeNotification(1));
-		add(new CommandeNotification(2));
-		add(new CommandeNotification(3));
+		temp.add(new CommandeNotification(1));
+		temp.add(new CommandeNotification(2));
+		temp.add(new CommandeNotification(3));
+		
+		add(temp,BorderLayout.PAGE_START);
 		
 	}
 }
