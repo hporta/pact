@@ -23,20 +23,13 @@ public class StockPanel extends JPanel{
 		setLayout(new BorderLayout());
 		JPanel temp = new JPanel();
 		temp.setLayout(new GridLayout(0,1));
-		/*GridBagConstraints c = new GridBagConstraints();
-		
-		c.anchor = GridBagConstraints.PAGE_START;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.weightx =1;
-		c.weighty = 0.1;
-		c.insets = new Insets(0,0,0,0);*/
 		
 		temp.add(addItemButton = new JButton("Ajouter"));
-		temp.add(new Item("Coca-cola","le coca c'est bon",1.2,3));
-		temp.add(new Item("Café","le café c'est bon",1.0,10));
-		temp.add(new Item("Perrier","le perrier c'est bon",1.2,3));
-		temp.add(new ItemSetting("Perrier","le perrier c'est bon",1.2,3));
+		temp.add(new ItemPanel(new Item("Coca-cola","le coca c'est bon",1.2,3)));
+		temp.add(new ItemPanel(new Item("Café","le café c'est bon",1.0,10)));
+		temp.add(new ItemPanel(new Item("Perrier","le perrier c'est bon",1.2,3)));
+		temp.add(new ItemSetting(new Item("Perrier","le perrier c'est bon",1.2,3)));
+		temp.add(new ItemSetting());
 		
 		add(temp,BorderLayout.PAGE_START);
 	}

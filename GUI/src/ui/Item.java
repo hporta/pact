@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class Item extends JPanel{
+public class Item {
 
 	private String nom;
 	private String description;
@@ -19,57 +19,49 @@ public class Item extends JPanel{
 	private int quantite;
 	
 	public Item(String nom, String description, double prix, int quantite) {
-		super();
 		this.nom = nom;
 		this.description = description;
 		this.prix = prix;
 		this.quantite = quantite;
-		
-		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		
-		c.anchor = GridBagConstraints.PAGE_START;
-		c.fill = GridBagConstraints.BOTH;
-		
-		c.gridx=0;
-		c.gridy=0;
-		c.weightx = 0.6;
-		c.weighty = 0.5;
-		add(new JLabel(nom),c);
-		
-		c.gridx=0;
-		c.gridy=1;
-		c.weightx = 0.6;
-		c.weighty = 0.5;
-		add(new JLabel(description),c);
-		
-		c.gridx=1;
-		c.gridy=0;
-		c.weightx = 0.2;
-		c.weighty = 0.5;
-		add(new JLabel("Prix : "+prix + "€"),c);
-
-		c.gridx=1;
-		c.gridy=1;
-		c.weightx = 0.2;
-		c.weighty = 0.5;
-		add(new JLabel("Quantite : "+quantite),c);
-		
-		c.gridx=2;
-		c.gridy=0;
-		c.weightx = 0.2;
-		c.weighty = 0.5;
-		add(new JButton("Modifier"),c);
-		
-		c.gridx=2;
-		c.gridy=1;
-		c.weightx = 0.2;
-		c.weighty = 0.5;
-		add(new JButton("Supprimer"),c);
-		
-		setBorder(BorderFactory.createLineBorder(Color.blue));
 	}
 	
-	
-	
+	public Item() {
+		this.nom = "Nom";
+		this.description = "Description";
+		this.prix = 0;
+		this.quantite = 0;
+	}
+
+	public final String getNom() {
+		return nom;
+	}
+
+	public final void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public final String getDescription() {
+		return description;
+	}
+
+	public final void setDescription(String description) {
+		this.description = description;
+	}
+
+	public final double getPrix() {
+		return prix;
+	}
+
+	public final void setPrix(double prix) {
+		this.prix = prix;
+	}
+
+	public final int getQuantite() {
+		return quantite;
+	}
+
+	public final void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+		
 }
