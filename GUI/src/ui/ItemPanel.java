@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.Item;
+
 
 public class ItemPanel extends JPanel{
 

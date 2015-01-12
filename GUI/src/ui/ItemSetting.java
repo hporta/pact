@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import model.Item;
+
 public class ItemSetting extends JPanel{
 	
 	private JTextField nom;
