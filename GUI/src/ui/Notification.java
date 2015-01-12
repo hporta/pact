@@ -18,6 +18,6 @@ public class Notification extends JPanel{
 		super();
 		setBorder(BorderFactory.createLineBorder(Color.blue));
 		setLayout(new BorderLayout());
-		add(new JButton("Fermer"),BorderLayout.PAGE_END);
+		add(new JButton("Fermer"),BorderLayout.EAST);
 	}
 }

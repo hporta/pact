@@ -22,6 +22,7 @@ public class NotificationPanel extends JPanel{
 		temp.setLayout(new GridLayout(0,1));
 		
 		temp.add(new CommandeNotification(1));
+		temp.add(new StockNotification("Cola-cola",4));
 		temp.add(new CommandeNotification(2));
 		temp.add(new CommandeNotification(3));
 		
