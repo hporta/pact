@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 import javax.swing.JLabel;
 
@@ -20,9 +21,6 @@ public class ParasolLabel extends JLabel{
 		super();
 		this.id = id;
 		this.state = state;
-		setHorizontalAlignment(JLabel.CENTER);
-		setText("Parasol n°" + id);
-		setColor();
 		setOpaque(true);
 	}
 	
@@ -34,30 +32,35 @@ public class ParasolLabel extends JLabel{
 	public void setState(String state)
 	{
 		this.state = state;
-		setColor();
 	}
 	
-	private void setColor()
+	public void paintComponent(Graphics g)
+	{
+		g.setColor(getColor());
+		g.fillOval(this.getWidth()/4,this.getWidth()/4,this.getWidth()/2,this.getHeight()/2);
+		g.setColor(Color.white);
+		int width = g.getFontMetrics().charWidth('0' + id);
+		g.drawString(id+"",this.getWidth()/2-width/2,this.getHeight()/2);
+	}
+	
+	private Color getColor()
 	{
 		switch(state)
 		{
 			// L = Libre
 			case "L" : 	
-				setBackground(GREEN);
-				break;
+				return(GREEN);
 				
 			// O = occupé sans commande	
 			case "O":
-				setBackground(ORANGE);
-				break;
+				return(ORANGE);
 				
 			// C = a commandé	
 			case "C":
-				setBackground(RED);
-				break;
+				return(RED);
 				
 			default:
-				setBackground(RED);		
+				return(RED);		
 		}
 	}
 	

@@ -10,7 +10,7 @@ public class ContentPanel extends JTabbedPane{
 	private final NotificationPanel notifications;
 	private final StockPanel stock;
 	private final CommandePanel commande;
-	private final PaiementPanel paiement;
+	//private final PaiementPanel paiement;
 
 	
 	private final String NOTIFICATION = "Notifications";
@@ -25,6 +25,6 @@ public class ContentPanel extends JTabbedPane{
 		addTab(NOTIFICATION,notifications = new NotificationPanel());
 		addTab(STOCK, stock = new StockPanel());
 		addTab(COMMANDE, commande = new CommandePanel());
-		addTab(PAIEMENT, paiement = new PaiementPanel());
+		//addTab(PAIEMENT, paiement = new PaiementPanel());
 	}
 }
