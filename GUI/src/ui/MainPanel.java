@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -14,6 +15,8 @@ public class MainPanel extends JPanel{
 	private final JLabel parasolHeader;
 	private final ContentPanel content;
 	private final JLabel contentHeader;
+	
+	private final String FONT = "TimesRoman";
 	
 	MainPanel()
 	{
@@ -32,6 +35,7 @@ public class MainPanel extends JPanel{
 		parasolHeader.setHorizontalAlignment(JLabel.CENTER);
 		parasolHeader.setForeground(Color.white);
 		parasolHeader.setBackground(new Color(0,94,197));
+		parasolHeader.setFont(new Font(FONT, Font.PLAIN, 25));
 		parasolHeader.setOpaque(true);
 		
 		c.gridx=0;
@@ -49,6 +53,7 @@ public class MainPanel extends JPanel{
 		contentHeader.setHorizontalAlignment(JLabel.CENTER);
 		contentHeader.setForeground(Color.white);
 		contentHeader.setBackground(new Color(200,55,55));
+		contentHeader.setFont(new Font(FONT, Font.PLAIN, 25));
 		contentHeader.setOpaque(true);
 		
 		c.gridx=1;

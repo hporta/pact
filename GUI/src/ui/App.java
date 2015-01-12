@@ -7,7 +7,7 @@ public class App extends JFrame{
 	private final MainPanel main;
 	
 	public App() {
-		super("Interface du Dome");
+		super("Interface du Dome");		
 		
 		main = new MainPanel();
 		setContentPane(main);

@@ -1,4 +1,4 @@
-package ui;
+package ui.notification;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,10 +13,13 @@ import javax.swing.JPanel;
 //il faut faire des classes filles pour chaque notification particulière
 public class Notification extends JPanel{
 
+	private final Color COLOR = Color.gray;
+	
 	public Notification()
 	{
 		super();
-		setBorder(BorderFactory.createLineBorder(Color.blue));
+		setBorder(BorderFactory.createLineBorder(Color.black));
+		setBackground(COLOR);
 		setLayout(new BorderLayout());
 		add(new JButton("Fermer"),BorderLayout.EAST);
 	}

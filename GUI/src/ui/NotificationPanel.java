@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import ui.notification.CommandeNotification;
+import ui.notification.Notification;
+import ui.notification.StockNotification;
+
 public class NotificationPanel extends JPanel{
 
 	private ArrayList<Notification> liste;
