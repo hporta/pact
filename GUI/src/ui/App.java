@@ -15,8 +15,4 @@ public class App extends JFrame{
 		pack();
 		setVisible(true);
 	}
-	
-	
-	
-
 }

@@ -36,6 +36,7 @@ public class StockPanel extends JPanel{
 		temp.add(new Item("Coca-cola","le coca c'est bon",1.2,3));
 		temp.add(new Item("Café","le café c'est bon",1.0,10));
 		temp.add(new Item("Perrier","le perrier c'est bon",1.2,3));
+		temp.add(new ItemSetting("Perrier","le perrier c'est bon",1.2,3));
 		
 		add(temp,BorderLayout.PAGE_START);
 	}
