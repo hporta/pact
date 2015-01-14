@@ -8,7 +8,7 @@ public abstract class Table
 	private int no;
 	private boolean propre; //propre ou sale
 	private float note;
-	private boolean libre; 
+	private boolean libre; // libre ou occupé
 	
 	public Table(int no)
 		{
@@ -36,18 +36,18 @@ public abstract class Table
 		return propre;
 		}
 	
-	public void clean() throws Exception
+	public void clean() throws Exception//Si la table est prope on a une rreur
 		{
 		if(propre == false)
 			System.out.println("envoyer un serveur nettoyer table" + no);
 		}
-	public void callServeur() throws Exception
+	public void callServeur() throws Exception// si la table est libre on a une erreur
 	{if(libre == true)
 		throw new Exception("Erreur il n'y a personne à table");
 	System.out.println("besoin de serveur" + no);
 	}
 
-public Command passerCommande(ArrayList<String> paroles) throws Exception
+public Command passerCommande(ArrayList<String> paroles) throws Exception//on reconnait des achetables dans les paroles que l'on récupèrent du module audio
 	{
 	if(libre == true)
 		throw new Exception("Erreur il n'y a personne à  table");

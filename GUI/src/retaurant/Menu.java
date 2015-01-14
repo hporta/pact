@@ -22,7 +22,7 @@ public class Menu implements Achetable
 		this.prix = prix;
 		}
 
-	public boolean Disponible(){int i = 0;
+	public boolean Disponible(){int i = 0;// un menu est disponible que si tous les plats sont disponibles
 		for (Plat plat : menu){
 			if(plat.Disponible())
 				i++;

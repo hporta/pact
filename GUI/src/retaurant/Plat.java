@@ -19,7 +19,7 @@ public class Plat implements Achetable
 		listeingredient = new ArrayList<Ingredient>();
 		}
 	
-	public boolean Disponible()
+	public boolean Disponible()//toujours un plat est disponible si tous les ingrédients sont présents
 		{int i =0;
 		for (Ingredient ingredient : listeingredient){
 			if (ingredient.getNoInStock()!=0)
@@ -27,7 +27,7 @@ public class Plat implements Achetable
 			}
 		return(i==listeingredient.size());
 		}
-	public void diminution () throws Exception{
+	public void diminution () throws Exception{// on diminue la quantité de tous les ingrédients
 		for (Ingredient ingredient : listeingredient)
 			ingredient.removeProduct(1);
 	}

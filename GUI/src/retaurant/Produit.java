@@ -1,6 +1,6 @@
 package retaurant;
 
-public abstract class Produit {
+public abstract class Produit {//cette classe représente l'ensemble de ce qui est en stock
 	private final String nom;
 	private int noinstock; //nombre de produit dans les stock
 	

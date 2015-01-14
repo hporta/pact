@@ -10,9 +10,8 @@ public class Command
 	
 	public Command(Table table)
 		{
-		//a implementer
 		listecommandes = new ArrayList<Achetable>();
-		etat = new String("En cours");
+		etat = new String("En cours");// lorsqu'on crée une commande elle sera en cours
 		this.table= table;
 		}
 	

@@ -25,7 +25,7 @@ public class Stock
 			}
 		}
 	}
-	public void EtatDesStocks(){
+	public void EtatDesStocks(){// il renvoie tous les produits en stock
 		for(Produit produit : stock){
 			System.out.println(produit.getNom() + produit.getNoInStock());
 		}
