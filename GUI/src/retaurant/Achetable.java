@@ -1,9 +1,11 @@
 package retaurant;
 
-public interface Achetable {// on crée une interface qui récupère l'ensemble des propriétés d'un produit que l'on peut consommer au café
+// on crï¿½e une interface qui rï¿½cupï¿½re l'ensemble des propriï¿½tï¿½s d'un produit que l'on peut consommer au cafï¿½
+public interface Achetable 
+{
 	public float getPrix();
 	public String getNom();
-	public boolean Disponible();//méthode qui permettra de mettre à  jour la carte si on a plus un produit
-	public void diminution() throws Exception;//méthode qui diminura la quantité d'un consommable
+	public boolean disponible();//mï¿½thode qui permettra de mettre ï¿½  jour la carte si on a plus un produit
+	public void diminution() throws Exception;//mï¿½thode qui diminura la quantitï¿½ d'un consommable
 
 }

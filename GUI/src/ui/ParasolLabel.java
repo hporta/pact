@@ -8,22 +8,24 @@ import java.awt.RenderingHints;
 
 import javax.swing.JLabel;
 
-import model.Table;
+
 
 /* Solution non définitive pour l'id et la table, il devrait y avoir un objet parasol pour gérer ces paramètres*/
-public class ParasolLabel extends JLabel{
-	
-	private Table table;
+public class ParasolLabel extends JLabel
+{
 	
 	private static final Color GREEN = new Color(0,200,0);
 	private static final Color RED = new Color(200,0,0);
 	private static final Color ORANGE = new Color(200,120,120);
 	
+	private final int id;
+	private final String state;
 	
 	public ParasolLabel(int id, String state)
 	{
 		super();
-		table = new Table(id,state);
+		this.id = id;
+		this.state = state;
 		setOpaque(true);
 	}
 	
@@ -42,13 +44,13 @@ public class ParasolLabel extends JLabel{
 		
 		g.setColor(Color.white);
 		g.setFont(new Font("TimesRoman",Font.PLAIN,min/8));
-		int width = g.getFontMetrics().charWidth('0' + table.getId());
-		g.drawString(table.getId()+"",this.getWidth()/2-width/2,this.getHeight()/2);
+		int width = g.getFontMetrics().charWidth('0' + id);
+		g.drawString(id+"",this.getWidth()/2-width/2,this.getHeight()/2);
 	}
 	
 	private Color getColor()
 	{
-		switch(table.getState())
+		switch(state)
 		{
 			// L = Libre
 			case "L" : 	

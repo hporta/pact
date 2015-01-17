@@ -8,14 +8,15 @@ import java.util.HashMap;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Commande;
-import model.Item;
+import retaurant.Achetable;
+import retaurant.Command;
+
 
 public class CommandeListe extends JPanel{
 	
-	private Commande commande;
+	private Command commande;
 	
-	public CommandeListe(Commande commande)
+	public CommandeListe(Command commande)
 	{
 		this.commande = commande;
 		build();
@@ -24,23 +25,21 @@ public class CommandeListe extends JPanel{
 	public void build()
 	{
 		setLayout(new GridLayout(0,2));
-		HashMap<Item,Integer> liste = commande.getListe();
 		
 		add(new JLabel("Commande"));
 		add(new JLabel ("Table"));
 		
-		for(Item item : liste.keySet())
+		for(Achetable obj: commande.getListeCommandes())
 		{
-			int quantity = liste.get(item);
 			
-			add(new JLabel(quantity + " x " + item.getNom()));
+			add(new JLabel(obj.getNom()));
 			
-			add(new JLabel(item.getPrix()*quantity + "€"));
+			add(new JLabel(obj.getPrix() + "€"));
 		}
 		
 		add(new JLabel("Total "));
 		
-		add(new JLabel(commande.getMontant() + "€"));
+		add(new JLabel("Pas de total pour le moment"));
 	}
 	
 	

@@ -4,60 +4,73 @@ import java.util.ArrayList;
 
 
 public abstract class Table
-	{
+{
 	private int no;
 	private boolean propre; //propre ou sale
 	private float note;
-	private boolean libre; // libre ou occupé
+	private boolean libre; // libre ou occupï¿½
 	
 	public Table(int no)
-		{
+	{
 		this.no = no;
-		}
+	}
 
-	public void addNote(int prixCommande){
+	public void addNote(int prixCommande)
+	{
 		note += prixCommande;
 	}
-    public void clearNote(){
+	
+    public void clearNote()
+    {
     	note = 0;
     }
+    
 	public void setEtat(boolean etat)
-		{	
+	{	
 		propre = etat;
-		}
+	}
 
 	
-	public final int getNo(){	
+	public final int getNo()
+	{	
 		return no;
-		}
+	}
 
 	
-	public boolean getPropre(){	
+	public boolean getPropre()
+	{	
 		return propre;
-		}
+	}
 	
-	public void clean() throws Exception//Si la table est prope on a une rreur
-		{
+	//Si la table est prope on a une rreur
+	public void clean() throws Exception
+	{
 		if(propre == false)
 			System.out.println("envoyer un serveur nettoyer table" + no);
-		}
-	public void callServeur() throws Exception// si la table est libre on a une erreur
-	{if(libre == true)
-		throw new Exception("Erreur il n'y a personne à table");
-	System.out.println("besoin de serveur" + no);
 	}
-
-public Command passerCommande(ArrayList<String> paroles) throws Exception//on reconnait des achetables dans les paroles que l'on récupèrent du module audio
+	
+	// si la table est libre on a une erreur
+	public void callServeur() throws Exception
 	{
-	if(libre == true)
-		throw new Exception("Erreur il n'y a personne à  table");
-	Command command = new Command(this);
-	for(String mot : paroles){
-		for(Achetable element : Carte.getCarte())
-		if(mot.equals(element))
-		command.add(element);
+		if(libre == true)
+			throw new Exception("Erreur il n'y a personne Ã  table");
+		
+		System.out.println("Besoin de serveur Ã  la table : " + no);
 	}
-	return command;
+	
+	//on reconnait des achetables dans les paroles que l'on rï¿½cupï¿½rent du module audio
+	public Command passerCommande(ArrayList<String> paroles) throws Exception
+	{
+		if(libre == true)
+			throw new Exception("Erreur il n'y a personne Ã   table");
+		
+		Command command = new Command(this);
+		for(String mot : paroles)
+			for(Achetable element : Carte.getCarte())
+				if(mot.equals(element))
+					command.add(element);
+	
+		return command;
 	}	
 
-	}
+}

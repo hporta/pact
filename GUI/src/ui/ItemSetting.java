@@ -13,7 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import model.Item;
+import retaurant.Achetable;
+
+
 
 public class ItemSetting extends JPanel{
 	
@@ -22,11 +24,8 @@ public class ItemSetting extends JPanel{
 	private JFormattedTextField prix;
 	private JFormattedTextField quantite;
 	
-	public ItemSetting() {
-		this(new Item());
-	}
 	
-	public ItemSetting(Item item) {
+	public ItemSetting(Achetable plat) {
 		
 		super();
 		
@@ -40,27 +39,27 @@ public class ItemSetting extends JPanel{
 		c.gridy=0;
 		c.weightx = 0.6;
 		c.weighty = 0.5;
-		add(this.nom = new JTextField(item.getNom()),c);
+		add(this.nom = new JTextField(plat.getNom()),c);
 		
 		c.gridx=0;
 		c.gridy=1;
 		c.weightx = 0.6;
 		c.weighty = 0.5;
-		add(this.description = new JTextField(item.getDescription()),c);
+		add(this.description = new JTextField("desription du plat"),c);
 		
 		c.gridx=1;
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.prix = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
-		this.prix.setValue(new Double(item.getPrix()));
+		this.prix.setValue(new Double(plat.getPrix()));
 
 		c.gridx=1;
 		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.quantite = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
-		this.quantite.setValue(new Integer(item.getQuantite()));
+		this.quantite.setValue(new Integer(2));
 		
 		c.gridx=2;
 		c.gridy=0;

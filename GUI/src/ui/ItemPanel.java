@@ -10,15 +10,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Item;
+import retaurant.Achetable;
+
 
 
 public class ItemPanel extends JPanel{
 
 
-	private Item item;
+	private Achetable item;
 	
-	public ItemPanel(Item item)
+	public ItemPanel(Achetable item)
 	{
 		super();
 		this.item = item;
@@ -39,7 +40,7 @@ public class ItemPanel extends JPanel{
 		c.gridy=1;
 		c.weightx = 0.6;
 		c.weighty = 0.5;
-		add(new JLabel(item.getDescription()),c);
+		add(new JLabel("Une description"),c);
 		
 		c.gridx=1;
 		c.gridy=0;
@@ -51,7 +52,7 @@ public class ItemPanel extends JPanel{
 		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(new JLabel("Quantite : "+ item.getQuantite()),c);
+		add(new JLabel("Quantite : "+ "une quantité"),c);
 		
 		c.gridx=2;
 		c.gridy=0;

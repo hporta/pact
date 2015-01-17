@@ -1,9 +1,12 @@
 package retaurant;
 
-public class Liquide extends Consommable{//boisson qui ne différe par leur nom mais par leur volume
+//boisson qui ne diffï¿½re par leur nom mais par leur volume
+public class Liquide extends Consommable
+{
 	private float litre;
 	
-	public Liquide(String nom, int noinstock,float price, float litre){
+	public Liquide(String nom, int noinstock,float price, float litre)
+	{
 		super(nom,noinstock,price);
 		this.litre = litre;
 	}

@@ -1,8 +1,10 @@
 package retaurant;
-public class Ingredient extends Produit{//element d'un  plat non consommable à l'unité
-	
-	public Ingredient(String nom, int noinstock){
+
+//element d'un  plat non consommable ï¿½ l'unitï¿½
+public class Ingredient extends Produit
+{
+	public Ingredient(String nom, int noinstock)
+	{
 		super(nom,noinstock);
 	}
-	
 }
