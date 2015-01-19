@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 //il faut faire des classes filles pour chaque notification particulière
 public class Notification extends JPanel{
 
-	private final Color COLOR = Color.gray;
+	public static final Color COLOR = Color.gray;
 	
 	public Notification()
 	{

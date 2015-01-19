@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 public class CommandeNotification extends Notification{
 		
-	private final Color CMD_COLOR = Color.magenta;
+	public static final Color CMD_COLOR = new Color(126,170,250);
 	
 	public CommandeNotification(int idTable)
 	{

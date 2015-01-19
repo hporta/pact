@@ -5,7 +5,8 @@ import javax.swing.JPanel;
 
 public class PaiementPanel extends JPanel{
 
-	public PaiementPanel() {
+	public PaiementPanel()
+	{
 		super();
 		add(new JLabel("Page des paiements"));
 	}

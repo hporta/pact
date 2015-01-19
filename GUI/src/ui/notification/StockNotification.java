@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 public class StockNotification extends Notification{
 
-	private final Color STOCK_COLOR = Color.cyan;
+	public static final Color STOCK_COLOR = new Color(255,67,42);
 	
 	public StockNotification(String nom, int quantite)
 	{
