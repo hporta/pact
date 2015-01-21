@@ -73,7 +73,7 @@ public class ItemSetting extends JPanel{
 		c.weighty = 0.5;
 		add(new JButton("Retour"),c);
 		
-		setBorder(BorderFactory.createLineBorder(Color.blue));
+		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 
 }

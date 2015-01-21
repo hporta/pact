@@ -25,6 +25,7 @@ public class ItemPanel extends JPanel{
 		this.item = item;
 		
 		setLayout(new GridBagLayout());
+		setBorder(BorderFactory.createLineBorder(Color.black));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		c.anchor = GridBagConstraints.PAGE_START;
