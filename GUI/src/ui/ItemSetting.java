@@ -3,9 +3,11 @@ package ui;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -65,13 +67,17 @@ public class ItemSetting extends JPanel{
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(new JButton("Valider"),c);
+		ImageIcon edit = new ImageIcon("data/img/validate.png");
+		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
+		add(new JButton("Valider",edit),c);
 		
 		c.gridx=2;
 		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(new JButton("Retour"),c);
+		ImageIcon retour = new ImageIcon("data/img/arrow.png");
+		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
+		add(new JButton("Retour",retour),c);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}

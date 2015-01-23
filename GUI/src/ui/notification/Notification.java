@@ -25,7 +25,7 @@ public class Notification extends JPanel{
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setBackground(COLOR);
 		setLayout(new BorderLayout());
-		ImageIcon cross = new ImageIcon("close.png");
+		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(12, 12,Image.SCALE_DEFAULT));
 		add(close = new JButton(cross),BorderLayout.EAST);
 		close.setBackground(new Color(0.0f,0.0f,0.0f,0.0f));
