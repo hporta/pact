@@ -1,7 +1,6 @@
 package ui;
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -12,20 +11,29 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import retaurant.Achetable;
+import retaurant.Consommable;
 
-
-
-public class ItemPanel extends JPanel
+public class ConsommableItem extends JPanel
 {
-	private Achetable item;
+	private Consommable consommable;
+	
+	//labels
+	private JLabel nom;
+	private JLabel prix;
+	private JLabel quantite;
+	
+	//Buttons
 	private JButton setButton;
 	private JButton delButton;
 	
-	public ItemPanel(Achetable item)
+	ConsommableItem(Consommable consommable)
 	{
 		super();
-		this.item = item;
+		this.consommable = consommable;
+		this.nom = new JLabel();
+		this.prix = new JLabel();
+		this.quantite = new JLabel();
+		update();
 		
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -38,25 +46,28 @@ public class ItemPanel extends JPanel
 		c.gridy=0;
 		c.weightx = 0.6;
 		c.weighty = 0.5;
-		add(new JLabel(item.getNom()),c);
+		add(nom,c);
 		
+		/*
+		 * Partie pour la description du produit
 		c.gridx=0;
 		c.gridy=1;
 		c.weightx = 0.6;
 		c.weighty = 0.5;
 		add(new JLabel("Une description"),c);
+		*/
 		
 		c.gridx=1;
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(new JLabel("Prix : "+item.getPrix() + "€"),c);
+		add(prix,c);
 
 		c.gridx=1;
 		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(new JLabel("Quantite : "+ "une quantité"),c);
+		add(quantite,c);
 		
 		c.gridx=2;
 		c.gridy=0;
@@ -73,5 +84,12 @@ public class ItemPanel extends JPanel
 		ImageIcon cross = new ImageIcon("data.img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),c);
-	}	
+	}
+	
+	public void update()
+	{
+		nom.setText("Nom : " + consommable.getNom());
+		prix.setText("Prix : " + consommable.getPrix() +"€");
+		quantite.setText("Quantité : " + consommable.getNoInStock() + " unités");
+	}
 }

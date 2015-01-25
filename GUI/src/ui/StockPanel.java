@@ -15,30 +15,35 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
+import retaurant.Consommable;
+import retaurant.Ingredient;
 import retaurant.Plat;
 
 
-public class StockPanel extends JPanel{
-
-	private final JButton addItemButton;
+public class StockPanel extends JTabbedPane
+{	
+	private final ConsommablePanel consommable;
+	private final IngredientPanel ingredient;
 	
-	public StockPanel()
+	private final String CONSOMMABLES = "Consommables";
+	private final String INGREDIENTS = "Ingredients";
+	
+	public StockPanel() 
 	{
 		super();
 		
-		setLayout(new BorderLayout());
-		JPanel temp = new JPanel();
-		temp.setLayout(new GridLayout(0,1));
+		addTab(CONSOMMABLES, consommable = new ConsommablePanel());
+		addTab(INGREDIENTS,ingredient= new IngredientPanel());
 		
+		consommable.addConsommable(new Consommable("Chips",10,1.5f));
+		consommable.addConsommable(new Consommable("Perrier",7,3.0f));
+		consommable.addConsommable(new Consommable("Coca",5,1.2f));
 		
-		temp.add(addItemButton = new AddItemButton());
-		temp.add(new ItemPanel(new Plat("Coca-cola","le coca c'est bon",1.2f)));
-		temp.add(new ItemPanel(new Plat("Café","le café c'est bon",1.0f)));
-		temp.add(new ItemPanel(new Plat("Perrier","le perrier c'est bon",1.2f)));
-		temp.add(new ItemSetting(new Plat("Perrier","le perrier c'est bon",1.2f)));
-		
-		add(temp,BorderLayout.PAGE_START);
+		ingredient.addIngredient(new Ingredient("Pommes de terre",15));
+		ingredient.addIngredient(new Ingredient("Carrotes",7));
+		ingredient.addIngredient(new Ingredient("Pommes",3));
 	}
 
 }
