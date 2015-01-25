@@ -31,6 +31,7 @@ public class IngredientForm extends JPanel implements ActionListener
 	private JButton ret;
 	
 	private IngredientPanel parent;
+	private final boolean nouveau;
 	
 	public IngredientForm(IngredientPanel parent,IngredientController controller)
 	{
@@ -38,6 +39,8 @@ public class IngredientForm extends JPanel implements ActionListener
 		this.controller = controller;
 		this.ingredient = controller.getIngredient();
 		this.parent = parent;
+		
+		nouveau = (ingredient.getNom() == "Nom" && ingredient.getNoInStock() == 0);		
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -92,16 +95,23 @@ public class IngredientForm extends JPanel implements ActionListener
 		if("validate".equals(e.getActionCommand()))
 		{
 			if(controller.setIngredient(nom.getText(), Integer.parseInt(quantite.getText())))
-			{
-				parent.addIngredient(controller.getIngredient());
+			{		
 				//supprime du conteneur
 				this.getParent().remove(this);
+				
+				parent.addIngredient(controller.getIngredient());
+
 			}
 		}
 		
 		else if("return".equals(e.getActionCommand()))
 		{
+			this.getParent().remove(this);
 			
+			if(!nouveau)
+			{
+				parent.addIngredient(controller.getIngredient());
+			}
 		}
 		
 	}

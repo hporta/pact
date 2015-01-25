@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -14,7 +16,7 @@ import javax.swing.JPanel;
 import retaurant.Ingredient;
 
 @SuppressWarnings("serial")
-public class IngredientItem extends JPanel
+public class IngredientItem extends JPanel implements ActionListener
 {
 	private Ingredient ingredient;
 
@@ -26,13 +28,17 @@ public class IngredientItem extends JPanel
 	private JButton setButton;
 	private JButton delButton;
 	
-	IngredientItem(Ingredient ingredient)
+	private IngredientPanel parent;
+	
+	IngredientItem(Ingredient ingredient,IngredientPanel parent)
 	{
 		super();
 		this.ingredient = ingredient;
 		this.nom = new JLabel();
 		this.quantite = new JLabel();
 		update();
+		
+		this.parent = parent;
 		
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -60,6 +66,8 @@ public class IngredientItem extends JPanel
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(setButton = new JButton("Modifier",edit),c);
+		setButton.addActionListener(this);
+		setButton.setActionCommand("set");
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -68,11 +76,32 @@ public class IngredientItem extends JPanel
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),c);
+		delButton.addActionListener(this);
+		delButton.setActionCommand("del");
 	}
 	
 	public void update()
 	{
 		nom.setText("Nom : " + ingredient.getNom());
 		quantite.setText("Quantité : " + ingredient.getNoInStock() + " unités");
+	}
+
+	public Ingredient getIngredient()
+	{
+		return ingredient;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if("del".equals(e.getActionCommand()))
+		{
+			this.getParent().remove(this);
+		}
+		
+		else if("set".equals(e.getActionCommand()))
+		{
+			parent.setIngredient(this);
+		}
 	}
 }

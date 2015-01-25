@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import controller.IngredientController;
 import retaurant.Ingredient;
 import ui.AddItemButton;
 
@@ -36,8 +37,17 @@ public class IngredientPanel extends JPanel implements ActionListener
 	
 	public void addIngredient(Ingredient ingredient)
 	{
-		IngredientItem temp = new IngredientItem(ingredient);
+		IngredientItem temp = new IngredientItem(ingredient,this);
 		liste.add(temp);
+		conteneur.add(temp);
+	}
+	
+	public void setIngredient(IngredientItem ingredient)
+	{
+		liste.remove(ingredient);
+		JPanel temp = new IngredientForm(this,new IngredientController(ingredient.getIngredient()));
+		liste.add(temp);
+		conteneur.remove(ingredient);
 		conteneur.add(temp);
 	}
 	/*
