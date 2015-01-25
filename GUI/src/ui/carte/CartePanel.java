@@ -1,9 +1,11 @@
-package ui;
+package ui.carte;
 
 import javax.swing.JTabbedPane;
 
 import retaurant.Ingredient;
 import retaurant.Plat;
+import ui.carte.menu.MenuPanel;
+import ui.carte.plat.PlatPanel;
 
 @SuppressWarnings("serial")
 public class CartePanel extends JTabbedPane

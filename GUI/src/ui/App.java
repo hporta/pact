@@ -2,11 +2,13 @@ package ui;
 
 import javax.swing.JFrame;
 
-public class App extends JFrame{
+public class App extends JFrame
+{
 
 	private final MainPanel main;
 	
-	public App() {
+	public App() 
+	{
 		super("Interface du Dome");		
 		
 		main = new MainPanel();

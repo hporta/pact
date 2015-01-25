@@ -1,4 +1,4 @@
-package ui;
+package ui.stock.ingredient;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -6,20 +6,21 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import retaurant.Consommable;
+import retaurant.Ingredient;
+import ui.AddItemButton;
 
 @SuppressWarnings("serial")
-public class ConsommablePanel extends JPanel
+public class IngredientPanel extends JPanel
 {
 	private AddItemButton add;
-	private ArrayList<ConsommableItem> liste;
+	private ArrayList<IngredientItem> liste;
 	private JPanel conteneur;
 	
-	public ConsommablePanel() 
+	public IngredientPanel() 
 	{
 		setLayout(new BorderLayout());
 		add = new AddItemButton();
-		liste = new ArrayList<ConsommableItem>();
+		liste = new ArrayList<IngredientItem>();
 		
 		conteneur = new JPanel();
 		conteneur.setLayout(new GridLayout(0,1));
@@ -28,9 +29,9 @@ public class ConsommablePanel extends JPanel
 		add(conteneur);
 	}
 	
-	public void addConsommable(Consommable consommable)
+	public void addIngredient(Ingredient ingredient)
 	{
-		ConsommableItem temp = new ConsommableItem(consommable);
+		IngredientItem temp = new IngredientItem(ingredient);
 		liste.add(temp);
 		conteneur.add(temp);
 	}

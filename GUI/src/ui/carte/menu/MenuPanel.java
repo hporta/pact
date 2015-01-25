@@ -1,4 +1,4 @@
-package ui;
+package ui.carte.menu;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -6,21 +6,22 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import retaurant.Plat;
+import retaurant.Menu;
 import ui.AddItemButton;
 
+
 @SuppressWarnings("serial")
-public class PlatPanel extends JPanel
+public class MenuPanel extends JPanel
 {
 	private AddItemButton add;
-	private ArrayList<PlatItem> liste;
+	private ArrayList<MenuItem> liste;
 	private JPanel conteneur;
 	
-	PlatPanel()
+	public MenuPanel()
 	{
 		super();
 		add = new AddItemButton();
-		liste = new ArrayList<PlatItem>();
+		liste = new ArrayList<MenuItem>();
 		conteneur = new JPanel();
 		
 		setLayout(new BorderLayout());
@@ -30,9 +31,9 @@ public class PlatPanel extends JPanel
 		add(conteneur);
 	}
 	
-	public void addPlat(Plat plat)
+	public void addMenu(Menu menu)
 	{
-		PlatItem temp = new PlatItem(plat);
+		MenuItem temp = new MenuItem(menu);
 		liste.add(temp);
 		conteneur.add(temp);
 	}

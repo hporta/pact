@@ -1,4 +1,4 @@
-package ui;
+package ui.stock.consommable;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -11,29 +11,28 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import retaurant.Ingredient;
-import retaurant.Plat;
+import retaurant.Consommable;
 
-@SuppressWarnings("serial")
-public class PlatItem extends JPanel
+public class ConsommableItem extends JPanel
 {
-	private Plat plat;
+	private Consommable consommable;
 	
+	//labels
 	private JLabel nom;
-	private JLabel description;
 	private JLabel prix;
+	private JLabel quantite;
 	
+	//Buttons
 	private JButton setButton;
 	private JButton delButton;
 	
-	public PlatItem(Plat plat)
+	ConsommableItem(Consommable consommable)
 	{
 		super();
-		this.plat = plat;
-		
+		this.consommable = consommable;
 		this.nom = new JLabel();
 		this.prix = new JLabel();
-		this.description = new JLabel();
+		this.quantite = new JLabel();
 		update();
 		
 		setLayout(new GridBagLayout());
@@ -46,20 +45,29 @@ public class PlatItem extends JPanel
 		c.gridx=0;
 		c.gridy=0;
 		c.weightx = 0.6;
-		c.weighty = 0.2;
+		c.weighty = 0.5;
 		add(nom,c);
-
+		
+		/*
+		 * Partie pour la description du produit
+		c.gridx=0;
+		c.gridy=1;
+		c.weightx = 0.6;
+		c.weighty = 0.5;
+		add(new JLabel("Une description"),c);
+		*/
+		
 		c.gridx=1;
 		c.gridy=0;
 		c.weightx = 0.2;
-		c.weighty = 0.2;
+		c.weighty = 0.5;
 		add(prix,c);
-		
-		c.gridx = 0;
-		c.gridy = 1;
-		c.weightx = 0.8;
-		c.weighty = 0.8;
-		add(description,c);
+
+		c.gridx=1;
+		c.gridy=1;
+		c.weightx = 0.2;
+		c.weighty = 0.5;
+		add(quantite,c);
 		
 		c.gridx=2;
 		c.gridy=0;
@@ -80,16 +88,8 @@ public class PlatItem extends JPanel
 	
 	public void update()
 	{
-		nom.setText("Nom : " + plat.getNom());
-		prix.setText("Prix : " + plat.getPrix() +"€");
-		
-		String descr = "<html>" + plat.getDescription() +"<br/> Ingrédients : ";
-		for(Ingredient ingre : plat.getIngredients())
-		{
-			descr += ingre.getNom()+",";
-		}
-		descr += "</html>";
-		
-		description.setText(descr);
+		nom.setText("Nom : " + consommable.getNom());
+		prix.setText("Prix : " + consommable.getPrix() +"€");
+		quantite.setText("Quantité : " + consommable.getNoInStock() + " unités");
 	}
 }

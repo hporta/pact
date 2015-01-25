@@ -1,4 +1,4 @@
-package ui;
+package ui.stock;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,6 +20,8 @@ import javax.swing.JTabbedPane;
 import retaurant.Consommable;
 import retaurant.Ingredient;
 import retaurant.Plat;
+import ui.stock.consommable.ConsommablePanel;
+import ui.stock.ingredient.IngredientPanel;
 
 
 public class StockPanel extends JTabbedPane

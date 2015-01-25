@@ -1,4 +1,4 @@
-package ui;
+package ui.stock;
 
 import java.awt.BorderLayout;
 

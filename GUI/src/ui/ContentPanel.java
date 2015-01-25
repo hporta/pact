@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JTabbedPane;
 
+import ui.carte.CartePanel;
+import ui.stock.StockPanel;
+
 public class ContentPanel extends JTabbedPane{
 
 	private final NotificationPanel notifications;
