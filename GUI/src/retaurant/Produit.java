@@ -3,7 +3,7 @@ package retaurant;
 //cette classe repr�sente l'ensemble de ce qui est en stock
 public abstract class Produit 
 {
-	private final String nom;
+	private String nom;
 	private int noinstock; //nombre de produit dans les stock
 	
 	public String getNom()
@@ -11,9 +11,19 @@ public abstract class Produit
 		return nom;
 	}
 	
+	public void setNom(String nom)
+	{
+		this.nom = nom;
+	}
+	
 	public int getNoInStock()
 	{	
 		return noinstock;
+	}
+	
+	public void setNoInStock(int noinstock)
+	{
+		this.noinstock = noinstock;
 	}
 	
 	public Produit(String nom, int noinstock)

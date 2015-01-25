@@ -7,4 +7,5 @@ public class Ingredient extends Produit
 	{
 		super(nom,noinstock);
 	}
+
 }
