@@ -65,7 +65,7 @@ public class IngredientItem extends JPanel
 		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		ImageIcon cross = new ImageIcon("data.img/close.png");
+		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),c);
 	}

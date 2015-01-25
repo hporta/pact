@@ -11,28 +11,28 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import retaurant.Consommable;
+import retaurant.Menu;
+import retaurant.Plat;
 
-public class ConsommableItem extends JPanel
+public class MenuItem extends JPanel
 {
-	private Consommable consommable;
+	private Menu menu;
 	
-	//labels
 	private JLabel nom;
+	private JLabel description;
 	private JLabel prix;
-	private JLabel quantite;
 	
-	//Buttons
 	private JButton setButton;
 	private JButton delButton;
 	
-	ConsommableItem(Consommable consommable)
+	public MenuItem(Menu menu)
 	{
 		super();
-		this.consommable = consommable;
+		this.menu = menu;
+		
 		this.nom = new JLabel();
 		this.prix = new JLabel();
-		this.quantite = new JLabel();
+		this.description = new JLabel();
 		update();
 		
 		setLayout(new GridBagLayout());
@@ -45,29 +45,20 @@ public class ConsommableItem extends JPanel
 		c.gridx=0;
 		c.gridy=0;
 		c.weightx = 0.6;
-		c.weighty = 0.5;
+		c.weighty = 0.2;
 		add(nom,c);
-		
-		/*
-		 * Partie pour la description du produit
-		c.gridx=0;
-		c.gridy=1;
-		c.weightx = 0.6;
-		c.weighty = 0.5;
-		add(new JLabel("Une description"),c);
-		*/
-		
+
 		c.gridx=1;
 		c.gridy=0;
 		c.weightx = 0.2;
-		c.weighty = 0.5;
+		c.weighty = 0.2;
 		add(prix,c);
-
-		c.gridx=1;
-		c.gridy=1;
-		c.weightx = 0.2;
-		c.weighty = 0.5;
-		add(quantite,c);
+		
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 0.8;
+		c.weighty = 0.8;
+		add(description,c);
 		
 		c.gridx=2;
 		c.gridy=0;
@@ -88,8 +79,15 @@ public class ConsommableItem extends JPanel
 	
 	public void update()
 	{
-		nom.setText("Nom : " + consommable.getNom());
-		prix.setText("Prix : " + consommable.getPrix() +"€");
-		quantite.setText("Quantité : " + consommable.getNoInStock() + " unités");
+		nom.setText("Nom : " + menu.getNom());
+		prix.setText("Prix : " + menu.getPrix() +"€");
+		
+		String descr = "Plats : ";
+		for(Plat plat : menu.getMenu())
+		{
+			descr += plat.getNom()+",";
+		}
+		
+		description.setText(descr);
 	}
 }

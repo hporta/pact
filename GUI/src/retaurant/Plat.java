@@ -61,4 +61,18 @@ public class Plat implements Achetable
 		this.prix = prix;
 	}
 	
+	public ArrayList<Ingredient> getIngredients()
+	{
+		return listeingredient;
+	}
+	
+	public String getDescription()
+	{
+		return description;
+	}
+	
+	public void addIngredient(Ingredient ingredient)
+	{
+		listeingredient.add(ingredient);
+	}
 }

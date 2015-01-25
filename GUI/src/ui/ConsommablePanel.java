@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import retaurant.Consommable;
 
 @SuppressWarnings("serial")
-public class ConsommablePanel extends ProduitPanel
+public class ConsommablePanel extends JPanel
 {
 	private AddItemButton add;
 	private ArrayList<ConsommableItem> liste;

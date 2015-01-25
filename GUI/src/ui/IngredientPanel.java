@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import retaurant.Ingredient;
 
 @SuppressWarnings("serial")
-public class IngredientPanel extends ProduitPanel
+public class IngredientPanel extends JPanel
 {
 	private AddItemButton add;
 	private ArrayList<IngredientItem> liste;
