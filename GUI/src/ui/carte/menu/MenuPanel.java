@@ -28,7 +28,7 @@ public class MenuPanel extends JPanel
 		conteneur.setLayout(new GridLayout(0,1));
 		conteneur.add(add);
 		
-		add(conteneur);
+		add(conteneur,BorderLayout.PAGE_START);
 	}
 	
 	public void addMenu(Menu menu)

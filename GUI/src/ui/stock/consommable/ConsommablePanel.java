@@ -26,7 +26,7 @@ public class ConsommablePanel extends JPanel
 		conteneur.setLayout(new GridLayout(0,1));
 		conteneur.add(add);
 		
-		add(conteneur);
+		add(conteneur,BorderLayout.PAGE_START);
 	}
 	
 	public void addConsommable(Consommable consommable)
