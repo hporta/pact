@@ -53,11 +53,17 @@ public class IngredientItem extends JPanel implements ActionListener
 		c.weighty = 0.5;
 		add(nom,c);
 
-		c.gridx=1;
+		c.gridx=0;
 		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(quantite,c);
+		
+		c.gridx=1;
+		c.gridy=0;
+		c.weightx = 0.7;
+		c.weighty = 1;
+		add(new JPanel(),c);
 		
 		c.gridx=2;
 		c.gridy=0;

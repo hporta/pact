@@ -50,19 +50,7 @@ public class IngredientPanel extends JPanel implements ActionListener
 		conteneur.remove(ingredient);
 		conteneur.add(temp);
 	}
-	/*
-	public void add(JPanel panneau)
-	{
-		
-	}
-	
-	public boolean remove(IngredientItem ingredient)
-	{
-		liste.remove(ingredient);
-		conteneur.remove(ingredient);
-		return true;
-	}
-	*/
+
 	
 	public void actionPerformed(ActionEvent e)
 	{

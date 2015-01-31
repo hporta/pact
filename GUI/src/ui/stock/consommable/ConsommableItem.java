@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,9 +15,10 @@ import javax.swing.JPanel;
 
 import retaurant.Consommable;
 
-public class ConsommableItem extends JPanel
+public class ConsommableItem extends JPanel implements ActionListener
 {
 	private Consommable consommable;
+	private ConsommablePanel parent;
 	
 	//labels
 	private JLabel nom;
@@ -26,9 +29,10 @@ public class ConsommableItem extends JPanel
 	private JButton setButton;
 	private JButton delButton;
 	
-	ConsommableItem(Consommable consommable)
+	ConsommableItem(Consommable consommable, ConsommablePanel parent)
 	{
 		super();
+		this.parent = parent;
 		this.consommable = consommable;
 		this.nom = new JLabel();
 		this.prix = new JLabel();
@@ -76,6 +80,8 @@ public class ConsommableItem extends JPanel
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(setButton = new JButton("Modifier",edit),c);
+		setButton.addActionListener(this);
+		setButton.setActionCommand("set");
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -84,6 +90,9 @@ public class ConsommableItem extends JPanel
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),c);
+		delButton.addActionListener(this);
+		delButton.setActionCommand("del");
+		
 	}
 	
 	public void update()
@@ -91,5 +100,27 @@ public class ConsommableItem extends JPanel
 		nom.setText("Nom : " + consommable.getNom());
 		prix.setText("Prix : " + consommable.getPrix() +"€");
 		quantite.setText("Quantité : " + consommable.getNoInStock() + " unités");
+	}
+	
+	
+	public Consommable getConsommable()
+	{
+		return consommable;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if("del".equals(e.getActionCommand()))
+		{
+			this.getParent().remove(this);
+			this.getParent().validate();
+			this.getParent().repaint();
+		}
+		
+		else if("set".equals(e.getActionCommand()))
+		{
+			parent.setConsommable(this);
+		}
 	}
 }

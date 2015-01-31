@@ -16,6 +16,11 @@ public class Consommable extends Produit implements Achetable
 		return prix;
 	}
 	
+	public void setPrix(float prix)
+	{
+		this.prix = prix;
+	}
+	
 	//méthode de l'interface
 	@Override
 	public boolean disponible()

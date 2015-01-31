@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -48,20 +49,40 @@ public class IngredientForm extends JPanel implements ActionListener
 		c.anchor = GridBagConstraints.PAGE_START;
 		c.fill = GridBagConstraints.BOTH;
 		
+		
 		c.gridx=0;
 		c.gridy=0;
-		c.weightx = 0.6;
+		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(this.nom = new JTextField(ingredient.getNom()),c);
+		add(new JLabel("Nom :"),c);
 		
 		c.gridx=1;
 		c.gridy=0;
+		c.weightx = 0.2;
+		c.weighty = 0.5;
+		add(this.nom = new JTextField(ingredient.getNom()),c);
+		
+
+		c.gridx=0;
+		c.gridy=1;
+		c.weightx = 0.2;
+		c.weighty = 0.5;
+		add(new JLabel("Quantité :"),c);
+		
+		c.gridx=1;
+		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.quantite = new JFormattedTextField(NumberFormat.getIntegerInstance()),c);
 		this.quantite.setValue(new Integer(ingredient.getNoInStock()));
 		
 		c.gridx=2;
+		c.gridy=0;
+		c.weightx = 0.7;
+		c.weighty = 1;
+		add(new JPanel(),c);
+		
+		c.gridx=4;
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
@@ -71,7 +92,7 @@ public class IngredientForm extends JPanel implements ActionListener
 		validate.addActionListener(this);
 		validate.setActionCommand("validate");
 		
-		c.gridx=2;
+		c.gridx=4;
 		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
