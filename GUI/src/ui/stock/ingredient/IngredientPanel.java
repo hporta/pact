@@ -16,51 +16,58 @@ import ui.AddItemButton;
 public class IngredientPanel extends JPanel implements ActionListener
 {
 	private AddItemButton add;
-	private ArrayList<JPanel> liste;
+	private ArrayList<IngredientCard> liste;
 	private JPanel conteneur;
 	
 	public IngredientPanel() 
 	{
 		setLayout(new BorderLayout());
+		
 		add = new AddItemButton();
 		add.addActionListener(this);
 		add.setActionCommand("add");
 		
-		liste = new ArrayList<JPanel>();
+		liste = new ArrayList<IngredientCard>();
 		
 		conteneur = new JPanel();
-		conteneur.setLayout(new GridLayout(0,1));
-		conteneur.add(add);
-		
+		conteneur.setLayout(new GridLayout(0,1));		
 		add(conteneur,BorderLayout.PAGE_START);
+		
+		update();
 	}
 	
 	public void addIngredient(Ingredient ingredient)
 	{
-		IngredientItem temp = new IngredientItem(ingredient,this);
-		liste.add(temp);
-		conteneur.add(temp);
+		liste.add(new IngredientCard(this,ingredient));
+		update();
 	}
 	
-	public void setIngredient(IngredientItem ingredient)
-	{
-		liste.remove(ingredient);
-		JPanel temp = new IngredientForm(this,new IngredientController(ingredient.getIngredient()));
-		liste.add(temp);
-		conteneur.remove(ingredient);
-		conteneur.add(temp);
-	}
 
+	public void removeIngredient(IngredientCard card)
+	{
+		liste.remove(card);
+		update();
+	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
 		if("add".equals(e.getActionCommand()))
 		{
-			JPanel form = new IngredientForm(this);
-			liste.add(form);
-			conteneur.add(form);
-			validate();
-			repaint();
+			liste.add(new IngredientCard(this));
+			update();
 	    }
+	}
+	
+	public void update()
+	{
+		conteneur.removeAll();
+		
+		conteneur.add(add);
+		
+		for(IngredientCard card : liste)
+		{
+			card.update();
+			conteneur.add(card);
+		}
 	}
 }

@@ -28,9 +28,9 @@ public class IngredientItem extends JPanel implements ActionListener
 	private JButton setButton;
 	private JButton delButton;
 	
-	private IngredientPanel parent;
+	private IngredientCard parent;
 	
-	IngredientItem(Ingredient ingredient,IngredientPanel parent)
+	IngredientItem(IngredientCard parent, Ingredient ingredient)
 	{
 		super();
 		this.ingredient = ingredient;
@@ -91,23 +91,18 @@ public class IngredientItem extends JPanel implements ActionListener
 		nom.setText("Nom : " + ingredient.getNom());
 		quantite.setText("Quantité : " + ingredient.getNoInStock() + " unités");
 	}
-
-	public Ingredient getIngredient()
-	{
-		return ingredient;
-	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if("del".equals(e.getActionCommand()))
 		{
-			this.getParent().remove(this);
+			parent.removeIngredient();
 		}
 		
 		else if("set".equals(e.getActionCommand()))
 		{
-			parent.setIngredient(this);
+			parent.switchCard();
 		}
 	}
 }

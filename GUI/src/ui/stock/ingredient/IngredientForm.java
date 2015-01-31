@@ -31,17 +31,14 @@ public class IngredientForm extends JPanel implements ActionListener
 	private JButton validate;
 	private JButton ret;
 	
-	private IngredientPanel parent;
-	private final boolean nouveau;
+	private IngredientCard parent;
 	
-	public IngredientForm(IngredientPanel parent,IngredientController controller)
+	public IngredientForm(IngredientCard parent,IngredientController controller)
 	{
 		super();
 		this.controller = controller;
 		this.ingredient = controller.getIngredient();
 		this.parent = parent;
-		
-		nouveau = (ingredient.getNom() == "Nom" && ingredient.getNoInStock() == 0);		
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -105,7 +102,7 @@ public class IngredientForm extends JPanel implements ActionListener
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
-	public IngredientForm(IngredientPanel parent)
+	public IngredientForm(IngredientCard parent)
 	{
 		this(parent,new IngredientController(new Ingredient("Nom",0)));
 	}
@@ -117,23 +114,22 @@ public class IngredientForm extends JPanel implements ActionListener
 		{
 			if(controller.setIngredient(nom.getText(), Integer.parseInt(quantite.getText())))
 			{		
-				//supprime du conteneur
-				this.getParent().remove(this);
-				
-				parent.addIngredient(controller.getIngredient());
-
+				parent.switchCard();
+				parent.update();
 			}
 		}
 		
+		//retour à la description
 		else if("return".equals(e.getActionCommand()))
 		{
-			this.getParent().remove(this);
-			
-			if(!nouveau)
-			{
-				parent.addIngredient(controller.getIngredient());
-			}
+			parent.switchCard();
 		}
 		
+	}
+	
+	public void update()
+	{
+		nom.setText(controller.getIngredient().getNom());
+		quantite.setValue(controller.getIngredient().getNoInStock());
 	}
 }
