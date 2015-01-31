@@ -13,24 +13,49 @@ import ui.notification.CommandeNotification;
 import ui.notification.Notification;
 import ui.notification.StockNotification;
 
-public class NotificationPanel extends JPanel{
-
+@SuppressWarnings("serial")
+public class NotificationPanel extends JPanel
+{
 	private ArrayList<Notification> liste;
+	private JPanel content;
 	
-	public NotificationPanel() {
+	public NotificationPanel() 
+	{
 		super();
 		liste = new ArrayList<Notification>();
 		
 		setLayout(new BorderLayout());
-		JPanel temp = new JPanel();
-		temp.setLayout(new GridLayout(0,1));
+		content = new JPanel();
+		content.setLayout(new GridLayout(0,1));
 		
-		temp.add(new CommandeNotification(1));
-		temp.add(new StockNotification("Cola-cola",4));
-		temp.add(new CommandeNotification(2));
-		temp.add(new CommandeNotification(3));
+		liste.add(new CommandeNotification(this,1));
+		liste.add(new StockNotification(this,"Cola-cola",4));
+		liste.add(new CommandeNotification(this,2));
+		liste.add(new CommandeNotification(this,3));
 		
-		add(temp,BorderLayout.PAGE_START);
+		add(content,BorderLayout.PAGE_START);
 		
+		update();
+	}
+	
+	public void removeNotification(Notification notification)
+	{
+		liste.remove(notification);
+		update();
+	}
+	
+	public void addNotification(Notification notification)
+	{
+		liste.add(notification);
+		update();
+	}
+	
+	//update the contentPanel by filling it with all the notifications of liste
+	public void update()
+	{
+		content.removeAll();
+		
+		for(Notification notification : liste)
+			content.add(notification);
 	}
 }

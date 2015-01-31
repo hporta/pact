@@ -6,13 +6,15 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import ui.NotificationPanel;
+
 public class CommandeNotification extends Notification{
 		
 	public static final Color CMD_COLOR = new Color(126,170,250);
 	
-	public CommandeNotification(int idTable)
+	public CommandeNotification(NotificationPanel parent, int idTable)
 	{
-		super();
+		super(parent);
 		setBackground(CMD_COLOR);
 		add(new JLabel("Commande de table"),BorderLayout.NORTH);
 		add(new JLabel("La table n°" + idTable + " a passé une commande."),BorderLayout.CENTER);
