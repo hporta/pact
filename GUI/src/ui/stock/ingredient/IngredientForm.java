@@ -22,7 +22,6 @@ import retaurant.Ingredient;
 @SuppressWarnings("serial")
 public class IngredientForm extends JPanel implements ActionListener
 {
-	private Ingredient ingredient;
 	private IngredientController controller;
 	
 	private JTextField nom;
@@ -37,7 +36,6 @@ public class IngredientForm extends JPanel implements ActionListener
 	{
 		super();
 		this.controller = controller;
-		this.ingredient = controller.getIngredient();
 		this.parent = parent;
 		
 		setLayout(new GridBagLayout());
@@ -57,7 +55,7 @@ public class IngredientForm extends JPanel implements ActionListener
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(this.nom = new JTextField(ingredient.getNom()),c);
+		add(this.nom = new JTextField(controller.getIngredient().getNom()),c);
 		
 
 		c.gridx=0;
@@ -71,7 +69,7 @@ public class IngredientForm extends JPanel implements ActionListener
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.quantite = new JFormattedTextField(NumberFormat.getIntegerInstance()),c);
-		this.quantite.setValue(new Integer(ingredient.getNoInStock()));
+		this.quantite.setValue(new Integer(controller.getIngredient().getNoInStock()));
 		
 		c.gridx=2;
 		c.gridy=0;
@@ -119,7 +117,6 @@ public class IngredientForm extends JPanel implements ActionListener
 			}
 		}
 		
-		//retour à la description
 		else if("return".equals(e.getActionCommand()))
 		{
 			parent.switchCard();

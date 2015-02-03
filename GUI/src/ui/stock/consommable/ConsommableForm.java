@@ -16,12 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.ConsommableController;
-import retaurant.Consommable;
 
 @SuppressWarnings("serial")
 public class ConsommableForm extends JPanel implements ActionListener
 {
-	private Consommable consommable;
 	private ConsommableController controller;
 	
 	private JTextField nom;
@@ -31,27 +29,13 @@ public class ConsommableForm extends JPanel implements ActionListener
 	private JButton validate;
 	private JButton ret;
 	
-	private ConsommablePanel parent;
-	private final boolean nouveau;
+	private ConsommableCard parent;
 	
-	
-	public ConsommableForm(ConsommablePanel parent)
-	{
-		this(parent, new ConsommableController(new Consommable("Nom",0,0.f)),true);
-	}
-	
-	public ConsommableForm(ConsommablePanel parent, ConsommableController controller)
-	{
-		this(parent, controller, false);
-	}
-	
-	public ConsommableForm(ConsommablePanel parent, ConsommableController controller, boolean nouveau)
+	public ConsommableForm(ConsommableCard parent, ConsommableController controller)
 	{
 		super();
 		this.controller = controller;
-		this.consommable = controller.getConsommable();
 		this.parent = parent;
-		this.nouveau = nouveau;
 
 		
 		setLayout(new GridBagLayout());
@@ -64,7 +48,7 @@ public class ConsommableForm extends JPanel implements ActionListener
 		c.gridy=0;
 		c.weightx = 0.6;
 		c.weighty = 0.5;
-		add(this.nom = new JTextField(consommable.getNom()),c);
+		add(this.nom = new JTextField(),c);
 			
 		
 		c.gridx=1;
@@ -72,14 +56,12 @@ public class ConsommableForm extends JPanel implements ActionListener
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.prix = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
-		this.prix.setValue(new Double(consommable.getPrix()));
 		
 		c.gridx=1;
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.quantite = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
-		this.quantite.setValue(new Integer(consommable.getNoInStock()));
 		
 		c.gridx=2;
 		c.gridy=0;
@@ -102,6 +84,8 @@ public class ConsommableForm extends JPanel implements ActionListener
 		ret.setActionCommand("return");
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		update();
 	}
 	
 
@@ -112,22 +96,21 @@ public class ConsommableForm extends JPanel implements ActionListener
 		{
 			if(controller.setConsommable(nom.getText(), Integer.parseInt(quantite.getText()), Float.parseFloat(prix.getText())))
 			{		
-				//supprime du conteneur
-				this.getParent().remove(this);
-				
-				parent.addConsommable(controller.getConsommable());
-
+				parent.switchCard();
+				parent.update();
 			}
 		}
 		
 		else if("return".equals(e.getActionCommand()))
 		{
-			this.getParent().remove(this);
-			
-			if(!nouveau)
-			{
-				parent.addConsommable(controller.getConsommable());
-			}
+			parent.switchCard();
 		}		
+	}
+	
+	public void update()
+	{
+		nom.setText(controller.getConsommable().getNom());
+		prix.setValue(controller.getConsommable().getPrix());
+		quantite.setValue(controller.getConsommable().getNoInStock());
 	}
 }

@@ -19,18 +19,21 @@ public class Plat implements Achetable
 		listeingredient = new ArrayList<Ingredient>();
 	}
 	
+	public Plat()
+	{
+		this("Nom","Description",0.f);
+	}
+	
 	//toujours un plat est disponible si tous les ingr�dients sont pr�sents
 	public boolean disponible()
-	{
-		int i =0;
-		
+	{		
 		for (Ingredient ingredient : listeingredient)
 		{
-			if (ingredient.getNoInStock()!=0)
-				i++;
+			if(ingredient.getNoInStock()==0)
+				return false;
 		}
 		
-		return(i == listeingredient.size());
+		return true;
 	}
 	
 	// on diminue la quantit� de tous les ingr�dients

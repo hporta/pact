@@ -26,6 +26,7 @@ public class PlatPanel extends JPanel
 		setLayout(new BorderLayout());
 		conteneur.setLayout(new GridLayout(0,1));
 		conteneur.add(add);
+		conteneur.add(new PlatForm());
 		
 		add(conteneur,BorderLayout.PAGE_START);
 	}

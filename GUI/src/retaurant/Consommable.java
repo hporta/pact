@@ -11,6 +11,11 @@ public class Consommable extends Produit implements Achetable
 		this.prix = price;
 	}
 	
+	public Consommable()
+	{
+		this("Nom",0,0.f);
+	}
+	
 	public float getPrix()
 	{
 		return prix;

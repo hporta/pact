@@ -15,10 +15,11 @@ import javax.swing.JPanel;
 
 import retaurant.Consommable;
 
+@SuppressWarnings("serial")
 public class ConsommableItem extends JPanel implements ActionListener
 {
 	private Consommable consommable;
-	private ConsommablePanel parent;
+	private ConsommableCard parent;
 	
 	//labels
 	private JLabel nom;
@@ -29,7 +30,7 @@ public class ConsommableItem extends JPanel implements ActionListener
 	private JButton setButton;
 	private JButton delButton;
 	
-	ConsommableItem(Consommable consommable, ConsommablePanel parent)
+	ConsommableItem(ConsommableCard parent,Consommable consommable)
 	{
 		super();
 		this.parent = parent;
@@ -113,14 +114,12 @@ public class ConsommableItem extends JPanel implements ActionListener
 	{
 		if("del".equals(e.getActionCommand()))
 		{
-			this.getParent().remove(this);
-			this.getParent().validate();
-			this.getParent().repaint();
+			parent.removeConsommable();
 		}
 		
 		else if("set".equals(e.getActionCommand()))
 		{
-			parent.setConsommable(this);
+			parent.switchCard();
 		}
 	}
 }

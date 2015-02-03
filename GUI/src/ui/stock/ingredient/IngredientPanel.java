@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import controller.IngredientController;
 import retaurant.Ingredient;
 import ui.AddItemButton;
 
