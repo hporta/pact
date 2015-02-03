@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import retaurant.Consommable;
 import retaurant.Ingredient;
 import retaurant.Plat;
+import retaurant.Stock;
 import ui.carte.menu.MenuPanel;
 import ui.carte.plat.PlatPanel;
 
@@ -29,9 +30,15 @@ public class CartePanel extends JPanel implements ActionListener
 	
 	private final JPanel conteneur;
 	
+	private Stock stock;
+	
 	public CartePanel()
 	{
-		
+		this(new Stock());
+	}
+	
+	public CartePanel(Stock stock)
+	{
 		super();
 		
 		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));

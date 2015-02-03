@@ -22,6 +22,7 @@ import controller.PlatController;
 
 import retaurant.Ingredient;
 import retaurant.Plat;
+import retaurant.Stock;
 
 @SuppressWarnings("serial")
 public class PlatForm extends JPanel implements ActionListener
@@ -34,7 +35,7 @@ public class PlatForm extends JPanel implements ActionListener
 	private JTextField nom;
 	private JTextField description;
 	private JFormattedTextField prix;
-	private ArrayList<JComboBox> ingredients;
+	private ArrayList<JComboBox<String>> ingredients;
 	
 	private JPanel aside;
 	
@@ -42,15 +43,18 @@ public class PlatForm extends JPanel implements ActionListener
 	private JButton ret;
 	private JButton addIngredient;
 	
+	private Stock stock;
 	
-	public PlatForm(PlatCard parent, PlatController controller, ArrayList<Ingredient> listeIngredients)
+	
+	public PlatForm(PlatCard parent, PlatController controller, Stock stock)
 	{
 		super();
+		this.stock = stock;
 		this.parent = parent;
 		this.controller = controller;
 		this.plat = controller.getPlat();
 		this.listeIngredients = listeIngredients;
-		ingredients = new ArrayList<JComboBox>();
+		ingredients = new ArrayList<JComboBox<String>>();
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -121,7 +125,7 @@ public class PlatForm extends JPanel implements ActionListener
 	
 	public PlatForm(PlatCard parent)
 	{
-		this(parent,new PlatController(new Plat(),new ArrayList<Ingredient>()),new ArrayList<Ingredient>());
+		this(parent,new PlatController(new Plat(),new ArrayList<Ingredient>()),new Stock());
 	}
 
 	@Override
@@ -129,7 +133,7 @@ public class PlatForm extends JPanel implements ActionListener
 	{
 		if(e.getActionCommand().equals("addIn"))
 		{
-			JComboBox temp = new JComboBox<String>();
+			JComboBox<String> temp = new JComboBox<String>();
 			fillComboBoxWithIngredients(temp);
 			ingredients.add(temp);
 			aside.add(temp);

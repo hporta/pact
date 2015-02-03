@@ -29,6 +29,9 @@ public class ConsommableForm extends JPanel implements ActionListener
 	private JButton validate;
 	private JButton ret;
 	
+	private final String VALIDATE = "validate";
+	private final String RETURN = "return";
+	
 	private ConsommableCard parent;
 	
 	public ConsommableForm(ConsommableCard parent, ConsommableController controller)
@@ -71,7 +74,7 @@ public class ConsommableForm extends JPanel implements ActionListener
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(validate = new JButton("Valider",edit),c);
 		validate.addActionListener(this);
-		validate.setActionCommand("validate");
+		validate.setActionCommand(VALIDATE);
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -81,7 +84,7 @@ public class ConsommableForm extends JPanel implements ActionListener
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(ret = new JButton("Retour",retour),c);
 		ret.addActionListener(this);
-		ret.setActionCommand("return");
+		ret.setActionCommand(RETURN);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -92,7 +95,7 @@ public class ConsommableForm extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if("validate".equals(e.getActionCommand()))
+		if(VALIDATE.equals(e.getActionCommand()))
 		{
 			if(controller.setConsommable(nom.getText(), Integer.parseInt(quantite.getText()), Float.parseFloat(prix.getText())))
 			{		
@@ -101,7 +104,7 @@ public class ConsommableForm extends JPanel implements ActionListener
 			}
 		}
 		
-		else if("return".equals(e.getActionCommand()))
+		else if(RETURN.equals(e.getActionCommand()))
 		{
 			parent.switchCard();
 		}		

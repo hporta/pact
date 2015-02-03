@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import controller.PlatController;
 import retaurant.Ingredient;
 import retaurant.Plat;
+import retaurant.Stock;
 
 @SuppressWarnings("serial")
 public class PlatCard extends JPanel
@@ -23,7 +24,7 @@ public class PlatCard extends JPanel
 		this.parent = parent;
 		this.controller = new PlatController(plat,new ArrayList<Ingredient>());
 		
-		this.form = new PlatForm(this,controller,new ArrayList<Ingredient>());
+		this.form = new PlatForm(this,controller,new Stock());
 		this.item = new PlatItem(this,plat);
 		
 		setLayout(new CardLayout());

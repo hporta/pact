@@ -30,7 +30,16 @@ public class IngredientForm extends JPanel implements ActionListener
 	private JButton validate;
 	private JButton ret;
 	
+	private final String VALIDATE = "validate";
+	private final String RETURN = "return";
+	
 	private IngredientCard parent;
+	
+	
+	public IngredientForm(IngredientCard parent)
+	{
+		this(parent,new IngredientController(new Ingredient("Nom",0)));
+	}
 	
 	public IngredientForm(IngredientCard parent,IngredientController controller)
 	{
@@ -85,7 +94,7 @@ public class IngredientForm extends JPanel implements ActionListener
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(validate = new JButton("Valider",edit),c);
 		validate.addActionListener(this);
-		validate.setActionCommand("validate");
+		validate.setActionCommand(VALIDATE);
 		
 		c.gridx=4;
 		c.gridy=1;
@@ -95,20 +104,16 @@ public class IngredientForm extends JPanel implements ActionListener
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(ret = new JButton("Retour",retour),c);
 		ret.addActionListener(this);
-		ret.setActionCommand("return");
+		ret.setActionCommand(RETURN);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
-	public IngredientForm(IngredientCard parent)
-	{
-		this(parent,new IngredientController(new Ingredient("Nom",0)));
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if("validate".equals(e.getActionCommand()))
+		if(VALIDATE.equals(e.getActionCommand()))
 		{
 			if(controller.setIngredient(nom.getText(), Integer.parseInt(quantite.getText())))
 			{		
@@ -117,11 +122,8 @@ public class IngredientForm extends JPanel implements ActionListener
 			}
 		}
 		
-		else if("return".equals(e.getActionCommand()))
-		{
-			parent.switchCard();
-		}
-		
+		else if(RETURN.equals(e.getActionCommand()))
+			parent.switchCard();		
 	}
 	
 	public void update()

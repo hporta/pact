@@ -1,7 +1,5 @@
 package retaurant;
 import java.util.ArrayList;
-import java.util.Hashtable;
-
 
 
 public class Stock

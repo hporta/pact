@@ -9,8 +9,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import retaurant.Consommable;
-import retaurant.Ingredient;
 import retaurant.Stock;
 import ui.stock.consommable.ConsommablePanel;
 import ui.stock.ingredient.IngredientPanel;
@@ -75,7 +73,6 @@ public class StockPanel extends JPanel implements ActionListener
 			cl.show(conteneur, CONSOMMABLES);
 			consommableButton.setEnabled(false);
 			ingredientButton.setEnabled(true);
-			stock.etatDesStocks();
 		}
 		
 		else if(e.getActionCommand().equals(INGREDIENTS))
