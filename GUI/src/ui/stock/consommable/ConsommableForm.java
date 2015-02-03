@@ -52,13 +52,13 @@ public class ConsommableForm extends JPanel implements ActionListener
 			
 		
 		c.gridx=1;
-		c.gridy=1;
+		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.prix = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
 		
 		c.gridx=1;
-		c.gridy=0;
+		c.gridy=1;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.quantite = new JFormattedTextField(NumberFormat.getNumberInstance()),c);

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import retaurant.Consommable;
 import retaurant.Ingredient;
+import retaurant.Stock;
 import ui.stock.consommable.ConsommablePanel;
 import ui.stock.ingredient.IngredientPanel;
 
@@ -29,10 +30,16 @@ public class StockPanel extends JPanel implements ActionListener
 	
 	private final JPanel conteneur;
 	
+	private final Stock stock;
+	
 	public StockPanel() 
 	{
-		super();
-		
+		this(new Stock());
+	}
+	
+	public StockPanel(Stock stock)
+	{
+		this.stock = stock;
 		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
 		
 		JPanel temp = new JPanel();
@@ -52,16 +59,11 @@ public class StockPanel extends JPanel implements ActionListener
 		
 		add(conteneur = new JPanel(new CardLayout()));
 		
-		conteneur.add(consommable = new ConsommablePanel(),CONSOMMABLES);
-		conteneur.add(ingredient= new IngredientPanel(),INGREDIENTS);
+		conteneur.add(consommable = new ConsommablePanel(stock),CONSOMMABLES);
+		conteneur.add(ingredient= new IngredientPanel(stock),INGREDIENTS);
 		
-		consommable.addConsommable(new Consommable("Chips",10,1.5f));
-		consommable.addConsommable(new Consommable("Perrier",7,3.0f));
-		consommable.addConsommable(new Consommable("Coca",5,1.2f));
+		update();
 		
-		ingredient.addIngredient(new Ingredient("Pommes de terre",15));
-		ingredient.addIngredient(new Ingredient("Carrotes",7));
-		ingredient.addIngredient(new Ingredient("Pommes",3));
 	}
 
 	@Override
@@ -73,6 +75,7 @@ public class StockPanel extends JPanel implements ActionListener
 			cl.show(conteneur, CONSOMMABLES);
 			consommableButton.setEnabled(false);
 			ingredientButton.setEnabled(true);
+			stock.etatDesStocks();
 		}
 		
 		else if(e.getActionCommand().equals(INGREDIENTS))
@@ -84,6 +87,9 @@ public class StockPanel extends JPanel implements ActionListener
 		}
 	}
 	
-	
-
+	public void update()
+	{
+		consommable.update();
+		ingredient.update();
+	}
 }

@@ -22,7 +22,7 @@ public class IngredientCard extends JPanel
 		this.controller = new IngredientController(ingredient);
 		
 		this.form = new IngredientForm(this,controller);
-		this.item = new IngredientItem(this,ingredient);
+		this.item = new IngredientItem(this,controller);
 		
 		setLayout(new CardLayout());
 		add(item);
@@ -48,6 +48,6 @@ public class IngredientCard extends JPanel
 	
 	public void removeIngredient()
 	{
-		parent.removeIngredient(this);
+		parent.removeIngredient(controller.getIngredient());
 	}
 }

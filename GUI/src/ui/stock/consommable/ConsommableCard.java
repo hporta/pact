@@ -48,6 +48,6 @@ public class ConsommableCard extends JPanel
 	
 	public void removeConsommable()
 	{
-		parent.removeConsommable(this);
+		parent.removeConsommable(controller.getConsommable());
 	}
 }

@@ -57,5 +57,8 @@ public class NotificationPanel extends JPanel
 		
 		for(Notification notification : liste)
 			content.add(notification);
+		
+		validate();
+		repaint();
 	}
 }

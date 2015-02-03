@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+@SuppressWarnings("serial")
 public class AddItemButton extends JButton
 {
 	private final String ICON_PATH = "data/img/plus.png";

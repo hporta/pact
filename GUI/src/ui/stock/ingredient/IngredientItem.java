@@ -13,13 +13,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.IngredientController;
+
 import retaurant.Ingredient;
 
 @SuppressWarnings("serial")
 public class IngredientItem extends JPanel implements ActionListener
 {
 	private Ingredient ingredient;
-
+	private IngredientController controller;
 	//labels
 	private JLabel nom;
 	private JLabel quantite;
@@ -30,10 +32,10 @@ public class IngredientItem extends JPanel implements ActionListener
 	
 	private IngredientCard parent;
 	
-	IngredientItem(IngredientCard parent, Ingredient ingredient)
+	IngredientItem(IngredientCard parent, IngredientController controller)
 	{
 		super();
-		this.ingredient = ingredient;
+		this.ingredient = controller.getIngredient();
 		this.nom = new JLabel();
 		this.quantite = new JLabel();
 		update();

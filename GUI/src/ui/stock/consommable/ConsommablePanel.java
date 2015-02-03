@@ -9,20 +9,27 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import retaurant.Consommable;
+import retaurant.Stock;
 import ui.AddItemButton;
 
 @SuppressWarnings("serial")
 public class ConsommablePanel extends JPanel implements ActionListener
 {
 	private AddItemButton add;
-	private ArrayList<ConsommableCard> liste;
 	private JPanel conteneur;
+	private Stock stock;
 	
 	public ConsommablePanel() 
 	{
+		this(new Stock());
+	}
+	
+	public ConsommablePanel(Stock stock)
+	{
+		this.stock = stock;
+		
 		setLayout(new BorderLayout());
 		add = new AddItemButton();
-		liste = new ArrayList<ConsommableCard>();
 		
 		conteneur = new JPanel();
 		conteneur.setLayout(new GridLayout(0,1));
@@ -36,13 +43,13 @@ public class ConsommablePanel extends JPanel implements ActionListener
 	
 	public void addConsommable(Consommable consommable)
 	{
-		liste.add(new ConsommableCard(this,consommable));
+		stock.addConsommable(consommable);
 		update();
 	}
 	
-	public void removeConsommable(ConsommableCard card)
+	public void removeConsommable(Consommable consommable)
 	{
-		liste.remove(card);
+		stock.removeConsommable(consommable);
 		update();
 	}
 
@@ -51,7 +58,7 @@ public class ConsommablePanel extends JPanel implements ActionListener
 	{
 		if("add".equals(e.getActionCommand()))
 		{
-			liste.add(new ConsommableCard(this));
+			stock.addConsommable(new Consommable());
 			update();
 	    }
 	}
@@ -62,11 +69,13 @@ public class ConsommablePanel extends JPanel implements ActionListener
 		
 		conteneur.add(add);
 		
-		for(ConsommableCard card : liste)
+		for(Consommable consommable : stock.getConsommables())
 		{
-			card.update();
-			conteneur.add(card);
+			conteneur.add(new ConsommableCard(this, consommable));
 		}
+		
+		validate();
+		repaint();
 	}
 	
 	

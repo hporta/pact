@@ -9,24 +9,42 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import retaurant.Ingredient;
+import retaurant.Stock;
 import ui.AddItemButton;
 
 @SuppressWarnings("serial")
 public class IngredientPanel extends JPanel implements ActionListener
 {
 	private AddItemButton add;
-	private ArrayList<IngredientCard> liste;
 	private JPanel conteneur;
+	private Stock stock;
 	
 	public IngredientPanel() 
 	{
+		this.stock = new Stock();
+		
 		setLayout(new BorderLayout());
 		
 		add = new AddItemButton();
 		add.addActionListener(this);
 		add.setActionCommand("add");
 		
-		liste = new ArrayList<IngredientCard>();
+		conteneur = new JPanel();
+		conteneur.setLayout(new GridLayout(0,1));		
+		add(conteneur,BorderLayout.PAGE_START);
+		
+		update();
+	}
+	
+	public IngredientPanel(Stock stock)
+	{
+		this.stock = stock;
+		
+		setLayout(new BorderLayout());
+		
+		add = new AddItemButton();
+		add.addActionListener(this);
+		add.setActionCommand("add");
 		
 		conteneur = new JPanel();
 		conteneur.setLayout(new GridLayout(0,1));		
@@ -37,14 +55,14 @@ public class IngredientPanel extends JPanel implements ActionListener
 	
 	public void addIngredient(Ingredient ingredient)
 	{
-		liste.add(new IngredientCard(this,ingredient));
+		stock.addIngredient(ingredient);
 		update();
 	}
 	
 
-	public void removeIngredient(IngredientCard card)
+	public void removeIngredient(Ingredient ingredient)
 	{
-		liste.remove(card);
+		stock.removeIngredient(ingredient);
 		update();
 	}
 	
@@ -52,7 +70,7 @@ public class IngredientPanel extends JPanel implements ActionListener
 	{
 		if("add".equals(e.getActionCommand()))
 		{
-			liste.add(new IngredientCard(this));
+			stock.addIngredient(new Ingredient());
 			update();
 	    }
 	}
@@ -63,10 +81,12 @@ public class IngredientPanel extends JPanel implements ActionListener
 		
 		conteneur.add(add);
 		
-		for(IngredientCard card : liste)
+		for(Ingredient ingredient : stock.getIngredients())
 		{
-			card.update();
-			conteneur.add(card);
+			conteneur.add(new IngredientCard(this, ingredient));
 		}
+		
+		validate();
+		repaint();
 	}
 }
