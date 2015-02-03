@@ -55,7 +55,6 @@ public class ParasolLabel extends JLabel
 			// L = Libre
 			case "L" : 	
 				return(GREEN);
-				
 			// O = occupé sans commande	
 			case "O":
 				return(ORANGE);
