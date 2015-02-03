@@ -8,6 +8,7 @@ import ui.NotificationPanel;
 
 
 
+@SuppressWarnings("serial")
 public class StockNotification extends Notification{
 
 	public static final Color STOCK_COLOR = new Color(255,67,42);

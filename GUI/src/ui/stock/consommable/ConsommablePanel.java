@@ -8,24 +8,21 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import controller.ConsommableController;
 import retaurant.Consommable;
 import ui.AddItemButton;
-import ui.stock.consommable.ConsommableForm;
-import ui.stock.consommable.ConsommableItem;
 
 @SuppressWarnings("serial")
 public class ConsommablePanel extends JPanel implements ActionListener
 {
 	private AddItemButton add;
-	private ArrayList<JPanel> liste;
+	private ArrayList<ConsommableCard> liste;
 	private JPanel conteneur;
 	
 	public ConsommablePanel() 
 	{
 		setLayout(new BorderLayout());
 		add = new AddItemButton();
-		liste = new ArrayList<JPanel>();
+		liste = new ArrayList<ConsommableCard>();
 		
 		conteneur = new JPanel();
 		conteneur.setLayout(new GridLayout(0,1));
@@ -39,19 +36,14 @@ public class ConsommablePanel extends JPanel implements ActionListener
 	
 	public void addConsommable(Consommable consommable)
 	{
-		ConsommableItem temp = new ConsommableItem(consommable,this);
-		liste.add(temp);
-		conteneur.add(temp);
+		liste.add(new ConsommableCard(this,consommable));
+		update();
 	}
 	
-	
-	public void setConsommable(ConsommableItem consommable)
+	public void removeConsommable(ConsommableCard card)
 	{
-		liste.remove(consommable);
-		JPanel temp = new ConsommableForm(this, new ConsommableController(consommable.getConsommable()));
-		liste.add(temp);
-		conteneur.remove(consommable);
-		conteneur.add(temp);
+		liste.remove(card);
+		update();
 	}
 
 	
@@ -59,12 +51,22 @@ public class ConsommablePanel extends JPanel implements ActionListener
 	{
 		if("add".equals(e.getActionCommand()))
 		{
-			JPanel form = new ConsommableForm(this);
-			liste.add(form);
-			conteneur.add(form);
-			validate();
-			repaint();
+			liste.add(new ConsommableCard(this));
+			update();
 	    }
+	}
+	
+	public void update()
+	{
+		conteneur.removeAll();
+		
+		conteneur.add(add);
+		
+		for(ConsommableCard card : liste)
+		{
+			card.update();
+			conteneur.add(card);
+		}
 	}
 	
 	

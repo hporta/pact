@@ -19,11 +19,11 @@ import javax.swing.JTabbedPane;
 
 import retaurant.Consommable;
 import retaurant.Ingredient;
-import retaurant.Plat;
 import ui.stock.consommable.ConsommablePanel;
 import ui.stock.ingredient.IngredientPanel;
 
 
+@SuppressWarnings("serial")
 public class StockPanel extends JTabbedPane
 {	
 	private final ConsommablePanel consommable;

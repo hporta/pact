@@ -4,11 +4,15 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,21 +20,35 @@ import javax.swing.JTextField;
 import retaurant.Plat;
 
 @SuppressWarnings("serial")
-public class PlatForm extends JPanel
+public class PlatForm extends JPanel implements ActionListener
 {
 	private Plat plat;
 	
 	private JTextField nom;
 	private JTextField description;
 	private JFormattedTextField prix;
+	private ArrayList<JComboBox> ingredients;
+	
+	private JPanel aside;
 	
 	private JButton validate;
 	private JButton ret;
+	private JButton addIngredient;
+	
+	//private ArrayList<String> stock;
+	
+	private String[] stock = {"Pommes de terre","saucisse","salade"};;
 	
 	public PlatForm(Plat plat)
 	{
 		super();
 		this.plat = plat;
+		ingredients = new ArrayList<JComboBox>();
+		
+		/*stock = new ArrayList<String>();
+		stock.add("Pommes de terre");
+		stock.add("saucisse");
+		stock.add("salade");*/
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -58,6 +76,23 @@ public class PlatForm extends JPanel
 		add(this.prix = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
 		this.prix.setValue(new Double(plat.getPrix()));
 		
+		//coin pour les ingredients
+		c.gridx=0;
+		c.gridy=3;
+		c.weightx = 0.2;
+		c.weighty = 0.5;
+		add(aside = new JPanel(),c);
+		
+		
+		//bouton pour ajouter un ingredient
+		c.gridx=0;
+		c.gridy=2;
+		c.weightx = 0.2;
+		c.weighty = 0.5;
+		add(addIngredient = new JButton("Ajouter un ingredient"),c);
+		addIngredient.addActionListener(this);
+		addIngredient.setActionCommand("addIn");
+		
 		c.gridx=2;
 		c.gridy=0;
 		c.weightx = 0.2;
@@ -79,6 +114,21 @@ public class PlatForm extends JPanel
 	
 	public PlatForm()
 	{
-		this(new Plat("Nom","Description",0.f));
+		this(new Plat());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getActionCommand().equals("addIn"))
+		{
+			ingredients.add(new JComboBox<String>(stock));
+			aside.add(ingredients.get(ingredients.size()-1));
+		}
+	}
+	
+	public void update()
+	{
+		
 	}
 }

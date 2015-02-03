@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 import ui.NotificationPanel;
 
+@SuppressWarnings("serial")
 public class CommandeNotification extends Notification{
 		
 	public static final Color CMD_COLOR = new Color(126,170,250);
