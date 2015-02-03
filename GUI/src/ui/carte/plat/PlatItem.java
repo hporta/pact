@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -15,9 +17,10 @@ import retaurant.Ingredient;
 import retaurant.Plat;
 
 @SuppressWarnings("serial")
-public class PlatItem extends JPanel
+public class PlatItem extends JPanel implements ActionListener
 {
 	private Plat plat;
+	private PlatCard parent;
 	
 	private JLabel nom;
 	private JLabel description;
@@ -26,10 +29,11 @@ public class PlatItem extends JPanel
 	private JButton setButton;
 	private JButton delButton;
 	
-	public PlatItem(Plat plat)
+	public PlatItem(PlatCard parent,Plat plat)
 	{
 		super();
 		this.plat = plat;
+		this.parent = parent;
 		
 		this.nom = new JLabel();
 		this.prix = new JLabel();
@@ -68,6 +72,8 @@ public class PlatItem extends JPanel
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(setButton = new JButton("Modifier",edit),c);
+		setButton.addActionListener(this);
+		setButton.setActionCommand("set");
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -76,6 +82,8 @@ public class PlatItem extends JPanel
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),c);
+		delButton.addActionListener(this);
+		delButton.setActionCommand("del");
 	}
 	
 	public void update()
@@ -92,4 +100,21 @@ public class PlatItem extends JPanel
 		
 		description.setText(descr);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getActionCommand().equals("set"))
+		{
+			parent.switchCard();
+		}
+		
+		else if(e.getActionCommand().equals("del"))
+		{
+			parent.removePlat();
+		}
+		
+	}
+	
+	
 }

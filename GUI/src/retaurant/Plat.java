@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Plat implements Achetable
 {
 	
-	private final String nom; 
+	private String nom; 
 	private String description;
 	private float prix;
 	private ArrayList<Ingredient> listeingredient;
@@ -77,5 +77,15 @@ public class Plat implements Achetable
 	public void addIngredient(Ingredient ingredient)
 	{
 		listeingredient.add(ingredient);
+	}
+	
+	public void setNom(String nom)
+	{
+		this.nom = nom;
+	}
+	
+	public void setIngredients(ArrayList<Ingredient> liste)
+	{
+		listeingredient = liste;
 	}
 }

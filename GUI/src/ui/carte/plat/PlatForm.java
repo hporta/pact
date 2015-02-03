@@ -3,6 +3,7 @@ package ui.carte.plat;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,12 +18,18 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.PlatController;
+
+import retaurant.Ingredient;
 import retaurant.Plat;
 
 @SuppressWarnings("serial")
 public class PlatForm extends JPanel implements ActionListener
 {
+	private PlatCard parent;
+	private PlatController controller;
 	private Plat plat;
+	private ArrayList<Ingredient> listeIngredients;
 	
 	private JTextField nom;
 	private JTextField description;
@@ -35,20 +42,15 @@ public class PlatForm extends JPanel implements ActionListener
 	private JButton ret;
 	private JButton addIngredient;
 	
-	//private ArrayList<String> stock;
 	
-	private String[] stock = {"Pommes de terre","saucisse","salade"};;
-	
-	public PlatForm(Plat plat)
+	public PlatForm(PlatCard parent, PlatController controller, ArrayList<Ingredient> listeIngredients)
 	{
 		super();
-		this.plat = plat;
+		this.parent = parent;
+		this.controller = controller;
+		this.plat = controller.getPlat();
+		this.listeIngredients = listeIngredients;
 		ingredients = new ArrayList<JComboBox>();
-		
-		/*stock = new ArrayList<String>();
-		stock.add("Pommes de terre");
-		stock.add("saucisse");
-		stock.add("salade");*/
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -82,6 +84,7 @@ public class PlatForm extends JPanel implements ActionListener
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(aside = new JPanel(),c);
+		aside.setLayout(new GridLayout(0,1));
 		
 		
 		//bouton pour ajouter un ingredient
@@ -100,6 +103,8 @@ public class PlatForm extends JPanel implements ActionListener
 		ImageIcon edit = new ImageIcon("data/img/validate.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(validate = new JButton("Valider",edit),c);
+		validate.addActionListener(this);
+		validate.setActionCommand("val");
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -108,13 +113,15 @@ public class PlatForm extends JPanel implements ActionListener
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(ret = new JButton("Retour",retour),c);
+		ret.addActionListener(this);
+		ret.setActionCommand("ret");
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
-	public PlatForm()
+	public PlatForm(PlatCard parent)
 	{
-		this(new Plat());
+		this(parent,new PlatController(new Plat(),new ArrayList<Ingredient>()),new ArrayList<Ingredient>());
 	}
 
 	@Override
@@ -122,13 +129,51 @@ public class PlatForm extends JPanel implements ActionListener
 	{
 		if(e.getActionCommand().equals("addIn"))
 		{
-			ingredients.add(new JComboBox<String>(stock));
-			aside.add(ingredients.get(ingredients.size()-1));
+			JComboBox temp = new JComboBox<String>();
+			fillComboBoxWithIngredients(temp);
+			ingredients.add(temp);
+			aside.add(temp);
+			update();
 		}
+		
+		else if(e.getActionCommand().equals("set"))
+		{
+			if(controller.setPlat(nom.getText(), description.getText(), (float) prix.getValue(), getIngredients()))
+			{
+				parent.switchCard();
+			}
+			
+		}
+		
+		else if(e.getActionCommand().equals("ret"))
+		{
+			parent.switchCard();
+		}
+		
 	}
 	
 	public void update()
 	{
+		validate();
+		repaint();
+	}
+	
+	private void fillComboBoxWithIngredients(JComboBox<String> box)
+	{
+		for(Ingredient ingredient : listeIngredients)
+		{
+			box.addItem(ingredient.getNom());
+		}
+	}
+	
+	public ArrayList<String> getIngredients()
+	{
+		ArrayList<String> liste = new ArrayList<String>();
+		for(JComboBox<String> box : ingredients)
+		{
+			liste.add((String) box.getSelectedItem());
+		}
 		
+		return liste;
 	}
 }
