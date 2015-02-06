@@ -93,5 +93,10 @@ public class CartePanel extends JPanel implements ActionListener
 			platButton.setEnabled(false);
 		}
 	}
+
+	public void update() 
+	{
+		
+	}
 	
 }

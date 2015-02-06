@@ -4,16 +4,17 @@ import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 import ui.carte.CartePanel;
+import ui.commande.CommandePanel;
+import ui.notification.NotificationPanel;
 import ui.stock.StockPanel;
 
+@SuppressWarnings("serial")
 public class ContentPanel extends JPanel implements ActionListener
 {
 
@@ -28,6 +29,8 @@ public class ContentPanel extends JPanel implements ActionListener
 	private final String COMMANDE = "Commande";
 	
 	private final JPanel conteneur;
+	private final JPanel buttonPanel;
+	
 	private final JButton notificationButton;
 	private final JButton stockButton;
 	private final JButton carteButton;
@@ -39,12 +42,12 @@ public class ContentPanel extends JPanel implements ActionListener
 		
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		JPanel temp = new JPanel(new GridLayout(1,4));
-		temp.add(notificationButton = new JButton(NOTIFICATION));
-		temp.add(stockButton = new JButton(STOCK));
-		temp.add(carteButton = new JButton(CARTE));
-		temp.add(commandeButton = new JButton(COMMANDE));
-		add(temp);
+		buttonPanel = new JPanel(new GridLayout(1,4));
+		buttonPanel.add(notificationButton = new JButton(NOTIFICATION));
+		buttonPanel.add(stockButton = new JButton(STOCK));
+		buttonPanel.add(carteButton = new JButton(CARTE));
+		buttonPanel.add(commandeButton = new JButton(COMMANDE));
+		add(buttonPanel);
 		
 		notificationButton.addActionListener(this);
 		notificationButton.setActionCommand(NOTIFICATION);
@@ -116,5 +119,13 @@ public class ContentPanel extends JPanel implements ActionListener
 			carteButton.setEnabled(true);
 			commandeButton.setEnabled(false);
 		}
+	}
+	
+	public void update()
+	{
+		notifications.update();
+		stock.update();
+		carte.update();
+		commande.update();
 	}
 }

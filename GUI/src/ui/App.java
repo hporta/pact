@@ -2,9 +2,9 @@ package ui;
 
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class App extends JFrame
 {
-
 	private final MainPanel main;
 	
 	public App() 

@@ -1,4 +1,4 @@
-package ui;
+package ui.notification;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -9,9 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import ui.notification.CommandeNotification;
-import ui.notification.Notification;
-import ui.notification.StockNotification;
 
 @SuppressWarnings("serial")
 public class NotificationPanel extends JPanel

@@ -94,7 +94,7 @@ public class PlatItem extends JPanel implements ActionListener
 		String descr = "<html>" + plat.getDescription() +"<br/> Ingrédients : ";
 		for(Ingredient ingre : plat.getIngredients())
 		{
-			descr += ingre.getNom()+",";
+			descr += ingre.getNom()+", ";
 		}
 		descr += "</html>";
 		
@@ -113,8 +113,6 @@ public class PlatItem extends JPanel implements ActionListener
 		{
 			parent.removePlat();
 		}
-		
 	}
-	
 	
 }

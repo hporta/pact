@@ -16,25 +16,9 @@ public class IngredientPanel extends JPanel implements ActionListener
 {
 	private AddItemButton add;
 	private JPanel conteneur;
+	
 	private Stock stock;
-	
-	public IngredientPanel() 
-	{
-		this.stock = new Stock();
 		
-		setLayout(new BorderLayout());
-		
-		add = new AddItemButton();
-		add.addActionListener(this);
-		add.setActionCommand("add");
-		
-		conteneur = new JPanel();
-		conteneur.setLayout(new GridLayout(0,1));		
-		add(conteneur,BorderLayout.PAGE_START);
-		
-		update();
-	}
-	
 	public IngredientPanel(Stock stock)
 	{
 		this.stock = stock;
@@ -58,7 +42,6 @@ public class IngredientPanel extends JPanel implements ActionListener
 		update();
 	}
 	
-
 	public void removeIngredient(Ingredient ingredient)
 	{
 		stock.removeIngredient(ingredient);

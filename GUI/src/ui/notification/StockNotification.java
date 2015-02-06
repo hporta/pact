@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
-import ui.NotificationPanel;
 
 
 

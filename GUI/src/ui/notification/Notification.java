@@ -13,13 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.NotificationPanel;
 
 //Notification est une classe générale pour toutes les notifications
 //il faut faire des classes filles pour chaque notification particulière
 public class Notification extends JPanel implements ActionListener
 {
-
 	public static final Color COLOR = Color.gray;
 	
 	private NotificationPanel parent;

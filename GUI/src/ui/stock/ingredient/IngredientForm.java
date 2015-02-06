@@ -24,6 +24,7 @@ public class IngredientForm extends JPanel implements ActionListener
 {
 	private IngredientController controller;
 	
+	//textfields
 	private JTextField nom;
 	private JFormattedTextField quantite;
 	

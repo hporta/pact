@@ -1,17 +1,12 @@
 package ui;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 @SuppressWarnings("serial")
 public class AddItemButton extends JButton
@@ -37,7 +32,6 @@ public class AddItemButton extends JButton
 			img4 = ImageIO.read(new File(LOWER_LEFT_ICON));
 			img5 = ImageIO.read(new File(LOWER_RIGHT_ICON));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

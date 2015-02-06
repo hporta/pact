@@ -22,6 +22,7 @@ public class IngredientItem extends JPanel implements ActionListener
 {
 	private Ingredient ingredient;
 	private IngredientController controller;
+	
 	//labels
 	private JLabel nom;
 	private JLabel quantite;
@@ -32,60 +33,66 @@ public class IngredientItem extends JPanel implements ActionListener
 	
 	private IngredientCard parent;
 	
+	private final String SET = "set";
+	private final String DELETE = "delete";
+	
+	private final String CIRCLE_ICON_PATH = "data/img/circle.png";
+	private final String CLOSE_ICON_PATH = "data/img/close.png";
+	
 	IngredientItem(IngredientCard parent, IngredientController controller)
 	{
-		super();
+		this.parent = parent;
+		this.controller = controller;
 		this.ingredient = controller.getIngredient();
 		this.nom = new JLabel();
 		this.quantite = new JLabel();
 		update();
 		
-		this.parent = parent;
 		
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints cstr = new GridBagConstraints();
 		
-		c.anchor = GridBagConstraints.PAGE_START;
-		c.fill = GridBagConstraints.BOTH;
+		cstr.anchor = GridBagConstraints.PAGE_START;
+		cstr.fill = GridBagConstraints.BOTH;
 		
-		c.gridx=0;
-		c.gridy=0;
-		c.weightx = 0.6;
-		c.weighty = 0.5;
-		add(nom,c);
+		cstr.gridx=0;
+		cstr.gridy=0;
+		cstr.weightx = 0.6;
+		cstr.weighty = 0.5;
+		add(nom,cstr);
 
-		c.gridx=0;
-		c.gridy=1;
-		c.weightx = 0.2;
-		c.weighty = 0.5;
-		add(quantite,c);
+		cstr.gridx=0;
+		cstr.gridy=1;
+		cstr.weightx = 0.2;
+		cstr.weighty = 0.5;
+		add(quantite,cstr);
 		
-		c.gridx=1;
-		c.gridy=0;
-		c.weightx = 0.7;
-		c.weighty = 1;
-		add(new JPanel(),c);
+		cstr.gridx=1;
+		cstr.gridy=0;
+		cstr.weightx = 0.7;
+		cstr.weighty = 1;
+		add(new JPanel(),cstr);
 		
-		c.gridx=2;
-		c.gridy=0;
-		c.weightx = 0.2;
-		c.weighty = 0.5;
-		ImageIcon edit = new ImageIcon("data/img/circle.png");
+		cstr.gridx=2;
+		cstr.gridy=0;
+		cstr.weightx = 0.2;
+		cstr.weighty = 0.5;
+		ImageIcon edit = new ImageIcon(CIRCLE_ICON_PATH);
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(setButton = new JButton("Modifier",edit),c);
+		add(setButton = new JButton("Modifier",edit),cstr);
 		setButton.addActionListener(this);
-		setButton.setActionCommand("set");
+		setButton.setActionCommand(SET);
 		
-		c.gridx=2;
-		c.gridy=1;
-		c.weightx = 0.2;
-		c.weighty = 0.5;
-		ImageIcon cross = new ImageIcon("data/img/close.png");
+		cstr.gridx=2;
+		cstr.gridy=1;
+		cstr.weightx = 0.2;
+		cstr.weighty = 0.5;
+		ImageIcon cross = new ImageIcon(CLOSE_ICON_PATH);
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(delButton = new JButton("Supprimer",cross),c);
+		add(delButton = new JButton("Supprimer",cross),cstr);
 		delButton.addActionListener(this);
-		delButton.setActionCommand("del");
+		delButton.setActionCommand(DELETE);
 	}
 	
 	public void update()
@@ -97,12 +104,12 @@ public class IngredientItem extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if("del".equals(e.getActionCommand()))
+		if(DELETE.equals(e.getActionCommand()))
 		{
 			parent.removeIngredient();
 		}
 		
-		else if("set".equals(e.getActionCommand()))
+		else if(SET.equals(e.getActionCommand()))
 		{
 			parent.switchCard();
 		}

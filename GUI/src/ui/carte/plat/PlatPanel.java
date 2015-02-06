@@ -34,7 +34,7 @@ public class PlatPanel extends JPanel implements ActionListener
 		
 		ArrayList<Ingredient> liste = new ArrayList<Ingredient>();
 		liste.add(new Ingredient("Pommes de terre",15));
-		liste.add(new Ingredient("Carrotes",7));
+		liste.add(new Ingredient("Carottes",7));
 		liste.add(new Ingredient("Pommes",3));
 		
 		add(conteneur,BorderLayout.PAGE_START);

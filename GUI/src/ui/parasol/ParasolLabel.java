@@ -1,4 +1,4 @@
-package ui;
+package ui.parasol;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,8 +11,7 @@ import javax.swing.JLabel;
 import retaurant.Table;
 
 
-
-/* Solution non définitive pour l'id et la table, il devrait y avoir un objet parasol pour gérer ces paramètres*/
+@SuppressWarnings("serial")
 public class ParasolLabel extends JLabel
 {
 	

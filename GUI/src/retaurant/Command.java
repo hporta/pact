@@ -56,4 +56,13 @@ public class Command
 		this.etat = etat;
 	}
 	
+	public float getTotal()
+	{
+		float total = 0.f;
+		for(Achetable achat : listeCommandes)
+			total += achat.getPrix();
+		
+		return total;
+	}
+	
 }

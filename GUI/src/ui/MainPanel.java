@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MainPanel extends JPanel{
+import ui.parasol.ParasolPanel;
+
+@SuppressWarnings("serial")
+public class MainPanel extends JPanel
+{
 
 	private final ParasolPanel parasol;
 	private final JLabel parasolHeader;
@@ -18,7 +21,7 @@ public class MainPanel extends JPanel{
 	
 	private final String FONT = "TimesRoman";
 	
-	MainPanel()
+	public MainPanel()
 	{
 		super();
 		setLayout(new GridBagLayout());

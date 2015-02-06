@@ -1,4 +1,4 @@
-package ui;
+package ui.parasol;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -33,6 +33,11 @@ public class ParasolPanel extends JPanel
 		
 		for(Table table : tables)
 			add(new ParasolLabel(table));
+	}
+	
+	public void update()
+	{
+		
 	}
 
 }
