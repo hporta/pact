@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 
-public abstract class Table
+public class Table
 {
 	private int no;
 	private boolean propre; //propre ou sale
@@ -34,6 +34,11 @@ public abstract class Table
 	public final int getNo()
 	{	
 		return no;
+	}
+	
+	public boolean isLibre()
+	{
+		return libre;
 	}
 
 	
