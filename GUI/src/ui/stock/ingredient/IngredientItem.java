@@ -14,16 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.IngredientController;
-import controller.StockController;
+
 import retaurant.Ingredient;
 
 @SuppressWarnings("serial")
-public class IngredientItem extends JPanel
+public class IngredientItem extends JPanel implements ActionListener
 {
-	//Model
 	private Ingredient ingredient;
+	private IngredientController controller;
 	
-	//Labels
+	//labels
 	private JLabel nom;
 	private JLabel quantite;
 	
@@ -31,17 +31,18 @@ public class IngredientItem extends JPanel
 	private JButton setButton;
 	private JButton delButton;
 	
+	private IngredientCard parent;
+	
 	private final String SET = "set";
 	private final String DELETE = "delete";
-	private final String SWITCH = "switch";
 	
 	private final String CIRCLE_ICON_PATH = "data/img/circle.png";
 	private final String CLOSE_ICON_PATH = "data/img/close.png";
 	
-	IngredientItem(StockController stockController,
-				IngredientCard parent,
-				IngredientController controller)
+	IngredientItem(IngredientCard parent, IngredientController controller)
 	{
+		this.parent = parent;
+		this.controller = controller;
 		this.ingredient = controller.getIngredient();
 		this.nom = new JLabel();
 		this.quantite = new JLabel();
@@ -80,8 +81,8 @@ public class IngredientItem extends JPanel
 		ImageIcon edit = new ImageIcon(CIRCLE_ICON_PATH);
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(setButton = new JButton("Modifier",edit),cstr);
-		setButton.addActionListener(parent);
-		setButton.setActionCommand(SWITCH);
+		setButton.addActionListener(this);
+		setButton.setActionCommand(SET);
 		
 		cstr.gridx=2;
 		cstr.gridy=1;
@@ -90,7 +91,7 @@ public class IngredientItem extends JPanel
 		ImageIcon cross = new ImageIcon(CLOSE_ICON_PATH);
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),cstr);
-		delButton.addActionListener(stockController);
+		delButton.addActionListener(this);
 		delButton.setActionCommand(DELETE);
 	}
 	
@@ -100,4 +101,17 @@ public class IngredientItem extends JPanel
 		quantite.setText("Quantité : " + ingredient.getNoInStock() + " unités");
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(DELETE.equals(e.getActionCommand()))
+		{
+			parent.removeIngredient();
+		}
+		
+		else if(SET.equals(e.getActionCommand()))
+		{
+			parent.switchCard();
+		}
+	}
 }

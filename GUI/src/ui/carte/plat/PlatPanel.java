@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import retaurant.Carte;
 import retaurant.Ingredient;
 import retaurant.Plat;
 import ui.AddItemButton;
@@ -17,14 +16,14 @@ import ui.AddItemButton;
 public class PlatPanel extends JPanel implements ActionListener
 {
 	private AddItemButton add;
-	private Carte carte;
+	private ArrayList<PlatCard> liste;
 	private JPanel conteneur;
 	
 	public PlatPanel()
 	{
 		super();
 		add = new AddItemButton();
-		carte = new Carte();
+		liste = new ArrayList<PlatCard>();
 		conteneur = new JPanel();
 		
 		setLayout(new BorderLayout());
@@ -35,34 +34,16 @@ public class PlatPanel extends JPanel implements ActionListener
 		
 		add(conteneur,BorderLayout.PAGE_START);
 	}
-	
-	public PlatPanel(Carte carte)
-	{
-		super();
-		add = new AddItemButton();
-		this.carte = carte;
-		conteneur = new JPanel();
-		
-		setLayout(new BorderLayout());
-		conteneur.setLayout(new GridLayout(0,1));
-		conteneur.add(add);
-		add.setActionCommand("add");
-		add.addActionListener(this);
-		
-		add(conteneur,BorderLayout.PAGE_START);
-	}
-	
-	
 	
 	public void addPlat(Plat plat)
 	{
-		carte.addPlat(plat);
+		liste.add(new PlatCard(this,plat));
 		update();
 	}
 	
-	public void removePlat(Plat plat)
+	public void removePlat(PlatCard card)
 	{
-		carte.removePlat(plat);
+		liste.remove(card);
 		update();
 	}
 	
@@ -72,9 +53,9 @@ public class PlatPanel extends JPanel implements ActionListener
 		
 		conteneur.add(add);
 		
-		for(Plat plat : carte.getPlats())
+		for(PlatCard card : liste)
 		{
-			conteneur.add(new PlatCard(this,plat));
+			conteneur.add(card);
 		}
 		
 		validate();
@@ -87,7 +68,9 @@ public class PlatPanel extends JPanel implements ActionListener
 		if(e.getActionCommand().equals("add"))
 		{
 			addPlat(new Plat());
+			update();
 		}
 	}
+	
 	
 }

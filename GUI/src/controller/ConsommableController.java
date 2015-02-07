@@ -5,19 +5,15 @@ import retaurant.Consommable;
 public class ConsommableController 
 {
 	private Consommable consommable;
-	private StockController controller;
 	
-	public ConsommableController(Consommable consommable, StockController controller)
+	public ConsommableController(Consommable consommable)
 	{
 		this.consommable = consommable;
-		this.controller = controller;
 	}
 	
 	public boolean setConsommable(String nom, int quantite, float price)
 	{
-		if(validateNom(nom) 
-				&& validateQuantite(quantite) 
-				&& validatePrice(price))
+		if(validateNom(nom) && validateQuantite(quantite) && validatePrice(price))
 		{
 			consommable.setNom(nom);
 			consommable.setNoInStock(quantite);
@@ -46,12 +42,6 @@ public class ConsommableController
 	public Consommable getConsommable() 
 	{
 		return consommable;
-	}
-	
-	
-	public void remove()
-	{
-		controller.removeConsommable(consommable);
 	}
 	
 }

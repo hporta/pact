@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
@@ -18,25 +20,33 @@ import controller.IngredientController;
 import retaurant.Ingredient;
 
 @SuppressWarnings("serial")
-public class IngredientForm extends JPanel
+public class IngredientForm extends JPanel implements ActionListener
 {
-	private Ingredient ingredient;
+	private IngredientController controller;
 	
-	//Textfields
+	//textfields
 	private JTextField nom;
 	private JFormattedTextField quantite;
 	
-	//Buttons
 	private JButton validate;
 	private JButton ret;
 	
 	private final String VALIDATE = "validate";
-	private final String SWITCH = "switch";
-
+	private final String RETURN = "return";
+	
+	private IngredientCard parent;
+	
+	
+	public IngredientForm(IngredientCard parent)
+	{
+		this(parent,new IngredientController(new Ingredient("Nom",0)));
+	}
 	
 	public IngredientForm(IngredientCard parent,IngredientController controller)
 	{
-		this.ingredient = controller.getIngredient();
+		super();
+		this.controller = controller;
+		this.parent = parent;
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -55,7 +65,7 @@ public class IngredientForm extends JPanel
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(this.nom = new JTextField(ingredient.getNom()),c);
+		add(this.nom = new JTextField(controller.getIngredient().getNom()),c);
 		
 
 		c.gridx=0;
@@ -69,7 +79,7 @@ public class IngredientForm extends JPanel
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.quantite = new JFormattedTextField(NumberFormat.getIntegerInstance()),c);
-		this.quantite.setValue(new Integer(ingredient.getNoInStock()));
+		this.quantite.setValue(new Integer(controller.getIngredient().getNoInStock()));
 		
 		c.gridx=2;
 		c.gridy=0;
@@ -84,7 +94,7 @@ public class IngredientForm extends JPanel
 		ImageIcon edit = new ImageIcon("data/img/validate.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(validate = new JButton("Valider",edit),c);
-		validate.addActionListener(controller);
+		validate.addActionListener(this);
 		validate.setActionCommand(VALIDATE);
 		
 		c.gridx=4;
@@ -94,15 +104,32 @@ public class IngredientForm extends JPanel
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(ret = new JButton("Retour",retour),c);
-		ret.addActionListener(parent);
-		ret.setActionCommand(SWITCH);
+		ret.addActionListener(this);
+		ret.setActionCommand(RETURN);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(VALIDATE.equals(e.getActionCommand()))
+		{
+			if(controller.setIngredient(nom.getText(), Integer.parseInt(quantite.getText())))
+			{		
+				parent.switchCard();
+				parent.update();
+			}
+		}
+		
+		else if(RETURN.equals(e.getActionCommand()))
+			parent.switchCard();		
+	}
+	
 	public void update()
 	{
-		nom.setText(ingredient.getNom());
-		quantite.setValue(ingredient.getNoInStock());
+		nom.setText(controller.getIngredient().getNom());
+		quantite.setValue(controller.getIngredient().getNoInStock());
 	}
 }

@@ -5,13 +5,10 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import retaurant.Carte;
-import retaurant.Menu;
-import retaurant.Plat;
-import ui.carte.menu.MenuForm;
-import ui.carte.menu.MenuItem;
-import ui.carte.menu.MenuPanel;
 import controller.MenuController;
+import retaurant.Plat;
+import retaurant.Menu;
+import retaurant.Stock;
 
 @SuppressWarnings("serial")
 public class MenuCard extends JPanel
@@ -27,7 +24,7 @@ public class MenuCard extends JPanel
 		this.parent = parent;
 		this.controller = new MenuController(menu,new ArrayList<Plat>());
 		
-		this.form = new MenuForm(this,controller,new Carte());
+		this.form = new MenuForm(this,controller,new Stock());
 		this.item = new MenuItem(this,menu);
 		
 		setLayout(new CardLayout());
@@ -54,7 +51,6 @@ public class MenuCard extends JPanel
 	
 	public void removeMenu()
 	{
-		parent.removeMenu(controller.getMenu());
+		parent.removeMenu(this);
 	}
-
 }

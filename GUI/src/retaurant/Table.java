@@ -64,7 +64,7 @@ public class Table
 	}
 	
 	//on reconnait des achetables dans les paroles que l'on r�cup�rent du module audio
-	/*public Command passerCommande(ArrayList<String> paroles) throws Exception
+	public Command passerCommande(ArrayList<String> paroles) throws Exception
 	{
 		if(libre == true)
 			throw new Exception("Erreur il n'y a personne à  table");
@@ -76,6 +76,6 @@ public class Table
 					command.add(element);
 	
 		return command;
-	}*/	
+	}	
 
 }

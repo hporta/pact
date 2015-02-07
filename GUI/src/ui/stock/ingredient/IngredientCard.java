@@ -1,34 +1,37 @@
 package ui.stock.ingredient;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
 import controller.IngredientController;
-import controller.StockController;
 import retaurant.Ingredient;
-import retaurant.Stock;
 
 @SuppressWarnings("serial")
-public class IngredientCard extends JPanel implements ActionListener
-{  	
+public class IngredientCard extends JPanel
+{
+	private IngredientController controller;
+	private IngredientPanel parent;
+	
 	private IngredientForm form;
 	private IngredientItem item;
 	
-	private final String SWITCH = "switch";
-	
-	public IngredientCard(Ingredient ingredient,StockController stockController)
+	public IngredientCard(IngredientPanel parent, Ingredient ingredient)
 	{
-		IngredientController controller = new IngredientController(ingredient,this,stockController.getStock());
+		this.parent = parent;
+		this.controller = new IngredientController(ingredient);
 		
 		this.form = new IngredientForm(this,controller);
-		this.item = new IngredientItem(stockController,this,controller);
+		this.item = new IngredientItem(this,controller);
 		
 		setLayout(new CardLayout());
 		add(item);
 		add(form);
+	}
+	
+	public IngredientCard(IngredientPanel parent)
+	{
+		this(parent, new Ingredient("Nom",0));
 	}
 	
 	public void switchCard()
@@ -43,10 +46,8 @@ public class IngredientCard extends JPanel implements ActionListener
 		form.update();
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void removeIngredient()
 	{
-		if(e.getActionCommand().equals(SWITCH))
-			switchCard();
+		parent.removeIngredient(controller.getIngredient());
 	}
 }

@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,11 +14,9 @@ import javax.swing.JPanel;
 import retaurant.Menu;
 import retaurant.Plat;
 
-@SuppressWarnings("serial")
-public class MenuItem extends JPanel implements ActionListener
+public class MenuItem extends JPanel
 {
 	private Menu menu;
-	private MenuCard parent;
 	
 	private JLabel nom;
 	private JLabel description;
@@ -29,11 +25,10 @@ public class MenuItem extends JPanel implements ActionListener
 	private JButton setButton;
 	private JButton delButton;
 	
-	public MenuItem(MenuCard parent,Menu menu)
+	public MenuItem(Menu menu)
 	{
 		super();
 		this.menu = menu;
-		this.parent = parent;
 		
 		this.nom = new JLabel();
 		this.prix = new JLabel();
@@ -72,8 +67,6 @@ public class MenuItem extends JPanel implements ActionListener
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(setButton = new JButton("Modifier",edit),c);
-		setButton.addActionListener(this);
-		setButton.setActionCommand("set");
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -82,8 +75,6 @@ public class MenuItem extends JPanel implements ActionListener
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),c);
-		delButton.addActionListener(this);
-		delButton.setActionCommand("del");
 	}
 	
 	public void update()
@@ -92,26 +83,11 @@ public class MenuItem extends JPanel implements ActionListener
 		prix.setText("Prix : " + menu.getPrix() +"€");
 		
 		String descr = "Plats : ";
-		for(Plat plat : menu.getPlat())
+		for(Plat plat : menu.getMenu())
 		{
-			descr += plat.getNom()+" + ";
+			descr += plat.getNom()+",";
 		}
 		
 		description.setText(descr);
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getActionCommand().equals("set"))
-		{
-			parent.switchCard();
-		}
-		
-		else if(e.getActionCommand().equals("del"))
-		{
-			parent.removeMenu();
-		}
-	}
-	
 }
