@@ -6,20 +6,17 @@ import javax.swing.JPanel;
 
 import controller.IngredientController;
 import retaurant.Ingredient;
+import retaurant.Stock;
 
 @SuppressWarnings("serial")
 public class IngredientCard extends JPanel
-{
-	private IngredientController controller;
-	private IngredientPanel parent;
-	
+{  	
 	private IngredientForm form;
 	private IngredientItem item;
 	
-	public IngredientCard(IngredientPanel parent, Ingredient ingredient)
+	public IngredientCard(Ingredient ingredient,Stock stock)
 	{
-		this.parent = parent;
-		this.controller = new IngredientController(ingredient);
+		IngredientController controller = new IngredientController(ingredient,this,stock);
 		
 		this.form = new IngredientForm(this,controller);
 		this.item = new IngredientItem(this,controller);
@@ -29,9 +26,9 @@ public class IngredientCard extends JPanel
 		add(form);
 	}
 	
-	public IngredientCard(IngredientPanel parent)
+	public IngredientCard(Stock stock)
 	{
-		this(parent, new Ingredient("Nom",0));
+		this(new Ingredient("Nom",0), stock);
 	}
 	
 	public void switchCard()
@@ -44,10 +41,5 @@ public class IngredientCard extends JPanel
 	{
 		item.update();
 		form.update();
-	}
-	
-	public void removeIngredient()
-	{
-		parent.removeIngredient(controller.getIngredient());
 	}
 }

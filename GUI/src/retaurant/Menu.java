@@ -17,6 +17,11 @@ public class Menu implements Achetable
 		this.prix = prix;
 	}
 	
+	public Menu()
+	{
+		this("Nom",0.f);
+	}
+	
 	public void add(Plat plat)
 	{
 		for(Plat platAuMenu : menu)
@@ -30,25 +35,13 @@ public class Menu implements Achetable
 	@Override
 	public boolean disponible()
 	{
-		//plutot que de compter le nombre de dispo au total, dès qu'un plat est pas dispo, on renvoie faux
-		/*
-		 * for(Plat plat : menu)
-		 * {
-		 * 		if(!plat.disponible())
-		 * 			return false;
-		 * }
-		 * 
-		 * return true;
-		 */
-		
-		int i = 0;
-		for (Plat plat : menu)
+		for(Plat plat : menu)
 		{
-			if(plat.disponible())
-				i++;
+			if(!plat.disponible())
+				return false;
 		}
-		
-		return( i == menu.size());
+		  
+		return true;
 	}
 	
 	@Override
@@ -82,6 +75,11 @@ public class Menu implements Achetable
     		throw new Exception("le menu est vide");
     	
         menu.remove(plat);
+	}
+
+	public ArrayList<Plat> getPlat() 
+	{
+		return menu;
 	}
 	
 

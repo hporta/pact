@@ -51,6 +51,6 @@ public class PlatCard extends JPanel
 	
 	public void removePlat()
 	{
-		parent.removePlat(this);
+		parent.removePlat(controller.getPlat());
 	}
 }

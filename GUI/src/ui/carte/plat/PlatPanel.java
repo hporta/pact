@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import retaurant.Carte;
 import retaurant.Ingredient;
 import retaurant.Plat;
 import ui.AddItemButton;
@@ -16,14 +17,14 @@ import ui.AddItemButton;
 public class PlatPanel extends JPanel implements ActionListener
 {
 	private AddItemButton add;
-	private ArrayList<PlatCard> liste;
+	private Carte carte;
 	private JPanel conteneur;
 	
 	public PlatPanel()
 	{
 		super();
 		add = new AddItemButton();
-		liste = new ArrayList<PlatCard>();
+		carte = new Carte();
 		conteneur = new JPanel();
 		
 		setLayout(new BorderLayout());
@@ -32,23 +33,36 @@ public class PlatPanel extends JPanel implements ActionListener
 		add.setActionCommand("add");
 		add.addActionListener(this);
 		
-		ArrayList<Ingredient> liste = new ArrayList<Ingredient>();
-		liste.add(new Ingredient("Pommes de terre",15));
-		liste.add(new Ingredient("Carottes",7));
-		liste.add(new Ingredient("Pommes",3));
+		add(conteneur,BorderLayout.PAGE_START);
+	}
+	
+	public PlatPanel(Carte carte)
+	{
+		super();
+		add = new AddItemButton();
+		this.carte = carte;
+		conteneur = new JPanel();
+		
+		setLayout(new BorderLayout());
+		conteneur.setLayout(new GridLayout(0,1));
+		conteneur.add(add);
+		add.setActionCommand("add");
+		add.addActionListener(this);
 		
 		add(conteneur,BorderLayout.PAGE_START);
 	}
 	
+	
+	
 	public void addPlat(Plat plat)
 	{
-		liste.add(new PlatCard(this,plat));
+		carte.addPlat(plat);
 		update();
 	}
 	
-	public void removePlat(PlatCard card)
+	public void removePlat(Plat plat)
 	{
-		liste.remove(card);
+		carte.removePlat(plat);
 		update();
 	}
 	
@@ -58,9 +72,9 @@ public class PlatPanel extends JPanel implements ActionListener
 		
 		conteneur.add(add);
 		
-		for(PlatCard card : liste)
+		for(Plat plat : carte.getPlats())
 		{
-			conteneur.add(card);
+			conteneur.add(new PlatCard(this,plat));
 		}
 		
 		validate();
@@ -73,9 +87,7 @@ public class PlatPanel extends JPanel implements ActionListener
 		if(e.getActionCommand().equals("add"))
 		{
 			addPlat(new Plat());
-			update();
 		}
 	}
-	
 	
 }

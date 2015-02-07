@@ -20,7 +20,7 @@ import controller.IngredientController;
 import retaurant.Ingredient;
 
 @SuppressWarnings("serial")
-public class IngredientForm extends JPanel implements ActionListener
+public class IngredientForm extends JPanel
 {
 	private IngredientController controller;
 	
@@ -94,7 +94,7 @@ public class IngredientForm extends JPanel implements ActionListener
 		ImageIcon edit = new ImageIcon("data/img/validate.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(validate = new JButton("Valider",edit),c);
-		validate.addActionListener(this);
+		validate.addActionListener(controller);
 		validate.setActionCommand(VALIDATE);
 		
 		c.gridx=4;
@@ -104,27 +104,10 @@ public class IngredientForm extends JPanel implements ActionListener
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(ret = new JButton("Retour",retour),c);
-		ret.addActionListener(this);
+		ret.addActionListener(controller);
 		ret.setActionCommand(RETURN);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
-	}
-	
-
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(VALIDATE.equals(e.getActionCommand()))
-		{
-			if(controller.setIngredient(nom.getText(), Integer.parseInt(quantite.getText())))
-			{		
-				parent.switchCard();
-				parent.update();
-			}
-		}
-		
-		else if(RETURN.equals(e.getActionCommand()))
-			parent.switchCard();		
 	}
 	
 	public void update()

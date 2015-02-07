@@ -18,7 +18,7 @@ import controller.IngredientController;
 import retaurant.Ingredient;
 
 @SuppressWarnings("serial")
-public class IngredientItem extends JPanel implements ActionListener
+public class IngredientItem extends JPanel
 {
 	private Ingredient ingredient;
 	private IngredientController controller;
@@ -81,7 +81,7 @@ public class IngredientItem extends JPanel implements ActionListener
 		ImageIcon edit = new ImageIcon(CIRCLE_ICON_PATH);
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(setButton = new JButton("Modifier",edit),cstr);
-		setButton.addActionListener(this);
+		setButton.addActionListener(controller);
 		setButton.setActionCommand(SET);
 		
 		cstr.gridx=2;
@@ -91,7 +91,7 @@ public class IngredientItem extends JPanel implements ActionListener
 		ImageIcon cross = new ImageIcon(CLOSE_ICON_PATH);
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),cstr);
-		delButton.addActionListener(this);
+		delButton.addActionListener(controller);
 		delButton.setActionCommand(DELETE);
 	}
 	
@@ -101,17 +101,4 @@ public class IngredientItem extends JPanel implements ActionListener
 		quantite.setText("Quantité : " + ingredient.getNoInStock() + " unités");
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(DELETE.equals(e.getActionCommand()))
-		{
-			parent.removeIngredient();
-		}
-		
-		else if(SET.equals(e.getActionCommand()))
-		{
-			parent.switchCard();
-		}
-	}
 }
