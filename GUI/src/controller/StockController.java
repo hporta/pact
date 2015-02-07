@@ -7,7 +7,7 @@ import retaurant.Consommable;
 import retaurant.Ingredient;
 import retaurant.Stock;
 
-public class StockController implements ActionListener
+public class StockController
 {
 	//Model
 	private Stock stock;
@@ -42,10 +42,15 @@ public class StockController implements ActionListener
 		stock.addConsommable(consommable);
 	}
 
+	/*
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
+		if(e.getActionCommand().equals("add"))
+		{
+			addIngredient(new Ingredient());
+		}
 		
-	}
+	}*/
 	
 }

@@ -2,31 +2,30 @@ package ui.stock.ingredient;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import controller.StockController;
 import retaurant.Ingredient;
-import retaurant.Stock;
 import ui.AddItemButton;
 
 @SuppressWarnings("serial")
-public class IngredientPanel extends JPanel implements ActionListener
+public class IngredientPanel extends JPanel
 {
 	private AddItemButton add;
 	private JPanel conteneur;
 	
-	private Stock stock;
+	//Controller
+	private StockController stockController;
 		
-	public IngredientPanel(Stock stock)
+	public IngredientPanel(StockController stockController)
 	{
-		this.stock = stock;
+		this.stockController = stockController;
 		
 		setLayout(new BorderLayout());
 		
 		add = new AddItemButton();
-		add.addActionListener(this);
+		add.addActionListener(stockController);
 		add.setActionCommand("add");
 		
 		conteneur = new JPanel();
@@ -35,27 +34,7 @@ public class IngredientPanel extends JPanel implements ActionListener
 		
 		update();
 	}
-	
-	public void addIngredient(Ingredient ingredient)
-	{
-		stock.addIngredient(ingredient);
-		update();
-	}
-	
-	public void removeIngredient(Ingredient ingredient)
-	{
-		stock.removeIngredient(ingredient);
-		update();
-	}
-	
-	public void actionPerformed(ActionEvent e)
-	{
-		if("add".equals(e.getActionCommand()))
-		{
-			stock.addIngredient(new Ingredient());
-			update();
-	    }
-	}
+
 	
 	public void update()
 	{
@@ -63,9 +42,9 @@ public class IngredientPanel extends JPanel implements ActionListener
 		
 		conteneur.add(add);
 		
-		for(Ingredient ingredient : stock.getIngredients())
+		for(Ingredient ingredient : stockController.getStock().getIngredients())
 		{
-			conteneur.add(new IngredientCard(this, ingredient));
+			conteneur.add(new IngredientCard(ingredient, stockController));
 		}
 		
 		validate();

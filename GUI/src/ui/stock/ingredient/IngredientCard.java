@@ -1,34 +1,34 @@
 package ui.stock.ingredient;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
 import controller.IngredientController;
+import controller.StockController;
 import retaurant.Ingredient;
 import retaurant.Stock;
 
 @SuppressWarnings("serial")
-public class IngredientCard extends JPanel
+public class IngredientCard extends JPanel implements ActionListener
 {  	
 	private IngredientForm form;
 	private IngredientItem item;
 	
-	public IngredientCard(Ingredient ingredient,Stock stock)
+	private final String SWITCH = "switch";
+	
+	public IngredientCard(Ingredient ingredient,StockController stockController)
 	{
-		IngredientController controller = new IngredientController(ingredient,this,stock);
+		IngredientController controller = new IngredientController(ingredient,this,stockController.getStock());
 		
 		this.form = new IngredientForm(this,controller);
-		this.item = new IngredientItem(this,controller);
+		this.item = new IngredientItem(stockController,this,controller);
 		
 		setLayout(new CardLayout());
 		add(item);
 		add(form);
-	}
-	
-	public IngredientCard(Stock stock)
-	{
-		this(new Ingredient("Nom",0), stock);
 	}
 	
 	public void switchCard()
@@ -41,5 +41,12 @@ public class IngredientCard extends JPanel
 	{
 		item.update();
 		form.update();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getActionCommand().equals(SWITCH))
+			switchCard();
 	}
 }

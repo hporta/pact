@@ -7,7 +7,7 @@ import retaurant.Ingredient;
 import retaurant.Stock;
 import ui.stock.ingredient.IngredientCard;
 
-public class IngredientController implements ActionListener
+public class IngredientController
 {
 	//View
 	private IngredientCard card;

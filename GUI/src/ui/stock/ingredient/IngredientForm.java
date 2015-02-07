@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
@@ -22,31 +20,23 @@ import retaurant.Ingredient;
 @SuppressWarnings("serial")
 public class IngredientForm extends JPanel
 {
-	private IngredientController controller;
+	private Ingredient ingredient;
 	
-	//textfields
+	//Textfields
 	private JTextField nom;
 	private JFormattedTextField quantite;
 	
+	//Buttons
 	private JButton validate;
 	private JButton ret;
 	
 	private final String VALIDATE = "validate";
-	private final String RETURN = "return";
-	
-	private IngredientCard parent;
-	
-	
-	public IngredientForm(IngredientCard parent)
-	{
-		this(parent,new IngredientController(new Ingredient("Nom",0)));
-	}
+	private final String SWITCH = "switch";
+
 	
 	public IngredientForm(IngredientCard parent,IngredientController controller)
 	{
-		super();
-		this.controller = controller;
-		this.parent = parent;
+		this.ingredient = controller.getIngredient();
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -65,7 +55,7 @@ public class IngredientForm extends JPanel
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(this.nom = new JTextField(controller.getIngredient().getNom()),c);
+		add(this.nom = new JTextField(ingredient.getNom()),c);
 		
 
 		c.gridx=0;
@@ -79,7 +69,7 @@ public class IngredientForm extends JPanel
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		add(this.quantite = new JFormattedTextField(NumberFormat.getIntegerInstance()),c);
-		this.quantite.setValue(new Integer(controller.getIngredient().getNoInStock()));
+		this.quantite.setValue(new Integer(ingredient.getNoInStock()));
 		
 		c.gridx=2;
 		c.gridy=0;
@@ -104,15 +94,15 @@ public class IngredientForm extends JPanel
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(ret = new JButton("Retour",retour),c);
-		ret.addActionListener(controller);
-		ret.setActionCommand(RETURN);
+		ret.addActionListener(parent);
+		ret.setActionCommand(SWITCH);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
 	public void update()
 	{
-		nom.setText(controller.getIngredient().getNom());
-		quantite.setValue(controller.getIngredient().getNoInStock());
+		nom.setText(ingredient.getNom());
+		quantite.setValue(ingredient.getNoInStock());
 	}
 }
