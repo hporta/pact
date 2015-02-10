@@ -1,38 +1,31 @@
 package ui.stock.consommable;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
 import controller.ConsommableController;
-import retaurant.Consommable;
 
 @SuppressWarnings("serial")
-public class ConsommableCard extends JPanel
-{
-	private ConsommableController controller;
-	private ConsommablePanel parent;
-	
+public class ConsommableCard extends JPanel implements ActionListener
+{	
 	private ConsommableForm form;
 	private ConsommableItem item;
 	
-	public ConsommableCard(ConsommablePanel parent, Consommable consommable)
+	private final String SWITCH = "switch";
+	
+	public ConsommableCard(ConsommableController controller)
 	{
-		this.parent = parent;
-		this.controller = new ConsommableController(consommable);
-		
 		this.form = new ConsommableForm(this,controller);
-		this.item = new ConsommableItem(this,consommable);
+		this.item = new ConsommableItem(this,controller);
 		
 		setLayout(new CardLayout());
 		add(item);
 		add(form);
 	}
 	
-	public ConsommableCard(ConsommablePanel parent)
-	{
-		this(parent, new Consommable());
-	}
 	
 	public void switchCard()
 	{
@@ -45,9 +38,13 @@ public class ConsommableCard extends JPanel
 		item.update();
 		form.update();
 	}
-	
-	public void removeConsommable()
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
 	{
-		parent.removeConsommable(controller.getConsommable());
+		if(e.getActionCommand().equals(SWITCH))
+			switchCard();
 	}
+
 }

@@ -121,11 +121,4 @@ public class ContentPanel extends JPanel implements ActionListener
 		}
 	}
 	
-	public void update()
-	{
-		notifications.update();
-		stock.update();
-		carte.update();
-		commande.update();
-	}
 }

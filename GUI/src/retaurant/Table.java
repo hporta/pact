@@ -1,9 +1,10 @@
 package retaurant;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
 
-public class Table
+public class Table extends Observable
 {
 	private int no;
 	private boolean propre; //propre ou sale

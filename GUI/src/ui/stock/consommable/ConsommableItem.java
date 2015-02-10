@@ -13,13 +13,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.ConsommableController;
+
 import retaurant.Consommable;
 
 @SuppressWarnings("serial")
 public class ConsommableItem extends JPanel implements ActionListener
 {
+	//Model
 	private Consommable consommable;
-	private ConsommableCard parent;
 	
 	//labels
 	private JLabel nom;
@@ -30,11 +32,9 @@ public class ConsommableItem extends JPanel implements ActionListener
 	private JButton setButton;
 	private JButton delButton;
 	
-	ConsommableItem(ConsommableCard parent,Consommable consommable)
+	ConsommableItem(ConsommableCard parent,ConsommableController controller)
 	{
-		super();
-		this.parent = parent;
-		this.consommable = consommable;
+		this.consommable = controller.getConsommable();
 		this.nom = new JLabel();
 		this.prix = new JLabel();
 		this.quantite = new JLabel();
@@ -81,7 +81,7 @@ public class ConsommableItem extends JPanel implements ActionListener
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(setButton = new JButton("Modifier",edit),c);
-		setButton.addActionListener(this);
+		setButton.addActionListener(parent);
 		setButton.setActionCommand("set");
 		
 		c.gridx=2;
@@ -91,7 +91,7 @@ public class ConsommableItem extends JPanel implements ActionListener
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),c);
-		delButton.addActionListener(this);
+		delButton.addActionListener(controller);
 		delButton.setActionCommand("del");
 		
 	}
@@ -108,18 +108,10 @@ public class ConsommableItem extends JPanel implements ActionListener
 	{
 		return consommable;
 	}
-	
+
 	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if("del".equals(e.getActionCommand()))
-		{
-			parent.removeConsommable();
-		}
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
-		else if("set".equals(e.getActionCommand()))
-		{
-			parent.switchCard();
-		}
 	}
 }

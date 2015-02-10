@@ -3,32 +3,30 @@ package ui.stock.ingredient;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 
 import controller.IngredientController;
-import controller.StockController;
-import retaurant.Ingredient;
-import retaurant.Stock;
 
 @SuppressWarnings("serial")
-public class IngredientCard extends JPanel implements ActionListener
-{  	
+public class IngredientCard extends JPanel implements ActionListener, Observer
+{
 	private IngredientForm form;
 	private IngredientItem item;
 	
 	private final String SWITCH = "switch";
 	
-	public IngredientCard(Ingredient ingredient,StockController stockController)
+	public IngredientCard(IngredientController ingredientController)
 	{
-		IngredientController controller = new IngredientController(ingredient,this,stockController.getStock());
+		//Informe l'ingredient qu'il doit notifier ses modifications
+		ingredientController.getIngredient().addObserver(this);
 		
-		this.form = new IngredientForm(this,controller);
-		this.item = new IngredientItem(stockController,this,controller);
-		
+		//Création des 2 panels
 		setLayout(new CardLayout());
-		add(item);
-		add(form);
+		add(item = new IngredientItem(this,ingredientController));
+		add(form = new IngredientForm(this,ingredientController));
 	}
 	
 	public void switchCard()
@@ -37,16 +35,18 @@ public class IngredientCard extends JPanel implements ActionListener
 		card.next(this);
 	}
 	
-	public void update()
-	{
-		item.update();
-		form.update();
-	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getActionCommand().equals(SWITCH))
 			switchCard();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) 
+	{
+		item.update();
+		form.update();
 	}
 }

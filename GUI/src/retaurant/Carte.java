@@ -1,7 +1,7 @@
 package retaurant;
 import java.util.ArrayList;
 
-
+//La carte contient tout ce qui peut être fait dans le restaurant
 public class Carte 
 {
 	private ArrayList<Achetable> carte;

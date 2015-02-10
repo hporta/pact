@@ -20,7 +20,9 @@ import retaurant.Ingredient;
 @SuppressWarnings("serial")
 public class IngredientForm extends JPanel
 {
+	//Model
 	private Ingredient ingredient;
+	
 	
 	//Textfields
 	private JTextField nom;
@@ -99,6 +101,7 @@ public class IngredientForm extends JPanel
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
+	
 	
 	public void update()
 	{

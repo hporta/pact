@@ -1,15 +1,21 @@
 package retaurant;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
 
-public class Terrasse
+public class Terrasse extends Observable
 {
 	private ArrayList<Table> terrasse;
 	
 	public Terrasse(ArrayList<Table> terrasse)
 	{
 		this.terrasse = terrasse;
+	}
+	
+	public Terrasse()
+	{
+		this.terrasse = new ArrayList<Table>();
 	}
 
 

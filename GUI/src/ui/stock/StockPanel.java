@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -16,7 +18,7 @@ import ui.stock.ingredient.IngredientPanel;
 
 
 @SuppressWarnings("serial")
-public class StockPanel extends JPanel implements ActionListener
+public class StockPanel extends JPanel implements ActionListener, Observer
 {	
 	private final ConsommablePanel consommable;
 	private final IngredientPanel ingredient;
@@ -48,6 +50,8 @@ public class StockPanel extends JPanel implements ActionListener
 		this.stock = stock;
 		this.stockController = new StockController(stock);
 		
+		stock.addObserver(this);
+		
 		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
 		
 		buttonPanel = new JPanel();
@@ -65,10 +69,8 @@ public class StockPanel extends JPanel implements ActionListener
 		enableButton(INGREDIENTS);
 		
 		add(conteneur = new JPanel(new CardLayout()));
-		conteneur.add(consommable = new ConsommablePanel(stock),CONSOMMABLES);
+		conteneur.add(consommable = new ConsommablePanel(stockController),CONSOMMABLES);
 		conteneur.add(ingredient= new IngredientPanel(stockController),INGREDIENTS);
-		
-		update();
 		
 	}
 
@@ -90,11 +92,6 @@ public class StockPanel extends JPanel implements ActionListener
 		}
 	}
 	
-	public void update()
-	{
-		consommable.update();
-		ingredient.update();
-	}
 	
 	private void enableButton(String name)
 	{
@@ -110,4 +107,13 @@ public class StockPanel extends JPanel implements ActionListener
 			ingredientButton.setEnabled(false);
 		}
 	}
+
+	@Override
+	public void update(Observable o, Object arg) 
+	{
+		consommable.update();
+		ingredient.update();
+	}
+	
+	
 }

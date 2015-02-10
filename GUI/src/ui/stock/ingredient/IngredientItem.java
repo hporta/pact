@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -14,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.IngredientController;
-import controller.StockController;
 import retaurant.Ingredient;
 
 @SuppressWarnings("serial")
@@ -31,16 +28,14 @@ public class IngredientItem extends JPanel
 	private JButton setButton;
 	private JButton delButton;
 	
-	private final String SET = "set";
 	private final String DELETE = "delete";
 	private final String SWITCH = "switch";
 	
 	private final String CIRCLE_ICON_PATH = "data/img/circle.png";
 	private final String CLOSE_ICON_PATH = "data/img/close.png";
 	
-	IngredientItem(StockController stockController,
-				IngredientCard parent,
-				IngredientController controller)
+	
+	IngredientItem(IngredientCard parent,IngredientController controller)
 	{
 		this.ingredient = controller.getIngredient();
 		this.nom = new JLabel();
@@ -90,9 +85,10 @@ public class IngredientItem extends JPanel
 		ImageIcon cross = new ImageIcon(CLOSE_ICON_PATH);
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),cstr);
-		delButton.addActionListener(stockController);
+		delButton.addActionListener(controller);
 		delButton.setActionCommand(DELETE);
 	}
+	
 	
 	public void update()
 	{

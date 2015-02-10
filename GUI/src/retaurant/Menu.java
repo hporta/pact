@@ -1,9 +1,10 @@
 package retaurant;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
 
-public class Menu implements Achetable
+public class Menu extends Observable implements Achetable
 {
 	private ArrayList<Plat> menu;
 	private final String nom;

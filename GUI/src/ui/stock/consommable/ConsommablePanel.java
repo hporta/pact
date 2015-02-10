@@ -2,30 +2,33 @@ package ui.stock.consommable;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+
+import controller.ConsommableController;
+import controller.StockController;
 
 import retaurant.Consommable;
 import retaurant.Stock;
 import ui.AddItemButton;
 
 @SuppressWarnings("serial")
-public class ConsommablePanel extends JPanel implements ActionListener
+public class ConsommablePanel extends JPanel
 {
 	private AddItemButton add;
 	private JPanel conteneur;
+	
+	//Model
 	private Stock stock;
 	
-	public ConsommablePanel() 
-	{
-		this(new Stock());
-	}
+	//Controller
+	private StockController stockController;
 	
-	public ConsommablePanel(Stock stock)
+	
+	public ConsommablePanel(StockController stockController)
 	{
-		this.stock = stock;
+		this.stockController = stockController;
+		this.stock = stockController.getStock();
 		
 		setLayout(new BorderLayout());
 		add = new AddItemButton();
@@ -34,32 +37,10 @@ public class ConsommablePanel extends JPanel implements ActionListener
 		conteneur.setLayout(new GridLayout(0,1));
 		conteneur.add(add);
 		
-		add.addActionListener(this);
-		add.setActionCommand("add");
+		add.addActionListener(stockController);
+		add.setActionCommand("addConsommable");
 		
 		add(conteneur,BorderLayout.PAGE_START);
-	}
-	
-	public void addConsommable(Consommable consommable)
-	{
-		stock.addConsommable(consommable);
-		update();
-	}
-	
-	public void removeConsommable(Consommable consommable)
-	{
-		stock.removeConsommable(consommable);
-		update();
-	}
-
-	
-	public void actionPerformed(ActionEvent e)
-	{
-		if("add".equals(e.getActionCommand()))
-		{
-			stock.addConsommable(new Consommable());
-			update();
-	    }
 	}
 	
 	public void update()
@@ -70,12 +51,11 @@ public class ConsommablePanel extends JPanel implements ActionListener
 		
 		for(Consommable consommable : stock.getConsommables())
 		{
-			conteneur.add(new ConsommableCard(this, consommable));
+			conteneur.add(new ConsommableCard(new ConsommableController(consommable,stockController)));
 		}
 		
 		validate();
 		repaint();
 	}
-	
 	
 }

@@ -5,8 +5,10 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import controller.IngredientController;
 import controller.StockController;
 import retaurant.Ingredient;
+import retaurant.Stock;
 import ui.AddItemButton;
 
 @SuppressWarnings("serial")
@@ -17,10 +19,14 @@ public class IngredientPanel extends JPanel
 	
 	//Controller
 	private StockController stockController;
+	
+	//Model
+	private Stock stock;
 		
 	public IngredientPanel(StockController stockController)
 	{
 		this.stockController = stockController;
+		this.stock = stockController.getStock();
 		
 		setLayout(new BorderLayout());
 		
@@ -42,9 +48,9 @@ public class IngredientPanel extends JPanel
 		
 		conteneur.add(add);
 		
-		for(Ingredient ingredient : stockController.getStock().getIngredients())
+		for(Ingredient ingredient : stock.getIngredients())
 		{
-			conteneur.add(new IngredientCard(ingredient, stockController));
+			conteneur.add(new IngredientCard(new IngredientController(ingredient, stockController)));
 		}
 		
 		validate();

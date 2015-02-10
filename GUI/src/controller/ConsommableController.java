@@ -1,16 +1,19 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import retaurant.Consommable;
 
-public class ConsommableController 
+public class ConsommableController implements ActionListener
 {
 	private Consommable consommable;
-	private StockController controller;
+	private StockController stockController;
 	
-	public ConsommableController(Consommable consommable, StockController controller)
+	public ConsommableController(Consommable consommable, StockController stockController)
 	{
 		this.consommable = consommable;
-		this.controller = controller;
+		this.stockController = stockController;
 	}
 	
 	public boolean setConsommable(String nom, int quantite, float price)
@@ -51,7 +54,21 @@ public class ConsommableController
 	
 	public void remove()
 	{
-		controller.removeConsommable(consommable);
+		stockController.removeConsommable(consommable);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if("del".equals(e.getActionCommand()))
+		{
+			remove();
+		}
+		
+		else if("set".equals(e.getActionCommand()))
+		{
+			
+		}
 	}
 	
 }

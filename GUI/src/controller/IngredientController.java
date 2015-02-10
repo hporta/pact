@@ -7,26 +7,23 @@ import retaurant.Ingredient;
 import retaurant.Stock;
 import ui.stock.ingredient.IngredientCard;
 
-public class IngredientController
+public class IngredientController implements ActionListener
 {
 	//View
-	private IngredientCard card;
+	//private IngredientCard card;
 	
 	//Model
 	private Ingredient ingredient;
-	private Stock stock;
+	private StockController stockController;
 	
 	//Events
-	private final String SET = "set";
 	private final String DELETE = "delete";
 	private final String VALIDATE = "validate";
-	private final String RETURN = "return";
 	
-	public IngredientController(Ingredient ingredient, IngredientCard card, Stock stock)
+	public IngredientController(Ingredient ingredient, StockController stockController)
 	{
 		this.ingredient = ingredient;
-		this.card = card;
-		this.stock = stock;
+		this.stockController = stockController;
 	}
 	
 	public Ingredient getIngredient() 
@@ -63,26 +60,17 @@ public class IngredientController
 		//Events form IngredientItem
 		if(DELETE.equals(e.getActionCommand()))
 		{
-			stock.removeIngredient(ingredient);
+			stockController.removeIngredient(ingredient);
 		}
-		
-		else if(SET.equals(e.getActionCommand()))
-		{
-			card.switchCard();
-		}
-		
 		
 		//Events from IngredientForm
 		else if(VALIDATE.equals(e.getActionCommand()))
 		{
-			if(setIngredient(nom.getText(), Integer.parseInt(quantite.getText())))
+			/*if(setIngredient(nom.getText(), Integer.parseInt(quantite.getText())))
 			{
 				card.switchCard();
 				card.update();
-			}
+			}*/
 		}
-		
-		else if(RETURN.equals(e.getActionCommand()))
-			card.switchCard();
 	}
 }

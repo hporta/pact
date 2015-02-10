@@ -1,8 +1,9 @@
 package retaurant;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
-public class Stock
+public class Stock extends Observable
 {
 	private ArrayList<Produit> stock;
 	private ArrayList<Consommable> consommables;
@@ -32,12 +33,16 @@ public class Stock
 	{
 		consommables.add(consommable);
 		stock.add(consommable);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void addIngredient(Ingredient ingredient)
 	{
 		ingredients.add(ingredient);
 		stock.add(ingredient);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void removeProduct()
@@ -75,11 +80,15 @@ public class Stock
 	{
 		ingredients.remove(ingredient);
 		stock.remove(ingredient);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void removeConsommable(Consommable consommable)
 	{
 		consommables.remove(consommable);
 		stock.remove(consommable);
+		setChanged();
+		notifyObservers();
 	}
 }

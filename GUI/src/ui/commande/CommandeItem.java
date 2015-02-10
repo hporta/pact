@@ -1,19 +1,17 @@
 package ui.commande;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.util.HashMap;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import retaurant.Achetable;
 import retaurant.Command;
 
 
+@SuppressWarnings("serial")
 public class CommandeItem extends JPanel
 {	
 	private Command commande;

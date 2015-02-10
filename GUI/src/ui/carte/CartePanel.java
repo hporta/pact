@@ -9,12 +9,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import retaurant.Consommable;
 import retaurant.Ingredient;
 import retaurant.Plat;
 import retaurant.Stock;
 import ui.carte.menu.MenuPanel;
 import ui.carte.plat.PlatPanel;
+
 
 @SuppressWarnings("serial")
 public class CartePanel extends JPanel implements ActionListener
