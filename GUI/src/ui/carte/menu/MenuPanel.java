@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import retaurant.Carte;
@@ -75,10 +76,12 @@ public class MenuPanel extends JPanel implements ActionListener
 		
 		conteneur.add(add);
 		
-		for(Menu menu : carte.getMenus())
-		{
-			conteneur.add(new MenuCard(this, menu));
-		}
+		if(carte.getMenus().size() > 0)
+			for(Menu menu : carte.getMenus())
+				conteneur.add(new MenuCard(this, menu));
+		
+		else
+			conteneur.add(new JLabel("Pas de menu à afficher"));
 		
 		validate();
 		repaint();

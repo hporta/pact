@@ -7,6 +7,7 @@ public class Command
 	//private final Table table;
 	private ArrayList<Achetable> listeCommandes;
 	private String etat;// etat de la commande
+	private int id;
 	
 	
 	public Command(Table table)
@@ -20,6 +21,7 @@ public class Command
 	{
 		listeCommandes = new ArrayList<Achetable>();
 		etat = new String("En cours");
+		this.id = id;
 	}
 
 	public void add(Achetable achat)
@@ -63,6 +65,11 @@ public class Command
 			total += achat.getPrix();
 		
 		return total;
+	}
+	
+	public int getId()
+	{
+		return id;
 	}
 	
 }

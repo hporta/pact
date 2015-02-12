@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import retaurant.Carte;
@@ -70,10 +71,12 @@ public class PlatPanel extends JPanel implements ActionListener
 		
 		conteneur.add(add);
 		
-		for(Plat plat : carte.getPlats())
-		{
-			conteneur.add(new PlatCard(this,plat));
-		}
+		if(carte.getPlats().size() > 0)
+			for(Plat plat : carte.getPlats())
+				conteneur.add(new PlatCard(this,plat));
+		
+		else
+			conteneur.add(new JLabel("Pas de plat à afficher"));
 		
 		validate();
 		repaint();

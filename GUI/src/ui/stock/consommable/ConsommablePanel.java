@@ -1,8 +1,10 @@
 package ui.stock.consommable;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.ConsommableController;
@@ -17,6 +19,7 @@ public class ConsommablePanel extends JPanel
 {
 	private AddItemButton add;
 	private JPanel conteneur;
+	private JPanel empty;
 	
 	//Model
 	private Stock stock;
@@ -30,8 +33,14 @@ public class ConsommablePanel extends JPanel
 		this.stockController = stockController;
 		this.stock = stockController.getStock();
 		
+
+		
 		setLayout(new BorderLayout());
 		add = new AddItemButton();
+		empty = new JPanel();
+		empty.setLayout(new BorderLayout());
+		empty.add(new JLabel("Pas de consommables à afficher"),BorderLayout.CENTER);
+		empty.setPreferredSize(new Dimension(this.getWidth(),100));
 		
 		conteneur = new JPanel();
 		conteneur.setLayout(new GridLayout(0,1));
@@ -41,6 +50,8 @@ public class ConsommablePanel extends JPanel
 		add.setActionCommand("addConsommable");
 		
 		add(conteneur,BorderLayout.PAGE_START);
+		
+		update();
 	}
 	
 	public void update()
@@ -49,10 +60,14 @@ public class ConsommablePanel extends JPanel
 		
 		conteneur.add(add);
 		
+		if(stock.getConsommables().size() == 0)
+			conteneur.add(empty);
+		
 		for(Consommable consommable : stock.getConsommables())
 		{
 			conteneur.add(new ConsommableCard(new ConsommableController(consommable,stockController)));
 		}
+			
 		
 		validate();
 		repaint();

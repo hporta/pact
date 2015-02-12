@@ -52,8 +52,12 @@ public class NotificationPanel extends JPanel
 	{
 		content.removeAll();
 		
-		for(Notification notification : liste)
-			content.add(notification);
+		if(liste.size() > 0)
+			for(Notification notification : liste)
+				content.add(notification);
+		
+		else
+			content.add(new JLabel("Pas de notification"));
 		
 		validate();
 		repaint();

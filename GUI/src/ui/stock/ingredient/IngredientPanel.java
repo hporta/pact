@@ -3,6 +3,7 @@ package ui.stock.ingredient;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.IngredientController;
@@ -16,6 +17,7 @@ public class IngredientPanel extends JPanel
 {
 	private AddItemButton add;
 	private JPanel conteneur;
+	private JPanel empty;
 	
 	//Controller
 	private StockController stockController;
@@ -34,6 +36,9 @@ public class IngredientPanel extends JPanel
 		add.addActionListener(stockController);
 		add.setActionCommand("add");
 		
+		empty = new JPanel();
+		empty.add(new JLabel("Pas d'ingredient à afficher"));
+		
 		conteneur = new JPanel();
 		conteneur.setLayout(new GridLayout(0,1));		
 		add(conteneur,BorderLayout.PAGE_START);
@@ -48,10 +53,14 @@ public class IngredientPanel extends JPanel
 		
 		conteneur.add(add);
 		
+		if(stock.getIngredients().size() == 0)
+			conteneur.add(empty);
+		
 		for(Ingredient ingredient : stock.getIngredients())
 		{
 			conteneur.add(new IngredientCard(new IngredientController(ingredient, stockController)));
 		}
+		
 		
 		validate();
 		repaint();

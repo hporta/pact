@@ -37,7 +37,7 @@ public class CommandeItem extends JPanel
 		
 		cstr.gridx = 1;
 		cstr.gridy = 0;
-		add(new JLabel("Table n° commande.getId()"),cstr);
+		add(new JLabel("Table n°"+commande.getId()),cstr);
 		
 		JPanel conteneur = new JPanel();
 		conteneur.setLayout(new GridLayout(0,2));
