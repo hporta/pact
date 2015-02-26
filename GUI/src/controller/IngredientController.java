@@ -4,24 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import retaurant.Ingredient;
-import retaurant.Stock;
+import ui.Constantes;
 import ui.stock.ingredient.IngredientCard;
+import ui.stock.ingredient.IngredientFields;
 
 public class IngredientController implements ActionListener
 {
 	//View
 	private IngredientCard card;
+	private IngredientFields fields;
 	
 	//Model
 	private Ingredient ingredient;
 	
 	//Controller
 	private StockController stockController;
-	
-	//Events
-	private final String DELETE = "delete";
-	private final String VALIDATE = "validate";
-	
+		
 	
 	public IngredientController(Ingredient ingredient, StockController stockController)
 	{
@@ -32,6 +30,11 @@ public class IngredientController implements ActionListener
 	public void setCard(IngredientCard card)
 	{
 		this.card = card;
+	}
+	
+	public void setFields(IngredientFields fields)
+	{
+		this.fields = fields;
 	}
 	
 	public Ingredient getIngredient() 
@@ -66,15 +69,15 @@ public class IngredientController implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		//Events form IngredientItem
-		if(DELETE.equals(e.getActionCommand()))
+		if(Constantes.DELETE.equals(e.getActionCommand()))
 		{
 			stockController.removeIngredient(ingredient);
 		}
 		
 		//Events from IngredientForm
-		else if(VALIDATE.equals(e.getActionCommand()))
+		else if(Constantes.VALIDATE.equals(e.getActionCommand()))
 		{
-			if(setIngredient(card.getNom(), card.get)))
+			if(setIngredient(fields.getNom(), fields.getQuantite()))
 			{
 				card.switchCard();
 			}

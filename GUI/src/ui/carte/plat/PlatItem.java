@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,7 +19,7 @@ import retaurant.Ingredient;
 import retaurant.Plat;
 
 @SuppressWarnings("serial")
-public class PlatItem extends JPanel
+public class PlatItem extends JPanel implements Observer
 {
 	//Model
 	private Plat plat;
@@ -35,13 +35,13 @@ public class PlatItem extends JPanel
 	
 	public PlatItem(PlatCard parent,PlatController platController)
 	{
-		super();
 		this.plat = platController.getPlat();
+		plat.addObserver(this);
 		
 		this.nom = new JLabel();
 		this.prix = new JLabel();
 		this.description = new JLabel();
-		update();
+		update(plat,null);
 		
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -89,7 +89,9 @@ public class PlatItem extends JPanel
 		delButton.setActionCommand("del");
 	}
 	
-	public void update()
+
+	@Override
+	public void update(Observable o, Object arg) 
 	{
 		nom.setText("Nom : " + plat.getNom());
 		prix.setText("Prix : " + plat.getPrix() +"€");

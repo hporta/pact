@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import ui.Constantes;
+
 import controller.ConsommableController;
 
 @SuppressWarnings("serial")
@@ -14,7 +16,6 @@ public class ConsommableCard extends JPanel implements ActionListener
 	private ConsommableForm form;
 	private ConsommableItem item;
 	
-	private final String SWITCH = "switch";
 	
 	public ConsommableCard(ConsommableController controller)
 	{
@@ -43,7 +44,7 @@ public class ConsommableCard extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals(SWITCH))
+		if(e.getActionCommand().equals(Constantes.SWITCH))
 			switchCard();
 	}
 

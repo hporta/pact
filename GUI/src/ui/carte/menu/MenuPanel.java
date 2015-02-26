@@ -2,17 +2,14 @@ package ui.carte.menu;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.CarteController;
+import controller.MenuController;
 
 import retaurant.Carte;
-import retaurant.Ingredient;
 import retaurant.Menu;
 import ui.AddItemButton;
 
@@ -52,7 +49,7 @@ public class MenuPanel extends JPanel
 		
 		if(carte.getMenus().size() > 0)
 			for(Menu menu : carte.getMenus())
-				conteneur.add(new MenuCard(this, menu));
+				conteneur.add(new MenuCard(new MenuController(menu, carteController)));
 		
 		else
 			conteneur.add(new JLabel("Pas de menu à afficher"));

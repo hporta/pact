@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,13 +27,13 @@ import retaurant.Menu;
 import retaurant.Plat;
 
 @SuppressWarnings("serial")
-public class MenuForm extends JPanel implements ActionListener
+public class MenuForm extends JPanel implements ActionListener, Observer
 {
-	private MenuCard parent;
 	private MenuController controller;
 	private Menu menu;
 	private ArrayList<Plat> listePlats;
 	
+	//Fields
 	private JTextField nom;
 	private JTextField description;
 	private JFormattedTextField prix;
@@ -43,15 +45,15 @@ public class MenuForm extends JPanel implements ActionListener
 	private JButton ret;
 	private JButton addPlat;
 	
+	//Model
 	private Carte carte;
 	
 	
 	public MenuForm(MenuCard parent, MenuController controller)
 	{
-		super();
-		this.parent = parent;
-		this.controller = controller;
 		this.menu = controller.getMenu();
+		menu.addObserver(this);
+		
 		this.listePlats = carte.getPlats();
 		plats = new ArrayList<JComboBox<String>>();
 		
@@ -137,20 +139,6 @@ public class MenuForm extends JPanel implements ActionListener
 			update();
 		}
 		
-		else if(e.getActionCommand().equals("set"))
-		{
-			if(controller.setMenu(nom.getText(), description.getText(), (float) prix.getValue(), getPlats()))
-			{
-				parent.switchCard();
-			}
-			
-		}
-		
-		else if(e.getActionCommand().equals("ret"))
-		{
-			parent.switchCard();
-		}
-		
 	}
 	
 	public void update()
@@ -176,5 +164,12 @@ public class MenuForm extends JPanel implements ActionListener
 		}
 		
 		return liste;
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

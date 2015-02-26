@@ -19,20 +19,8 @@ import ui.stock.StockPanel;
 @SuppressWarnings("serial")
 public class ContentPanel extends JPanel implements ActionListener
 {
-	//Panels
-	private final NotificationPanel notifications;
-	private final StockPanel stock;
-	private final CartePanel carte;
-	private final CommandePanel commande;
-
+	//Main panel
 	private final JPanel conteneur;
-	private final JPanel buttonPanel;
-	
-	//Tab buttons
-	private final JButton notificationButton;
-	private final JButton stockButton;
-	private final JButton carteButton;
-	private final JButton commandeButton;
 	
 	//Tab names
 	private final String NOTIFICATION = "Notifications";
@@ -44,13 +32,19 @@ public class ContentPanel extends JPanel implements ActionListener
 	{
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		buttonPanel = new JPanel(new GridLayout(1,4));
-		buttonPanel.add(notificationButton = new JButton(NOTIFICATION));
-		buttonPanel.add(stockButton = new JButton(STOCK));
-		buttonPanel.add(carteButton = new JButton(CARTE));
-		buttonPanel.add(commandeButton = new JButton(COMMANDE));
+		JButton notificationButton = new JButton(NOTIFICATION);
+		JButton stockButton = new JButton(STOCK);
+		JButton carteButton = new JButton(CARTE);
+		JButton commandeButton = new JButton(COMMANDE); 
+		
+		JPanel buttonPanel = new JPanel(new GridLayout(1,4));
+		buttonPanel.add(notificationButton);
+		buttonPanel.add(stockButton);
+		buttonPanel.add(carteButton);
+		buttonPanel.add(commandeButton);
 		add(buttonPanel);
 		
+		//Setting the event for every button
 		notificationButton.addActionListener(this);
 		notificationButton.setActionCommand(NOTIFICATION);
 		
@@ -63,64 +57,22 @@ public class ContentPanel extends JPanel implements ActionListener
 		commandeButton.addActionListener(this);
 		commandeButton.setActionCommand(COMMANDE);
 		
-		notificationButton.setEnabled(false);
-		stockButton.setEnabled(true);
-		carteButton.setEnabled(true);
-		commandeButton.setEnabled(true);
-		
+		//Main panel
 		conteneur = new JPanel(new CardLayout());
-		
-		conteneur.add(NOTIFICATION,notifications = new NotificationPanel());
-		conteneur.add(STOCK, stock = new StockPanel(restaurantController.getStockController()));
-		conteneur.add(CARTE, carte = new CartePanel(restaurantController.getCarteController(),restaurantController.getStockController()));
-		conteneur.add(COMMANDE, commande = new CommandePanel());
+		conteneur.add(NOTIFICATION,new NotificationPanel());
+		conteneur.add(STOCK,new StockPanel(restaurantController.getStockController()));
+		conteneur.add(CARTE,new CartePanel(restaurantController.getCarteController(),restaurantController.getStockController()));
+		conteneur.add(COMMANDE,new CommandePanel());
 		
 		add(conteneur);
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals(NOTIFICATION))
-		{
-			CardLayout cl = (CardLayout) conteneur.getLayout();
-			cl.show(conteneur, NOTIFICATION);
-			notificationButton.setEnabled(false);
-			stockButton.setEnabled(true);
-			carteButton.setEnabled(true);
-			commandeButton.setEnabled(true);
-		}
-		
-		else if(e.getActionCommand().equals(STOCK))
-		{
-			CardLayout cl = (CardLayout) conteneur.getLayout();
-			cl.show(conteneur, STOCK);
-			notificationButton.setEnabled(true);
-			stockButton.setEnabled(false);
-			carteButton.setEnabled(true);
-			commandeButton.setEnabled(true);
-		}
-		
-		
-		else if(e.getActionCommand().equals(CARTE))
-		{
-			CardLayout cl = (CardLayout) conteneur.getLayout();
-			cl.show(conteneur, CARTE);
-			notificationButton.setEnabled(true);
-			stockButton.setEnabled(true);
-			carteButton.setEnabled(false);
-			commandeButton.setEnabled(true);
-		}
-		
-		else if(e.getActionCommand().equals(COMMANDE))
-		{
-			CardLayout cl = (CardLayout) conteneur.getLayout();
-			cl.show(conteneur, COMMANDE);
-			notificationButton.setEnabled(true);
-			stockButton.setEnabled(true);
-			carteButton.setEnabled(true);
-			commandeButton.setEnabled(false);
-		}
+		CardLayout cl = (CardLayout) conteneur.getLayout();
+		cl.show(conteneur, e.getActionCommand());
 	}
 	
 }

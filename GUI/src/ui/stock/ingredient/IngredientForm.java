@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.text.NumberFormat;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,30 +18,23 @@ import javax.swing.JTextField;
 
 import controller.IngredientController;
 import retaurant.Ingredient;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
-public class IngredientForm extends JPanel
+public class IngredientForm extends JPanel implements Observer
 {
 	//Model
 	private Ingredient ingredient;
-	
 	
 	//Textfields
 	private JTextField nom;
 	private JFormattedTextField quantite;
 	
-	//Buttons
-	private JButton validate;
-	private JButton ret;
-	
-	//Actions from buttons
-	private final String VALIDATE = "validate";
-	private final String SWITCH = "switch";
-
 	
 	public IngredientForm(IngredientCard parent,IngredientController controller)
 	{
 		this.ingredient = controller.getIngredient();
+		ingredient.addObserver(this);
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -86,9 +81,10 @@ public class IngredientForm extends JPanel
 		c.weighty = 0.5;
 		ImageIcon edit = new ImageIcon("data/img/validate.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
-		add(validate = new JButton("Valider",edit),c);
+		JButton validate = new JButton("Valider",edit);
 		validate.addActionListener(controller);
-		validate.setActionCommand(VALIDATE);
+		validate.setActionCommand(Constantes.VALIDATE);
+		add(validate,c);
 		
 		c.gridx=4;
 		c.gridy=1;
@@ -96,17 +92,23 @@ public class IngredientForm extends JPanel
 		c.weighty = 0.5;
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
-		add(ret = new JButton("Retour",retour),c);
+		JButton ret = new JButton("Retour",retour);
 		ret.addActionListener(parent);
-		ret.setActionCommand(SWITCH);
+		ret.setActionCommand(Constantes.SWITCH);
+		add(ret,c);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		controller.setFields(new IngredientFields(nom, quantite));
 	}
-	
-	
-	public void update()
+
+
+	@Override
+	public void update(Observable o, Object arg) 
 	{
 		nom.setText(ingredient.getNom());
 		quantite.setValue(ingredient.getNoInStock());
 	}
+	
+	
 }

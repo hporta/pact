@@ -37,14 +37,10 @@ public class StockPanel extends JPanel implements ActionListener, Observer
 	//Model
 	private final Stock stock;
 	
-	//Controller
-	private final StockController stockController;
 	
-		
 	public StockPanel(StockController stockController)
 	{
 
-		this.stockController = stockController;
 		this.stock = stockController.getStock();
 		
 		stock.addObserver(this);

@@ -4,16 +4,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import retaurant.Consommable;
+import ui.Constantes;
+import ui.stock.consommable.ConsommableCard;
+import ui.stock.consommable.ConsommableFields;
 
 public class ConsommableController implements ActionListener
 {
+	//View
+	private ConsommableCard card;
+	private ConsommableFields fields; 
+	
+	//Model
 	private Consommable consommable;
+	
+	//Controller
 	private StockController stockController;
 	
 	public ConsommableController(Consommable consommable, StockController stockController)
 	{
 		this.consommable = consommable;
 		this.stockController = stockController;
+	}
+	
+	public void setCard(ConsommableCard card)
+	{
+		this.card = card;
+	}
+	
+	public void setFields(ConsommableFields fields)
+	{
+		this.fields = fields;
 	}
 	
 	public boolean setConsommable(String nom, int quantite, float price)
@@ -60,14 +80,17 @@ public class ConsommableController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if("del".equals(e.getActionCommand()))
+		if(Constantes.DELETE.equals(e.getActionCommand()))
 		{
 			remove();
 		}
 		
-		else if("set".equals(e.getActionCommand()))
+		else if(Constantes.VALIDATE.equals(e.getActionCommand()))
 		{
-			
+			if(setConsommable(fields.getNom(), fields.getQuantite(), fields.getPrix()))
+			{
+				card.switchCard();
+			}
 		}
 	}
 	

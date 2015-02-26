@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import retaurant.Ingredient;
 import retaurant.Plat;
 import retaurant.Stock;
+import ui.carte.plat.PlatCard;
 
 public class PlatController implements ActionListener
 {
@@ -16,6 +17,7 @@ public class PlatController implements ActionListener
 	
 	//Superior controller
 	CarteController carteController;
+	private PlatCard card;
 	
 	public PlatController(Plat plat, CarteController carteController)
 	{
@@ -76,7 +78,7 @@ public class PlatController implements ActionListener
 	
 	private boolean isIn(String name)
 	{
-		for(Ingredient ingredient : stock)
+		for(Ingredient ingredient : stock.getIngredients())
 		{
 			if(ingredient.getNom().equals(name))
 				return true;
@@ -91,7 +93,7 @@ public class PlatController implements ActionListener
 		
 		for(String nom : liste)
 		{
-			for(Ingredient ingredient : stock)
+			for(Ingredient ingredient : stock.getIngredients())
 			{
 				if(nom.equals(ingredient.getNom()))
 					ingredients.add(ingredient);
@@ -107,5 +109,15 @@ public class PlatController implements ActionListener
 		if(e.getActionCommand().equals("del"))
 			carteController.removePlat(plat);
 		
+		else if(e.getActionCommand().equals("validate"))
+		{
+			
+		}
+		
+	}
+
+	public void setCard(PlatCard platCard) 
+	{
+		this.card = platCard;
 	}
 }

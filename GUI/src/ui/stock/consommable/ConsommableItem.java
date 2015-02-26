@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,9 +14,10 @@ import javax.swing.JPanel;
 import controller.ConsommableController;
 
 import retaurant.Consommable;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
-public class ConsommableItem extends JPanel implements ActionListener
+public class ConsommableItem extends JPanel
 {
 	//Model
 	private Consommable consommable;
@@ -27,10 +26,6 @@ public class ConsommableItem extends JPanel implements ActionListener
 	private JLabel nom;
 	private JLabel prix;
 	private JLabel quantite;
-	
-	//Buttons
-	private JButton setButton;
-	private JButton delButton;
 	
 	ConsommableItem(ConsommableCard parent,ConsommableController controller)
 	{
@@ -80,9 +75,10 @@ public class ConsommableItem extends JPanel implements ActionListener
 		c.weighty = 0.5;
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(setButton = new JButton("Modifier",edit),c);
+		JButton setButton = new JButton("Modifier",edit);
 		setButton.addActionListener(parent);
-		setButton.setActionCommand("set");
+		setButton.setActionCommand(Constantes.SWITCH);
+		add(setButton,c);
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -90,9 +86,10 @@ public class ConsommableItem extends JPanel implements ActionListener
 		c.weighty = 0.5;
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(delButton = new JButton("Supprimer",cross),c);
+		JButton delButton = new JButton("Supprimer",cross);
 		delButton.addActionListener(controller);
-		delButton.setActionCommand("del");
+		delButton.setActionCommand(Constantes.DELETE);
+		add(delButton,c);
 		
 	}
 	
@@ -103,15 +100,4 @@ public class ConsommableItem extends JPanel implements ActionListener
 		quantite.setText("Quantité : " + consommable.getNoInStock() + " unités");
 	}
 	
-	
-	public Consommable getConsommable()
-	{
-		return consommable;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,9 +15,10 @@ import javax.swing.JPanel;
 
 import controller.IngredientController;
 import retaurant.Ingredient;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
-public class IngredientItem extends JPanel
+public class IngredientItem extends JPanel implements Observer
 {
 	//Model
 	private Ingredient ingredient;
@@ -24,13 +27,6 @@ public class IngredientItem extends JPanel
 	private JLabel nom;
 	private JLabel quantite;
 	
-	//Buttons
-	private JButton setButton;
-	private JButton delButton;
-	
-	private final String DELETE = "delete";
-	private final String SWITCH = "switch";
-	
 	private final String CIRCLE_ICON_PATH = "data/img/circle.png";
 	private final String CLOSE_ICON_PATH = "data/img/close.png";
 	
@@ -38,9 +34,10 @@ public class IngredientItem extends JPanel
 	IngredientItem(IngredientCard parent,IngredientController controller)
 	{
 		this.ingredient = controller.getIngredient();
+		ingredient.addObserver(this);
 		this.nom = new JLabel();
 		this.quantite = new JLabel();
-		update();
+		update(ingredient, null);
 		
 		
 		setLayout(new GridBagLayout());
@@ -68,15 +65,17 @@ public class IngredientItem extends JPanel
 		cstr.weighty = 1;
 		add(new JPanel(),cstr);
 		
+		
 		cstr.gridx=2;
 		cstr.gridy=0;
 		cstr.weightx = 0.2;
 		cstr.weighty = 0.5;
 		ImageIcon edit = new ImageIcon(CIRCLE_ICON_PATH);
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(setButton = new JButton("Modifier",edit),cstr);
+		JButton setButton = new JButton("Modifier",edit);
 		setButton.addActionListener(parent);
-		setButton.setActionCommand(SWITCH);
+		setButton.setActionCommand(Constantes.SWITCH);
+		add(setButton,cstr);
 		
 		cstr.gridx=2;
 		cstr.gridy=1;
@@ -84,13 +83,15 @@ public class IngredientItem extends JPanel
 		cstr.weighty = 0.5;
 		ImageIcon cross = new ImageIcon(CLOSE_ICON_PATH);
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(delButton = new JButton("Supprimer",cross),cstr);
+		JButton delButton = new JButton("Supprimer",cross);
 		delButton.addActionListener(controller);
-		delButton.setActionCommand(DELETE);
+		delButton.setActionCommand(Constantes.DELETE);
+		add(delButton,cstr);
 	}
-	
-	
-	public void update()
+
+
+	@Override
+	public void update(Observable o, Object arg)
 	{
 		nom.setText("Nom : " + ingredient.getNom());
 		quantite.setText("Quantité : " + ingredient.getNoInStock() + " unités");

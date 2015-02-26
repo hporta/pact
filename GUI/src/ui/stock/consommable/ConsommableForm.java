@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
@@ -15,31 +13,26 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import retaurant.Consommable;
+import ui.Constantes;
+
 import controller.ConsommableController;
 
 @SuppressWarnings("serial")
-public class ConsommableForm extends JPanel implements ActionListener
+public class ConsommableForm extends JPanel
 {
-	private ConsommableController controller;
+	//Model
+	private Consommable consommable;
 	
+	//Fields
 	private JTextField nom;
 	private JFormattedTextField prix;
 	private JFormattedTextField quantite;
 	
-	private JButton validate;
-	private JButton ret;
-	
-	private final String VALIDATE = "validate";
-	private final String RETURN = "return";
-	
-	private ConsommableCard parent;
 	
 	public ConsommableForm(ConsommableCard parent, ConsommableController controller)
 	{
-		super();
-		this.controller = controller;
-		this.parent = parent;
-
+		this.consommable = controller.getConsommable();
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -72,9 +65,10 @@ public class ConsommableForm extends JPanel implements ActionListener
 		c.weighty = 0.5;
 		ImageIcon edit = new ImageIcon("data/img/validate.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
-		add(validate = new JButton("Valider",edit),c);
-		validate.addActionListener(this);
-		validate.setActionCommand(VALIDATE);
+		JButton validate = new JButton("Valider",edit);
+		validate.addActionListener(controller);
+		validate.setActionCommand(Constantes.VALIDATE);
+		add(validate,c);
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -82,38 +76,21 @@ public class ConsommableForm extends JPanel implements ActionListener
 		c.weighty = 0.5;
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
-		add(ret = new JButton("Retour",retour),c);
-		ret.addActionListener(this);
-		ret.setActionCommand(RETURN);
+		JButton ret = new JButton("Retour",retour);
+		ret.addActionListener(parent);
+		ret.setActionCommand(Constantes.SWITCH);
+		add(ret,c);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		
+		controller.setFields(new ConsommableFields(nom,prix,quantite));
 		update();
 	}
 	
-
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(VALIDATE.equals(e.getActionCommand()))
-		{
-			if(controller.setConsommable(nom.getText(), Integer.parseInt(quantite.getText()), Float.parseFloat(prix.getText())))
-			{		
-				parent.switchCard();
-				parent.update();
-			}
-		}
-		
-		else if(RETURN.equals(e.getActionCommand()))
-		{
-			parent.switchCard();
-		}		
-	}
 	
 	public void update()
 	{
-		nom.setText(controller.getConsommable().getNom());
-		prix.setValue(controller.getConsommable().getPrix());
-		quantite.setValue(controller.getConsommable().getNoInStock());
+		nom.setText(consommable.getNom());
+		prix.setValue(consommable.getPrix());
+		quantite.setValue(consommable.getNoInStock());
 	}
 }

@@ -6,12 +6,15 @@ import java.util.ArrayList;
 
 import retaurant.Menu;
 import retaurant.Plat;
+import ui.carte.menu.MenuCard;
 
 public class MenuController implements ActionListener
 {
 	private Menu menu;
 	
 	private CarteController carteController;
+
+	private MenuCard menuCard;
 	
 	public MenuController(Menu menu, CarteController carteController)
 	{
@@ -26,7 +29,6 @@ public class MenuController implements ActionListener
 
 	public boolean setMenu(String text, String text2, float value,
 			ArrayList<String> plats) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -36,6 +38,19 @@ public class MenuController implements ActionListener
 		if(e.getActionCommand().equals("del"))
 			carteController.removeMenu(menu);
 		
+		else if(e.getActionCommand().equals("validate"))
+		{
+			if(setMenu())
+			{
+				menuCard.switchCard();
+			}
+		}
+		
+	}
+
+	public void setCard(MenuCard menuCard) 
+	{
+		this.menuCard = menuCard;
 	}
 
 }
