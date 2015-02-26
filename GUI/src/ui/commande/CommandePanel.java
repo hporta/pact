@@ -1,6 +1,7 @@
 package ui.commande;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -30,16 +31,23 @@ public class CommandePanel extends JPanel implements ActionListener
 		
 		commandes.add(new Command(2));
 		commandes.add(new Command(3));
+		commandes.add(new Command(4));
+		commandes.add(new Command(5));
+		commandes.add(new Command(17));
+		commandes.add(new Command(8));
+		
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		c.gridheight = 1;
 		c.gridwidth = 2;
-		c.fill = GridBagConstraints.BOTH;
+
 		
 		c.weightx = 0.25;
 		c.weighty = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.PAGE_START;
 		aside = new JPanel();
 		aside.setLayout(new BorderLayout());
 		add(aside,c);
@@ -48,8 +56,10 @@ public class CommandePanel extends JPanel implements ActionListener
 		buttonPanel.setLayout(new GridLayout(0,1));
 		aside.add(buttonPanel);
 		
+
 		c.weightx = 0.75;
 		c.weighty = 1;
+		c.fill = GridBagConstraints.BOTH;
 		conteneur = new JPanel();
 		conteneur.setLayout(new CardLayout());
 		add(conteneur,c);
@@ -68,6 +78,7 @@ public class CommandePanel extends JPanel implements ActionListener
 			JButton bouton = new JButton("Commande n°" + com.getId());
 			bouton.addActionListener(this);
 			bouton.setActionCommand(com.getId() +"");
+			bouton.setPreferredSize(new Dimension(bouton.getWidth(),85));
 			
 			buttonPanel.add(bouton);
 			conteneur.add(new CommandeItem(commandes.get(i)),""+com.getId());

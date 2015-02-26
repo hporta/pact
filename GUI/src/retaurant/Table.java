@@ -1,5 +1,4 @@
 package retaurant;
-import java.util.ArrayList;
 import java.util.Observable;
 
 
@@ -14,6 +13,15 @@ public class Table extends Observable
 	public Table(int no)
 	{
 		this.no = no;
+		this.propre = true;
+		this.libre = true;
+	}
+	
+	public Table(int no, boolean propre, boolean libre)
+	{
+		this.no = no;
+		this.propre = propre;
+		this.libre = libre;
 	}
 
 	public void addNote(int prixCommande)
@@ -29,6 +37,8 @@ public class Table extends Observable
 	public void setEtat(boolean etat)
 	{	
 		propre = etat;
+		setChanged();
+		notifyObservers();
 	}
 
 	

@@ -5,6 +5,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLabel;
 
@@ -12,12 +18,52 @@ import retaurant.Table;
 
 
 @SuppressWarnings("serial")
-public class ParasolLabel extends JLabel
+public class ParasolLabel extends JLabel implements Observer, MouseListener
 {
 	
+	@Override
+	public void update(Observable arg0, Object arg1) 
+	{
+		repaint();
+	}
+
+	
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		table.setEtat(!table.getPropre());
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	private static final Color GREEN = new Color(0,200,0);
 	private static final Color RED = new Color(200,0,0);
-	private static final Color ORANGE = new Color(200,120,120);
+	private static final Color ORANGE = new Color(236,67,48);
 	
 	private Table table;
 	
@@ -25,7 +71,10 @@ public class ParasolLabel extends JLabel
 	{
 		super();
 		this.table = table;
+		table.addObserver(this);
 		setOpaque(true);
+		
+		addMouseListener(this);
 	}
 	
 	public void paintComponent(Graphics g)
@@ -56,11 +105,11 @@ public class ParasolLabel extends JLabel
 		
 		else if(!table.getPropre() && table.isLibre())
 		{
-			return ORANGE;
+			return RED;
 		}
 		
 		else
-			return RED;
+			return Color.orange;
 	}
 	
 	
