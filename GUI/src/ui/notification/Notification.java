@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ui.Constantes;
+
 
 //Notification est une classe générale pour toutes les notifications
 //il faut faire des classes filles pour chaque notification particulière
@@ -40,14 +42,14 @@ public class Notification extends JPanel implements ActionListener
 		close.setBorder(null);
 		
 		close.addActionListener(this);
-		close.setActionCommand("del");
+		close.setActionCommand(Constantes.DELETE);
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals("del"))
+		if(e.getActionCommand().equals(Constantes.DELETE))
 		{
 			parent.removeNotification(this);
 		}		

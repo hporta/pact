@@ -16,6 +16,10 @@ public class Terrasse extends Observable
 	public Terrasse()
 	{
 		this.terrasse = new ArrayList<Table>();
+		
+		//remplissage de table
+		for(int i =0; i < 9; i++)
+			terrasse.add(new Table(i,i%3==0,i%2==0));
 	}
 
 

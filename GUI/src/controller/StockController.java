@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import retaurant.Consommable;
 import retaurant.Ingredient;
 import retaurant.Stock;
+import ui.Constantes;
 
 public class StockController implements ActionListener
 {
@@ -46,9 +47,14 @@ public class StockController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals("add"))
+		if(e.getActionCommand().equals(Constantes.ADD_INGREDIENTS))
 		{
 			addIngredient(new Ingredient());
+		}
+		
+		else if(e.getActionCommand().equals(Constantes.ADD_CONSOMMABLE))
+		{
+			addConsommable(new Consommable());
 		}
 		
 	}

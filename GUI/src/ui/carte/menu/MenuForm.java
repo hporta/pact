@@ -99,7 +99,7 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 		c.gridy=2;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(addPlat = new JButton("Ajouter un ingredient"),c);
+		add(addPlat = new JButton("Ajouter un plat"),c);
 		addPlat.addActionListener(this);
 		addPlat.setActionCommand("addIn");
 		

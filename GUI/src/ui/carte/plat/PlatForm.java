@@ -23,6 +23,7 @@ import controller.PlatController;
 import retaurant.Ingredient;
 import retaurant.Plat;
 import retaurant.Stock;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
 public class PlatForm extends JPanel implements ActionListener
@@ -39,8 +40,6 @@ public class PlatForm extends JPanel implements ActionListener
 	
 	private JPanel aside;
 	
-	private JButton validate;
-	private JButton ret;
 	private JButton addIngredient;
 	
 	private Stock stock;
@@ -106,9 +105,10 @@ public class PlatForm extends JPanel implements ActionListener
 		c.weighty = 0.5;
 		ImageIcon edit = new ImageIcon("data/img/validate.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
-		add(validate = new JButton("Valider",edit),c);
+		JButton validate = new JButton("Valider",edit);
 		validate.addActionListener(this);
-		validate.setActionCommand("val");
+		validate.setActionCommand(Constantes.VALIDATE);
+		add(validate,c);
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -116,9 +116,10 @@ public class PlatForm extends JPanel implements ActionListener
 		c.weighty = 0.5;
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
-		add(ret = new JButton("Retour",retour),c);
+		JButton ret = new JButton("Retour",retour);
 		ret.addActionListener(this);
-		ret.setActionCommand("ret");
+		ret.setActionCommand(Constantes.SWITCH);
+		add(ret,c);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
@@ -133,22 +134,7 @@ public class PlatForm extends JPanel implements ActionListener
 			ingredients.add(temp);
 			aside.add(temp);
 			update();
-		}
-		
-		else if(e.getActionCommand().equals("set"))
-		{
-			if(controller.setPlat(nom.getText(), description.getText(), (float) prix.getValue(), getIngredients()))
-			{
-				parent.switchCard();
-			}
-			
-		}
-		
-		else if(e.getActionCommand().equals("ret"))
-		{
-			parent.switchCard();
-		}
-		
+		}		
 	}
 	
 	public void update()

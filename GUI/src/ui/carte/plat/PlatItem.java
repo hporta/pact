@@ -17,6 +17,7 @@ import controller.PlatController;
 
 import retaurant.Ingredient;
 import retaurant.Plat;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
 public class PlatItem extends JPanel implements Observer
@@ -29,9 +30,6 @@ public class PlatItem extends JPanel implements Observer
 	private JLabel description;
 	private JLabel prix;
 	
-	//boutons de retour, confirmation
-	private JButton setButton;
-	private JButton delButton;
 	
 	public PlatItem(PlatCard parent,PlatController platController)
 	{
@@ -74,9 +72,11 @@ public class PlatItem extends JPanel implements Observer
 		c.weighty = 0.5;
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(setButton = new JButton("Modifier",edit),c);
+		JButton setButton = new JButton("Modifier",edit);
 		setButton.addActionListener(parent);
-		setButton.setActionCommand("Switch");
+		setButton.setActionCommand(Constantes.SWITCH);
+		add(setButton,c);
+		
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -84,9 +84,10 @@ public class PlatItem extends JPanel implements Observer
 		c.weighty = 0.5;
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(delButton = new JButton("Supprimer",cross),c);
+		JButton delButton = new JButton("Supprimer",cross);
 		delButton.addActionListener(platController);
-		delButton.setActionCommand("del");
+		delButton.setActionCommand(Constantes.DELETE);
+		add(delButton,c);
 	}
 	
 

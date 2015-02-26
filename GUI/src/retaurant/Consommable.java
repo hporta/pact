@@ -24,6 +24,8 @@ public class Consommable extends Produit implements Achetable
 	public void setPrix(float prix)
 	{
 		this.prix = prix;
+		setChanged();
+		notifyObservers();
 	}
 	
 	//méthode de l'interface

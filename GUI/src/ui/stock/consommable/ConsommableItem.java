@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,7 +19,7 @@ import retaurant.Consommable;
 import ui.Constantes;
 
 @SuppressWarnings("serial")
-public class ConsommableItem extends JPanel
+public class ConsommableItem extends JPanel implements Observer
 {
 	//Model
 	private Consommable consommable;
@@ -30,6 +32,8 @@ public class ConsommableItem extends JPanel
 	ConsommableItem(ConsommableCard parent,ConsommableController controller)
 	{
 		this.consommable = controller.getConsommable();
+		consommable.addObserver(this);
+		
 		this.nom = new JLabel();
 		this.prix = new JLabel();
 		this.quantite = new JLabel();
@@ -98,6 +102,15 @@ public class ConsommableItem extends JPanel
 		nom.setText("Nom : " + consommable.getNom());
 		prix.setText("Prix : " + consommable.getPrix() +"€");
 		quantite.setText("Quantité : " + consommable.getNoInStock() + " unités");
+	}
+
+	@Override
+	public void update(Observable o, Object arg) 
+	{
+		nom.setText("Nom : " + consommable.getNom());
+		prix.setText("Prix : " + consommable.getPrix() +"€");
+		quantite.setText("Quantité : " + consommable.getNoInStock() + " unités");
+		
 	}
 	
 }

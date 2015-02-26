@@ -13,6 +13,7 @@ import controller.StockController;
 import retaurant.Consommable;
 import retaurant.Stock;
 import ui.AddItemButton;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
 public class ConsommablePanel extends JPanel
@@ -33,10 +34,9 @@ public class ConsommablePanel extends JPanel
 		this.stockController = stockController;
 		this.stock = stockController.getStock();
 		
-
-		
 		setLayout(new BorderLayout());
-		add = new AddItemButton(stockController,"AddConsommable");
+		add = new AddItemButton(stockController,Constantes.ADD_CONSOMMABLE);
+		
 		empty = new JPanel();
 		empty.setLayout(new BorderLayout());
 		empty.add(new JLabel("Pas de consommables à afficher"),BorderLayout.CENTER);
@@ -44,8 +44,6 @@ public class ConsommablePanel extends JPanel
 		
 		conteneur = new JPanel();
 		conteneur.setLayout(new GridLayout(0,1));
-		conteneur.add(add);
-		
 		
 		add(conteneur,BorderLayout.PAGE_START);
 		
@@ -62,10 +60,8 @@ public class ConsommablePanel extends JPanel
 			conteneur.add(empty);
 		
 		for(Consommable consommable : stock.getConsommables())
-		{
-			conteneur.add(new ConsommableCard(new ConsommableController(consommable,stockController)));
-		}
-			
+			conteneur.add(new ConsommableCard(
+					new ConsommableController(consommable,stockController)));
 		
 		validate();
 		repaint();

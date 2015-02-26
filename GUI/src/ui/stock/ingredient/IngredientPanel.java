@@ -11,6 +11,7 @@ import controller.StockController;
 import retaurant.Ingredient;
 import retaurant.Stock;
 import ui.AddItemButton;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
 public class IngredientPanel extends JPanel
@@ -32,7 +33,7 @@ public class IngredientPanel extends JPanel
 		
 		setLayout(new BorderLayout());
 		
-		add = new AddItemButton(stockController,"AddIngre");
+		add = new AddItemButton(stockController,Constantes.ADD_INGREDIENTS);
 		
 		empty = new JPanel();
 		empty.add(new JLabel("Pas d'ingredient à afficher"));

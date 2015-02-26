@@ -3,11 +3,15 @@ package ui.notification;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import controller.StockController;
 
 
 @SuppressWarnings("serial")
@@ -18,7 +22,6 @@ public class NotificationPanel extends JPanel
 	
 	public NotificationPanel() 
 	{
-		super();
 		liste = new ArrayList<Notification>();
 		
 		setLayout(new BorderLayout());
@@ -62,4 +65,5 @@ public class NotificationPanel extends JPanel
 		validate();
 		repaint();
 	}
+
 }

@@ -19,6 +19,7 @@ public class ConsommableCard extends JPanel implements ActionListener
 	
 	public ConsommableCard(ConsommableController controller)
 	{
+		controller.setCard(this);
 		this.form = new ConsommableForm(this,controller);
 		this.item = new ConsommableItem(this,controller);
 		

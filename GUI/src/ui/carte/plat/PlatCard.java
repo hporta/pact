@@ -7,17 +7,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import ui.Constantes;
+
 import controller.PlatController;
 
 @SuppressWarnings("serial")
 public class PlatCard extends JPanel implements ActionListener
 {	
-	private final String SWITCH = "switch";
-	
 	
 	public PlatCard(PlatController platController)
 	{
-		//Informe le plat qu'il doit notifier ses modifications
 		platController.setCard(this);
 		
 		//Création des 2 panels
@@ -37,7 +36,7 @@ public class PlatCard extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals(SWITCH))
+		if(e.getActionCommand().equals(Constantes.SWITCH))
 			switchCard();
 	}
 	

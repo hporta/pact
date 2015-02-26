@@ -7,10 +7,10 @@ import javax.swing.JTextField;
 public class ConsommableFields 
 {
 	private JTextField nom;
-	private JFormattedTextField prix;
+	private JTextField prix;
 	private JFormattedTextField quantite;
 
-	public ConsommableFields(JTextField nom, JFormattedTextField prix,
+	public ConsommableFields(JTextField nom, JTextField prix,
 			JFormattedTextField quantite) 
 	{
 		this.nom = nom;
@@ -30,7 +30,7 @@ public class ConsommableFields
 	
 	public float getPrix()
 	{
-		return Float.parseFloat(prix.getText());
+		return Float.parseFloat(prix.getText().replace(',' ,'.'));
 	}
 
 }

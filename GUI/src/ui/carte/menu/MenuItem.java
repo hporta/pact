@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,25 +15,24 @@ import controller.MenuController;
 
 import retaurant.Menu;
 import retaurant.Plat;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
 public class MenuItem extends JPanel
 {
+	//Model
 	private Menu menu;
-	private MenuCard parent;
 	
+	
+	//Labels
 	private JLabel nom;
 	private JLabel description;
 	private JLabel prix;
-	
-	private JButton setButton;
-	private JButton delButton;
 	
 	public MenuItem(MenuCard parent,MenuController menuController)
 	{
 		super();
 		this.menu = menuController.getMenu();
-		this.parent = parent;
 		
 		this.nom = new JLabel();
 		this.prix = new JLabel();
@@ -73,9 +70,10 @@ public class MenuItem extends JPanel
 		c.weighty = 0.5;
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(setButton = new JButton("Modifier",edit),c);
+		JButton setButton = new JButton("Modifier",edit);
 		setButton.addActionListener(parent);
-		setButton.setActionCommand("set");
+		setButton.setActionCommand(Constantes.SWITCH);
+		add(setButton,c);
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -83,10 +81,12 @@ public class MenuItem extends JPanel
 		c.weighty = 0.5;
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
-		add(delButton = new JButton("Supprimer",cross),c);
+		JButton delButton = new JButton("Supprimer",cross);
 		delButton.addActionListener(menuController);
-		delButton.setActionCommand("del");
+		delButton.setActionCommand(Constantes.DELETE);
+		add(delButton,c);
 	}
+	
 	
 	public void update()
 	{

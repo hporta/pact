@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.text.NumberFormat;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,20 +21,21 @@ import ui.Constantes;
 import controller.ConsommableController;
 
 @SuppressWarnings("serial")
-public class ConsommableForm extends JPanel
+public class ConsommableForm extends JPanel implements Observer
 {
 	//Model
 	private Consommable consommable;
 	
 	//Fields
 	private JTextField nom;
-	private JFormattedTextField prix;
+	private JTextField prix;
 	private JFormattedTextField quantite;
 	
 	
 	public ConsommableForm(ConsommableCard parent, ConsommableController controller)
 	{
 		this.consommable = controller.getConsommable();
+		consommable.addObserver(this);
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -51,7 +54,7 @@ public class ConsommableForm extends JPanel
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(this.prix = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
+		add(this.prix = new JTextField(),c);
 		
 		c.gridx=1;
 		c.gridy=1;
@@ -90,7 +93,19 @@ public class ConsommableForm extends JPanel
 	public void update()
 	{
 		nom.setText(consommable.getNom());
-		prix.setValue(consommable.getPrix());
+		prix.setText(""+consommable.getPrix());
 		quantite.setValue(consommable.getNoInStock());
 	}
+
+
+	@Override
+	public void update(Observable o, Object arg) 
+	{
+		nom.setText(consommable.getNom());
+		prix.setText(""+consommable.getPrix());
+		quantite.setValue(consommable.getNoInStock());
+		
+	}
+	
+	
 }

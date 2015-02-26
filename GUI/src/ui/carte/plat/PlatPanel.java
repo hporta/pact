@@ -2,8 +2,6 @@ package ui.carte.plat;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -50,15 +48,13 @@ public class PlatPanel extends JPanel
 		
 		conteneur.add(add);
 		
-		if(carte.getPlats().size() > 0)
-			for(Plat plat : carte.getPlats())
-				conteneur.add(new PlatCard(new PlatController(plat,carteController)));
-		
-		else
+		if(carte.getPlats().size() == 0)
 			conteneur.add(new JLabel("Pas de plat à afficher"));
 		
-		validate();
-		repaint();
+		for(Plat plat : carte.getPlats())
+				conteneur.add(new PlatCard(
+						new PlatController(plat,carteController)));
+
 	}
 	
 }
