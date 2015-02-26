@@ -7,17 +7,24 @@ import java.util.ArrayList;
 import retaurant.Ingredient;
 import retaurant.Plat;
 import retaurant.Stock;
+import ui.Constantes;
 import ui.carte.plat.PlatCard;
+import ui.carte.plat.PlatFields;
 
 public class PlatController implements ActionListener
 {
+	//View
+	private PlatCard card;
+	private PlatFields fields;
+	
+	
 	//Model
 	private final Plat plat;
 	private final Stock stock;
 	
 	//Superior controller
 	CarteController carteController;
-	private PlatCard card;
+
 	
 	public PlatController(Plat plat, CarteController carteController)
 	{
@@ -29,6 +36,11 @@ public class PlatController implements ActionListener
 	public Plat getPlat()
 	{
 		return plat;
+	}
+	
+	public Stock getStock()
+	{
+		return carteController.getStock();
 	}
 	
 	public boolean setPlat(String nom, String description, float price, ArrayList<String> liste)
@@ -106,12 +118,17 @@ public class PlatController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals("del"))
+		if(e.getActionCommand().equals(Constantes.DELETE))
 			carteController.removePlat(plat);
 		
-		else if(e.getActionCommand().equals("validate"))
+		else if(e.getActionCommand().equals(Constantes.VALIDATE))
 		{
-			
+			System.out.println(fields.getNom());
+			System.out.println(fields.getDescription());
+			System.out.println(fields.getPrix());
+			System.out.println(fields.getIngredients());
+			if(setPlat(fields.getNom(),fields.getDescription(),fields.getPrix(),fields.getIngredients()))
+				card.switchCard();
 		}
 		
 	}
@@ -119,5 +136,10 @@ public class PlatController implements ActionListener
 	public void setCard(PlatCard platCard) 
 	{
 		this.card = platCard;
+	}
+	
+	public void setField(PlatFields fields)
+	{
+		this.fields = fields;
 	}
 }

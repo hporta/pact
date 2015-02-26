@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,11 +23,8 @@ import ui.carte.plat.PlatPanel;
 
 
 @SuppressWarnings("serial")
-public class CartePanel extends JPanel implements ActionListener
-{
-	private final MenuPanel menu;
-	private final PlatPanel plat;
-	
+public class CartePanel extends JPanel implements ActionListener, Observer
+{	
 	private final String MENUS = "Menus";
 	private final String PLATS = "Plats";
 	
@@ -33,11 +32,18 @@ public class CartePanel extends JPanel implements ActionListener
 	private final JButton platButton;
 	
 	private final JPanel conteneur;
+	private MenuPanel menu;
+	private PlatPanel plat;
 		
 	
 	public CartePanel(CarteController carteController, StockController stockController)
-	{		
+	{
+		carteController.getCarte().addObserver(this);
+		stockController.getStock().addObserver(this);	
+		
 		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+		
+
 		
 		JPanel temp = new JPanel();
 		temp.setLayout(new GridLayout(1,2));
@@ -56,7 +62,7 @@ public class CartePanel extends JPanel implements ActionListener
 		
 		add(conteneur = new JPanel(new CardLayout()));
 		conteneur.add(menu = new MenuPanel(carteController),MENUS);
-		conteneur.add(plat= new PlatPanel(carteController),PLATS);
+		conteneur.add(plat = new PlatPanel(carteController),PLATS);
 
 	}
 	
@@ -80,6 +86,15 @@ public class CartePanel extends JPanel implements ActionListener
 			menuButton.setEnabled(true);
 			platButton.setEnabled(false);
 		}
+	}
+
+
+
+	@Override
+	public void update(Observable arg0, Object arg1) 
+	{
+		menu.update();
+		plat.update();
 	}
 	
 }

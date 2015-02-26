@@ -12,6 +12,7 @@ import controller.PlatController;
 import retaurant.Carte;
 import retaurant.Plat;
 import ui.AddItemButton;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
 public class PlatPanel extends JPanel
@@ -32,7 +33,7 @@ public class PlatPanel extends JPanel
 		this.carte = carteController.getCarte();
 		
 		conteneur = new JPanel();
-		add = new AddItemButton(carteController,"addPlat");
+		add = new AddItemButton(carteController,Constantes.ADD_PLAT);
 		
 		
 		setLayout(new BorderLayout());
@@ -40,6 +41,8 @@ public class PlatPanel extends JPanel
 		conteneur.add(add);
 		
 		add(conteneur,BorderLayout.PAGE_START);
+		
+		update();
 	}
 	
 	public void update()
@@ -54,6 +57,9 @@ public class PlatPanel extends JPanel
 		for(Plat plat : carte.getPlats())
 				conteneur.add(new PlatCard(
 						new PlatController(plat,carteController)));
+		
+		validate();
+		repaint();
 
 	}
 	

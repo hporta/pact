@@ -25,6 +25,7 @@ import controller.MenuController;
 import retaurant.Carte;
 import retaurant.Menu;
 import retaurant.Plat;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
 public class MenuForm extends JPanel implements ActionListener, Observer
@@ -51,6 +52,7 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 	
 	public MenuForm(MenuCard parent, MenuController controller)
 	{
+		this.carte = controller.getCarteController().getCarte();
 		this.menu = controller.getMenu();
 		menu.addObserver(this);
 		
@@ -110,8 +112,8 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 		ImageIcon edit = new ImageIcon("data/img/validate.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(validate = new JButton("Valider",edit),c);
-		validate.addActionListener(this);
-		validate.setActionCommand("val");
+		validate.addActionListener(controller);
+		validate.setActionCommand(Constantes.VALIDATE);
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -120,10 +122,12 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		add(ret = new JButton("Retour",retour),c);
-		ret.addActionListener(this);
-		ret.setActionCommand("ret");
+		ret.addActionListener(parent);
+		ret.setActionCommand(Constantes.SWITCH);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		controller.setFields(new MenuFields(nom,prix,plats));
 	}
 
 

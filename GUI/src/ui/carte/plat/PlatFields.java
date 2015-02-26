@@ -2,6 +2,7 @@ package ui.carte.plat;
 
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
@@ -11,13 +12,15 @@ public class PlatFields
 	private JTextField nom;
 	private JTextField description;
 	private JFormattedTextField prix;
+	private ArrayList<JComboBox<String>> ingredients;
 
 	public PlatFields(JTextField nom, JFormattedTextField prix,
-			JTextField description) 
+			JTextField description, ArrayList<JComboBox<String>> ingredients) 
 	{
 		this.nom = nom;
 		this.prix = prix;
 		this.description = description;
+		this.ingredients = ingredients;
 	}
 	
 	public String getNom()
@@ -37,6 +40,11 @@ public class PlatFields
 	
 	public ArrayList<String> getIngredients()
 	{
-		return new ArrayList<String>();
+		ArrayList<String> liste = new ArrayList<String>();
+		
+		for(JComboBox<String> box : ingredients)
+			liste.add((String) box.getSelectedItem());
+		
+		return liste;
 	}
 }

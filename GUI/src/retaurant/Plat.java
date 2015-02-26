@@ -53,6 +53,8 @@ public class Plat extends Observable implements Achetable
 	public void setDescription(String description)
 	{	
 		this.description = description;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public float getPrix()
@@ -63,6 +65,8 @@ public class Plat extends Observable implements Achetable
 	public void setPrix(float prix)
 	{	
 		this.prix = prix;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public ArrayList<Ingredient> getIngredients()
@@ -83,10 +87,14 @@ public class Plat extends Observable implements Achetable
 	public void setNom(String nom)
 	{
 		this.nom = nom;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void setIngredients(ArrayList<Ingredient> liste)
 	{
 		listeingredient = liste;
+		setChanged();
+		notifyObservers();
 	}
 }

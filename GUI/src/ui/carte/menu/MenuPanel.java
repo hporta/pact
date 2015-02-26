@@ -12,6 +12,7 @@ import controller.MenuController;
 import retaurant.Carte;
 import retaurant.Menu;
 import ui.AddItemButton;
+import ui.Constantes;
 
 @SuppressWarnings("serial")
 public class MenuPanel extends JPanel
@@ -30,14 +31,16 @@ public class MenuPanel extends JPanel
 		this.carte = carteController.getCarte();
 		this.carteController = carteController;
 		
-		add = new AddItemButton(carteController,"AddMenu");
+		add = new AddItemButton(carteController,Constantes.ADD_MENU);
 		conteneur = new JPanel();
-		
+			
 		setLayout(new BorderLayout());
 		conteneur.setLayout(new GridLayout(0,1));
 		conteneur.add(add);
 		
 		add(conteneur,BorderLayout.PAGE_START);
+		
+		update();
 	}
 	
 	

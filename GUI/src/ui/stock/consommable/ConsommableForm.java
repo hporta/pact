@@ -104,7 +104,6 @@ public class ConsommableForm extends JPanel implements Observer
 		nom.setText(consommable.getNom());
 		prix.setText(""+consommable.getPrix());
 		quantite.setValue(consommable.getNoInStock());
-		
 	}
 	
 	

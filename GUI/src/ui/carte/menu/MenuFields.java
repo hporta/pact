@@ -10,16 +10,15 @@ public class MenuFields
 {
 	//Fields
 	private JTextField nom;
-	private JTextField description;
 	private JFormattedTextField prix;
 	private ArrayList<JComboBox<String>> plats;
 	
 	
-	public MenuFields(JTextField nom, JTextField description,
-			JFormattedTextField prix, ArrayList<JComboBox<String>> plats) 
+	public MenuFields(JTextField nom,JFormattedTextField prix,
+			ArrayList<JComboBox<String>> plats) 
 	{
 		this.nom = nom;
-		this.description = description;
+		//this.description = description;
 		this.prix = prix;
 		this.plats = plats;
 	}
@@ -30,10 +29,11 @@ public class MenuFields
 		return nom.getText();
 	}
 	
+	/*
 	public String getDescription()
 	{
 		return description.getText();
-	}
+	}*/
 	
 	public float getPrix()
 	{
@@ -42,7 +42,12 @@ public class MenuFields
 	
 	public ArrayList<String> getPlats()
 	{
-		return new ArrayList<>();
+		ArrayList<String> liste = new ArrayList<String>();
+		
+		for(JComboBox<String> box : plats)
+			liste.add((String) box.getSelectedItem());
+		
+		return liste;
 	}
 
 }

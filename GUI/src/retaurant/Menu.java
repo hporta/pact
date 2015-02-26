@@ -7,7 +7,7 @@ import java.util.Observable;
 public class Menu extends Observable implements Achetable
 {
 	private ArrayList<Plat> menu;
-	private final String nom;
+	private String nom;
 	private float prix;
 
 	
@@ -22,6 +22,8 @@ public class Menu extends Observable implements Achetable
 	{
 		this("Nom",0.f);
 	}
+	
+	
 	
 	public void add(Plat plat)
 	{
@@ -81,6 +83,27 @@ public class Menu extends Observable implements Achetable
 	public ArrayList<Plat> getPlat() 
 	{
 		return menu;
+	}
+
+	public final void setPlats(ArrayList<Plat> menu) 
+	{
+		this.menu = menu;
+		setChanged();
+		notifyObservers();
+	}
+
+	public final void setPrix(float prix) 
+	{
+		this.prix = prix;
+		setChanged();
+		notifyObservers();
+	}
+
+	public final void setNom(String nom) 
+	{
+		this.nom = nom;
+		setChanged();
+		notifyObservers();
 	}
 	
 

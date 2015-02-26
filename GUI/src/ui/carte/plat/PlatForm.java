@@ -28,31 +28,35 @@ import ui.Constantes;
 @SuppressWarnings("serial")
 public class PlatForm extends JPanel implements ActionListener
 {
-	private PlatCard parent;
+	//Controller
 	private PlatController controller;
+	
+	//Model
 	private Plat plat;
+	private Stock stock;
 	private ArrayList<Ingredient> listeIngredients;
 	
+	//fields
 	private JTextField nom;
 	private JTextField description;
 	private JFormattedTextField prix;
 	private ArrayList<JComboBox<String>> ingredients;
 	
+	
 	private JPanel aside;
 	
 	private JButton addIngredient;
 	
-	private Stock stock;
-	
+	private final String ADD_IN = "add ingre";
+		
 	
 	public PlatForm(PlatCard parent, PlatController controller)
 	{
-		super();
-		this.stock = stock;
-		this.parent = parent;
 		this.controller = controller;
+		this.stock = controller.getStock();
 		this.plat = controller.getPlat();
-		this.listeIngredients = listeIngredients;
+		this.listeIngredients = stock.getIngredients();
+		
 		ingredients = new ArrayList<JComboBox<String>>();
 		
 		setLayout(new GridBagLayout());
@@ -97,7 +101,7 @@ public class PlatForm extends JPanel implements ActionListener
 		c.weighty = 0.5;
 		add(addIngredient = new JButton("Ajouter un ingredient"),c);
 		addIngredient.addActionListener(this);
-		addIngredient.setActionCommand("addIn");
+		addIngredient.setActionCommand(ADD_IN);
 		
 		c.gridx=2;
 		c.gridy=0;
@@ -106,7 +110,7 @@ public class PlatForm extends JPanel implements ActionListener
 		ImageIcon edit = new ImageIcon("data/img/validate.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		JButton validate = new JButton("Valider",edit);
-		validate.addActionListener(this);
+		validate.addActionListener(controller);
 		validate.setActionCommand(Constantes.VALIDATE);
 		add(validate,c);
 		
@@ -117,48 +121,46 @@ public class PlatForm extends JPanel implements ActionListener
 		ImageIcon retour = new ImageIcon("data/img/arrow.png");
 		retour = new ImageIcon(retour.getImage().getScaledInstance(18, 18,Image.SCALE_SMOOTH));
 		JButton ret = new JButton("Retour",retour);
-		ret.addActionListener(this);
+		ret.addActionListener(parent);
 		ret.setActionCommand(Constantes.SWITCH);
 		add(ret,c);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		controller.setField(new PlatFields(nom,prix,description,ingredients));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals("addIn"))
+		if(e.getActionCommand().equals(ADD_IN))
 		{
 			JComboBox<String> temp = new JComboBox<String>();
 			fillComboBoxWithIngredients(temp);
 			ingredients.add(temp);
 			aside.add(temp);
-			update();
-		}		
+			
+			validate();
+			repaint();
+		}
 	}
-	
-	public void update()
-	{
-		validate();
-		repaint();
-	}
+
 	
 	private void fillComboBoxWithIngredients(JComboBox<String> box)
 	{
 		for(Ingredient ingredient : listeIngredients)
-		{
 			box.addItem(ingredient.getNom());
-		}
 	}
 	
-	public ArrayList<String> getIngredients()
+	
+	public void update()
 	{
-		ArrayList<String> liste = new ArrayList<String>();
-		for(JComboBox<String> box : ingredients)
-		{
-			liste.add((String) box.getSelectedItem());
-		}
+		nom.setText(plat.getNom());
+		prix.setText(""+plat.getPrix());
+		description.setText(plat.getDescription());
 		
-		return liste;
+		
+		validate();
+		repaint();
 	}
 }

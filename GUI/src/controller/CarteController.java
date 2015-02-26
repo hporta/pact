@@ -7,6 +7,7 @@ import retaurant.Carte;
 import retaurant.Menu;
 import retaurant.Plat;
 import retaurant.Stock;
+import ui.Constantes;
 
 public class CarteController implements ActionListener
 {
@@ -54,10 +55,10 @@ public class CarteController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals("AddPlat"))
+		if(e.getActionCommand().equals(Constantes.ADD_PLAT))
 			addPlat(new Plat());
 		
-		else if(e.getActionCommand().equals("AddMenu"))
+		else if(e.getActionCommand().equals(Constantes.ADD_MENU))
 			addMenu(new Menu());
 		
 	}

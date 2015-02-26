@@ -4,21 +4,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import retaurant.Carte;
 import retaurant.Menu;
 import retaurant.Plat;
+import ui.Constantes;
 import ui.carte.menu.MenuCard;
+import ui.carte.menu.MenuFields;
 
 public class MenuController implements ActionListener
 {
+	//Model
 	private Menu menu;
+	private Carte carte;
 	
+	//controller
 	private CarteController carteController;
 
+	//View
 	private MenuCard menuCard;
+	private MenuFields fields;
 	
 	public MenuController(Menu menu, CarteController carteController)
 	{
 		this.menu = menu;
+		this.carte = carteController.getCarte();
 		this.carteController = carteController;
 	}
 
@@ -27,23 +36,91 @@ public class MenuController implements ActionListener
 		return menu;
 	}
 
-	public boolean setMenu(String text, String text2, float value,
-			ArrayList<String> plats) {
+	public boolean setMenu(String nom, float price, ArrayList<String> liste)
+	{
+
+		if(validateNom(nom)
+				&& validatePrice(price)
+				&& validatePlats(liste))
+		{
+			menu.setNom(nom);
+			//menu.setDescription(description);
+			menu.setPrix(price);
+			menu.setPlats(buildListe(liste));
+			return true;
+		}
+		
+		else
+			return false;
+	}
+	
+	public boolean validateNom(String nom)
+	{
+		return nom.length() <= 20 && nom != "";
+	}
+	
+	public boolean validateDescription(String description)
+	{
+		return description.length() <= 150 && description != "";
+	}
+	
+	public boolean validatePrice(float price)
+	{
+		return price > 0;
+	}
+	
+	public boolean validatePlats(ArrayList<String> liste)
+	{
+		for(String name : liste)
+		{
+			if(!isIn(name))
+				return false;
+		}
+		
+		return true;
+	}
+	
+	private boolean isIn(String name)
+	{
+		for(Plat plat : carte.getPlats())
+		{
+			if(plat.getNom().equals(name))
+				return true;
+		}
+		
 		return false;
+	}
+	
+	private ArrayList<Plat> buildListe(ArrayList<String> liste)
+	{
+		ArrayList<Plat> plats = new ArrayList<Plat>();
+		
+		for(String nom : liste)
+		{
+			for(Plat plat : carte.getPlats())
+			{
+				if(nom.equals(plat.getNom()))
+					plats.add(plat);
+			}
+		}
+		
+		return plats;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getActionCommand().equals("del"))
+		if(e.getActionCommand().equals(Constantes.DELETE))
 			carteController.removeMenu(menu);
 		
-		else if(e.getActionCommand().equals("validate"))
+		else if(e.getActionCommand().equals(Constantes.VALIDATE))
 		{
-			if(setMenu())
-			{
+			System.out.println(fields.getNom());
+			//System.out.println(fields.getDescription());
+			System.out.println(fields.getPrix());
+			System.out.println(fields.getPlats());
+			if(setMenu(fields.getNom(),fields.getPrix(),fields.getPlats()))
 				menuCard.switchCard();
-			}
 		}
 		
 	}
@@ -51,6 +128,15 @@ public class MenuController implements ActionListener
 	public void setCard(MenuCard menuCard) 
 	{
 		this.menuCard = menuCard;
+	}
+
+	public CarteController getCarteController()
+	{
+		return carteController;
+	}
+
+	public void setFields(MenuFields menuFields) {
+		this.fields = menuFields;
 	}
 
 }

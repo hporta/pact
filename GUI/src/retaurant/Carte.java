@@ -1,8 +1,9 @@
 package retaurant;
 import java.util.ArrayList;
+import java.util.Observable;
 
 //La carte contient tout ce qui peut être fait dans le restaurant
-public class Carte 
+public class Carte extends Observable
 {
 	private ArrayList<Achetable> carte;
 	private ArrayList<Plat> plats;
@@ -43,21 +44,29 @@ public class Carte
 	public void addPlat(Plat plat)
 	{
 		plats.add(plat);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void removePlat(Plat plat)
 	{
 		plats.remove(plat);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void addMenu(Menu menu)
 	{
 		menus.add(menu);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void removeMenu(Menu menu)
 	{
 		menus.remove(menu);
+		setChanged();
+		notifyObservers();
 	}
 	
 	// on enleve les elements de la carte qui ne sont plus disponible
@@ -70,17 +79,17 @@ public class Carte
 		}
 	}
 	
-	public ArrayList<Achetable> getCarte()
+	public final ArrayList<Achetable> getCarte()
 	{
 		return carte;
 	}
 
-	public ArrayList<Plat> getPlats() 
+	public final ArrayList<Plat> getPlats() 
 	{
 		return plats;
 	}
 	
-	public ArrayList<Menu> getMenus()
+	public final ArrayList<Menu> getMenus()
 	{
 		return menus;
 	}

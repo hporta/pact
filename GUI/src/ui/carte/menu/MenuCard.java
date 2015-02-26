@@ -1,18 +1,13 @@
 package ui.carte.menu;
 
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JPanel;
-
+import ui.CardPanel;
 import ui.carte.menu.MenuForm;
 import ui.carte.menu.MenuItem;
 
 import controller.MenuController;
 
 @SuppressWarnings("serial")
-public class MenuCard extends JPanel implements ActionListener
+public class MenuCard extends CardPanel
 {	
 	public MenuCard(MenuController menuController)
 	{
@@ -20,25 +15,8 @@ public class MenuCard extends JPanel implements ActionListener
 		menuController.setCard(this);
 		
 		//Création des 2 panels
-		setLayout(new CardLayout());
-		add(new MenuForm(this, menuController));
 		add(new MenuItem(this, menuController));
+		add(new MenuForm(this, menuController));
 	}
-	
-	
-	public void switchCard()
-	{
-		CardLayout card = (CardLayout) getLayout();
-		card.next(this);
-	}
-	
-
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getActionCommand().equals("Switch"))
-			switchCard();		
-	}
-	
 	
 }

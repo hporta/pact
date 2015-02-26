@@ -1,52 +1,19 @@
 package ui.stock.consommable;
 
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JPanel;
-
-import ui.Constantes;
+import ui.CardPanel;
 
 import controller.ConsommableController;
 
 @SuppressWarnings("serial")
-public class ConsommableCard extends JPanel implements ActionListener
-{	
-	private ConsommableForm form;
-	private ConsommableItem item;
-	
-	
+public class ConsommableCard extends CardPanel
+{		
 	public ConsommableCard(ConsommableController controller)
 	{
 		controller.setCard(this);
-		this.form = new ConsommableForm(this,controller);
-		this.item = new ConsommableItem(this,controller);
 		
-		setLayout(new CardLayout());
-		add(item);
-		add(form);
-	}
-	
-	
-	public void switchCard()
-	{
-		CardLayout card = (CardLayout) getLayout();
-		card.next(this);
-	}
-	
-	public void update()
-	{
-		item.update();
-		form.update();
-	}
+		//Ajout des 2 panels
+		add(new ConsommableItem(this,controller));
+		add(new ConsommableForm(this,controller));
 
-
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getActionCommand().equals(Constantes.SWITCH))
-			switchCard();
 	}
-
 }

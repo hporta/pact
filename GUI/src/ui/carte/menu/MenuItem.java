@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,7 +20,7 @@ import retaurant.Plat;
 import ui.Constantes;
 
 @SuppressWarnings("serial")
-public class MenuItem extends JPanel
+public class MenuItem extends JPanel implements Observer
 {
 	//Model
 	private Menu menu;
@@ -33,11 +35,11 @@ public class MenuItem extends JPanel
 	{
 		super();
 		this.menu = menuController.getMenu();
+		menu.addObserver(this);
 		
 		this.nom = new JLabel();
 		this.prix = new JLabel();
 		this.description = new JLabel();
-		update();
 		
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -85,10 +87,14 @@ public class MenuItem extends JPanel
 		delButton.addActionListener(menuController);
 		delButton.setActionCommand(Constantes.DELETE);
 		add(delButton,c);
+		
+		update(menu,null);
 	}
 	
-	
-	public void update()
+
+
+	@Override
+	public void update(Observable arg0, Object arg1) 
 	{
 		nom.setText("Nom : " + menu.getNom());
 		prix.setText("Prix : " + menu.getPrix() +"€");
