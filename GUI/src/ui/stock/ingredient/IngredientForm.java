@@ -32,6 +32,7 @@ public class IngredientForm extends JPanel
 	private JButton validate;
 	private JButton ret;
 	
+	//Actions from buttons
 	private final String VALIDATE = "validate";
 	private final String SWITCH = "switch";
 

@@ -9,6 +9,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.RestaurantController;
+
 import ui.carte.CartePanel;
 import ui.commande.CommandePanel;
 import ui.notification.NotificationPanel;
@@ -17,29 +19,29 @@ import ui.stock.StockPanel;
 @SuppressWarnings("serial")
 public class ContentPanel extends JPanel implements ActionListener
 {
-
+	//Panels
 	private final NotificationPanel notifications;
 	private final StockPanel stock;
 	private final CartePanel carte;
 	private final CommandePanel commande;
 
-	private final String NOTIFICATION = "Notifications";
-	private final String STOCK = "Stocks";
-	private final String CARTE = "Carte";
-	private final String COMMANDE = "Commande";
-	
 	private final JPanel conteneur;
 	private final JPanel buttonPanel;
 	
+	//Tab buttons
 	private final JButton notificationButton;
 	private final JButton stockButton;
 	private final JButton carteButton;
 	private final JButton commandeButton;
 	
-	public ContentPanel() 
+	//Tab names
+	private final String NOTIFICATION = "Notifications";
+	private final String STOCK = "Stocks";
+	private final String CARTE = "Carte";
+	private final String COMMANDE = "Commande";
+	
+	public ContentPanel(RestaurantController restaurantController) 
 	{
-		super();
-		
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
 		buttonPanel = new JPanel(new GridLayout(1,4));
@@ -69,8 +71,8 @@ public class ContentPanel extends JPanel implements ActionListener
 		conteneur = new JPanel(new CardLayout());
 		
 		conteneur.add(NOTIFICATION,notifications = new NotificationPanel());
-		conteneur.add(STOCK, stock = new StockPanel());
-		conteneur.add(CARTE, carte = new CartePanel());
+		conteneur.add(STOCK, stock = new StockPanel(restaurantController.getStockController()));
+		conteneur.add(CARTE, carte = new CartePanel(restaurantController.getCarteController(),restaurantController.getStockController()));
 		conteneur.add(COMMANDE, commande = new CommandePanel());
 		
 		add(conteneur);

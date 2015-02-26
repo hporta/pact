@@ -46,7 +46,7 @@ public class PlatForm extends JPanel implements ActionListener
 	private Stock stock;
 	
 	
-	public PlatForm(PlatCard parent, PlatController controller, Stock stock)
+	public PlatForm(PlatCard parent, PlatController controller)
 	{
 		super();
 		this.stock = stock;
@@ -121,11 +121,6 @@ public class PlatForm extends JPanel implements ActionListener
 		ret.setActionCommand("ret");
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
-	}
-	
-	public PlatForm(PlatCard parent)
-	{
-		this(parent,new PlatController(new Plat(),new ArrayList<Ingredient>()),new Stock());
 	}
 
 	@Override

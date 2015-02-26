@@ -1,3 +1,5 @@
+import controller.RestaurantController;
+import retaurant.Restaurant;
 import ui.App;
 
 
@@ -5,7 +7,13 @@ public class MainTest
 {
 	public static void main(String[] args) 
 	{
-		App test = new App();
-
+		//Model
+		Restaurant restaurant = new Restaurant();
+		
+		//Controller
+		RestaurantController restaurantController = new RestaurantController(restaurant);
+		
+		//View
+		App test = new App(restaurantController);
 	}
 }

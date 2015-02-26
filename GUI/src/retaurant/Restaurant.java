@@ -2,10 +2,10 @@ package retaurant;
 
 public class Restaurant 
 {
-	private Terrasse terrasse;
-	private Stock stock;
-	private Carte carte;
-	private Compte compte;
+	private final Terrasse terrasse;
+	private final Stock stock;
+	private final Carte carte;
+	private final Compte compte;
 	
 	public Restaurant()
 	{
@@ -14,4 +14,21 @@ public class Restaurant
 		this.carte = new Carte();
 		this.compte = new Compte();
 	}
+
+	public final Terrasse getTerrasse() 
+	{
+		return terrasse;
+	}
+
+	public final Stock getStock() 
+	{
+		return stock;
+	}
+
+	public final Carte getCarte() 
+	{
+		return carte;
+	}
+	
+	
 }

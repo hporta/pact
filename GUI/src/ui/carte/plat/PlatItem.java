@@ -13,27 +13,30 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.PlatController;
+
 import retaurant.Ingredient;
 import retaurant.Plat;
 
 @SuppressWarnings("serial")
-public class PlatItem extends JPanel implements ActionListener
+public class PlatItem extends JPanel
 {
+	//Model
 	private Plat plat;
-	private PlatCard parent;
 	
+	//Labels
 	private JLabel nom;
 	private JLabel description;
 	private JLabel prix;
 	
+	//boutons de retour, confirmation
 	private JButton setButton;
 	private JButton delButton;
 	
-	public PlatItem(PlatCard parent,Plat plat)
+	public PlatItem(PlatCard parent,PlatController platController)
 	{
 		super();
-		this.plat = plat;
-		this.parent = parent;
+		this.plat = platController.getPlat();
 		
 		this.nom = new JLabel();
 		this.prix = new JLabel();
@@ -72,8 +75,8 @@ public class PlatItem extends JPanel implements ActionListener
 		ImageIcon edit = new ImageIcon("data/img/circle.png");
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(setButton = new JButton("Modifier",edit),c);
-		setButton.addActionListener(this);
-		setButton.setActionCommand("set");
+		setButton.addActionListener(parent);
+		setButton.setActionCommand("Switch");
 		
 		c.gridx=2;
 		c.gridy=1;
@@ -82,7 +85,7 @@ public class PlatItem extends JPanel implements ActionListener
 		ImageIcon cross = new ImageIcon("data/img/close.png");
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		add(delButton = new JButton("Supprimer",cross),c);
-		delButton.addActionListener(this);
+		delButton.addActionListener(platController);
 		delButton.setActionCommand("del");
 	}
 	
@@ -99,20 +102,6 @@ public class PlatItem extends JPanel implements ActionListener
 		descr += "</html>";
 		
 		description.setText(descr);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getActionCommand().equals("set"))
-		{
-			parent.switchCard();
-		}
-		
-		else if(e.getActionCommand().equals("del"))
-		{
-			parent.removePlat();
-		}
 	}
 	
 }

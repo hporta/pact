@@ -36,7 +36,7 @@ public class ConsommablePanel extends JPanel
 
 		
 		setLayout(new BorderLayout());
-		add = new AddItemButton();
+		add = new AddItemButton(stockController,"AddConsommable");
 		empty = new JPanel();
 		empty.setLayout(new BorderLayout());
 		empty.add(new JLabel("Pas de consommables à afficher"),BorderLayout.CENTER);
@@ -46,8 +46,6 @@ public class ConsommablePanel extends JPanel
 		conteneur.setLayout(new GridLayout(0,1));
 		conteneur.add(add);
 		
-		add.addActionListener(stockController);
-		add.setActionCommand("addConsommable");
 		
 		add(conteneur,BorderLayout.PAGE_START);
 		

@@ -9,6 +9,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.CarteController;
+import controller.StockController;
+
+import retaurant.Carte;
 import retaurant.Ingredient;
 import retaurant.Plat;
 import retaurant.Stock;
@@ -29,18 +33,10 @@ public class CartePanel extends JPanel implements ActionListener
 	private final JButton platButton;
 	
 	private final JPanel conteneur;
-	
-	private Stock stock;
-	
-	public CartePanel()
-	{
-		this(new Stock());
-	}
-	
-	public CartePanel(Stock stock)
-	{
-		super();
 		
+	
+	public CartePanel(CarteController carteController, StockController stockController)
+	{		
 		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
 		
 		JPanel temp = new JPanel();
@@ -59,20 +55,12 @@ public class CartePanel extends JPanel implements ActionListener
 		menuButton.setEnabled(false);
 		
 		add(conteneur = new JPanel(new CardLayout()));
-		conteneur.add(menu = new MenuPanel(),MENUS);
-		conteneur.add(plat= new PlatPanel(),PLATS);
-		
-		
-		Plat temp1 = new Plat("Frites","des frites maison",3.2f);
-		temp1.addIngredient(new Ingredient("Pommes de terre",8));
-		plat.addPlat(temp1);
-		
-		temp1 = new Plat("Steak Haché aux haricots","un steak haché pur boeuf et des haricots verts frais",8.0f);
-		temp1.addIngredient(new Ingredient("Pommes de terre",8));
-		temp1.addIngredient(new Ingredient("Boeuf",2));
-		temp1.addIngredient(new Ingredient("Haricots verts",10));
-		plat.addPlat(temp1);
+		conteneur.add(menu = new MenuPanel(carteController),MENUS);
+		conteneur.add(plat= new PlatPanel(carteController),PLATS);
+
 	}
+	
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
@@ -92,11 +80,6 @@ public class CartePanel extends JPanel implements ActionListener
 			menuButton.setEnabled(true);
 			platButton.setEnabled(false);
 		}
-	}
-
-	public void update() 
-	{
-		
 	}
 	
 }

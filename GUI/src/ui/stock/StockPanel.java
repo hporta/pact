@@ -23,6 +23,7 @@ public class StockPanel extends JPanel implements ActionListener, Observer
 	private final ConsommablePanel consommable;
 	private final IngredientPanel ingredient;
 	
+	//Tabs
 	private final String CONSOMMABLES = "Consommables";
 	private final String INGREDIENTS = "Ingredients";
 	
@@ -39,16 +40,12 @@ public class StockPanel extends JPanel implements ActionListener, Observer
 	//Controller
 	private final StockController stockController;
 	
-	
-	public StockPanel() 
+		
+	public StockPanel(StockController stockController)
 	{
-		this(new Stock());
-	}
-	
-	public StockPanel(Stock stock)
-	{
-		this.stock = stock;
-		this.stockController = new StockController(stock);
+
+		this.stockController = stockController;
+		this.stock = stockController.getStock();
 		
 		stock.addObserver(this);
 		

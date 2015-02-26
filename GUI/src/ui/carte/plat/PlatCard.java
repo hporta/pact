@@ -1,7 +1,11 @@
 package ui.carte.plat;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 
@@ -11,31 +15,27 @@ import retaurant.Plat;
 import retaurant.Stock;
 
 @SuppressWarnings("serial")
-public class PlatCard extends JPanel
+public class PlatCard extends JPanel implements ActionListener, Observer
 {
-	private PlatController controller;
-	private PlatPanel parent;
-	
+	//panels
 	private PlatForm form;
 	private PlatItem item;
 	
-	public PlatCard(PlatPanel parent, Plat plat)
+	private final String SWITCH = "switch";
+	
+	
+	public PlatCard(PlatController platController)
 	{
-		this.parent = parent;
-		this.controller = new PlatController(plat,new ArrayList<Ingredient>());
+		//Informe le plat qu'il doit notifier ses modifications
+		platController.getPlat().addObserver(this);
 		
-		this.form = new PlatForm(this,controller,new Stock());
-		this.item = new PlatItem(this,plat);
 		
+		//Création des 2 panels
 		setLayout(new CardLayout());
-		add(item);
-		add(form);
+		add(item = new PlatItem(this, platController));
+		add(form = new PlatForm(this, platController));
 	}
 	
-	public PlatCard(PlatPanel parent)
-	{
-		this(parent, new Plat());
-	}
 	
 	public void switchCard()
 	{
@@ -43,14 +43,20 @@ public class PlatCard extends JPanel
 		card.next(this);
 	}
 	
-	public void update()
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getActionCommand().equals(SWITCH))
+			switchCard();
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) 
 	{
 		item.update();
 		form.update();
 	}
 	
-	public void removePlat()
-	{
-		parent.removePlat(controller.getPlat());
-	}
 }

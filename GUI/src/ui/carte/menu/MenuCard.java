@@ -1,7 +1,11 @@
 package ui.carte.menu;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 
@@ -14,31 +18,22 @@ import ui.carte.menu.MenuPanel;
 import controller.MenuController;
 
 @SuppressWarnings("serial")
-public class MenuCard extends JPanel
+public class MenuCard extends JPanel implements Observer, ActionListener
 {
-	private MenuController controller;
-	private MenuPanel parent;
-	
 	private MenuForm form;
 	private MenuItem item;
 	
-	public MenuCard(MenuPanel parent, Menu menu)
+	public MenuCard(MenuController menuController)
 	{
-		this.parent = parent;
-		this.controller = new MenuController(menu,new ArrayList<Plat>());
+		//Informe le menu qu'il doit notifier ses modifications
+		menuController.getMenu().addObserver(this);
 		
-		this.form = new MenuForm(this,controller,new Carte());
-		this.item = new MenuItem(this,menu);
-		
+		//Création des 2 panels
 		setLayout(new CardLayout());
-		add(item);
-		add(form);
+		add(item = new MenuForm(this, menuController));
+		add(form = new MenuItem(this, menuController));
 	}
 	
-	public MenuCard(MenuPanel parent)
-	{
-		this(parent, new Menu());
-	}
 	
 	public void switchCard()
 	{
@@ -46,15 +41,21 @@ public class MenuCard extends JPanel
 		card.next(this);
 	}
 	
-	public void update()
+
+	@Override
+	public void update(Observable o, Object arg) 
 	{
 		item.update();
 		form.update();
 	}
-	
-	public void removeMenu()
-	{
-		parent.removeMenu(controller.getMenu());
-	}
 
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getActionCommand().equals("Switch"))
+			switchCard();		
+	}
+	
+	
 }

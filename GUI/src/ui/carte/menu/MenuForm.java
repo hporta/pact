@@ -46,10 +46,9 @@ public class MenuForm extends JPanel implements ActionListener
 	private Carte carte;
 	
 	
-	public MenuForm(MenuCard parent, MenuController controller, Carte carte)
+	public MenuForm(MenuCard parent, MenuController controller)
 	{
 		super();
-		this.carte = carte;
 		this.parent = parent;
 		this.controller = controller;
 		this.menu = controller.getMenu();
@@ -124,11 +123,7 @@ public class MenuForm extends JPanel implements ActionListener
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
-	
-	public MenuForm(MenuCard parent)
-	{
-		this(parent,new MenuController(new Menu(),new ArrayList<Plat>()),new Carte());
-	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) 

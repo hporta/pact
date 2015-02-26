@@ -8,12 +8,13 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.RestaurantController;
+
 import ui.parasol.ParasolPanel;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel
 {
-
 	private final ParasolPanel parasol;
 	private final JLabel parasolHeader;
 	private final ContentPanel content;
@@ -21,9 +22,8 @@ public class MainPanel extends JPanel
 	
 	private final String FONT = "TimesRoman";
 	
-	public MainPanel()
+	public MainPanel(RestaurantController restaurantController)
 	{
-		super();
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -45,7 +45,7 @@ public class MainPanel extends JPanel
 		c.gridy=1;
 		c.weightx = 0.33;
 		c.weighty = 0.8;
-		add(parasol = new ParasolPanel(),c);
+		add(parasol = new ParasolPanel(restaurantController.getTerrasseController()),c);
 		
 		
 		c.gridx=1;
@@ -63,7 +63,7 @@ public class MainPanel extends JPanel
 		c.gridy=1;
 		c.weightx = 0.66;
 		c.weighty = 0.8;
-		add(content = new ContentPanel(),c);
+		add(content = new ContentPanel(restaurantController),c);
 
 	}
 	

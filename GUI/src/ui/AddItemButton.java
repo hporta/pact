@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class AddItemButton extends JButton
 	private Image img4;
 	private Image img5;
 	
-	public AddItemButton() 
+	public AddItemButton(ActionListener actionListener, String actionCommand) 
 	{
 		super();
 		try {
@@ -34,6 +35,9 @@ public class AddItemButton extends JButton
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		addActionListener(actionListener);
+		setActionCommand(actionCommand);
 		
 		setOpaque(false);
 		

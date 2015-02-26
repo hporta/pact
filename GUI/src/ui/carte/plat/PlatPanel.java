@@ -8,61 +8,40 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.CarteController;
+import controller.PlatController;
+
 import retaurant.Carte;
 import retaurant.Plat;
 import ui.AddItemButton;
 
 @SuppressWarnings("serial")
-public class PlatPanel extends JPanel implements ActionListener
+public class PlatPanel extends JPanel
 {
 	private AddItemButton add;
-	private Carte carte;
 	private JPanel conteneur;
 	
-	public PlatPanel()
+	//Model
+	private Carte carte;
+	
+	//Controller
+	private CarteController carteController;
+	
+	
+	public PlatPanel(CarteController carteController)
 	{
-		super();
-		add = new AddItemButton();
-		carte = new Carte();
+		this.carteController = carteController;
+		this.carte = carteController.getCarte();
+		
 		conteneur = new JPanel();
+		add = new AddItemButton(carteController,"addPlat");
+		
 		
 		setLayout(new BorderLayout());
 		conteneur.setLayout(new GridLayout(0,1));
 		conteneur.add(add);
-		add.setActionCommand("add");
-		add.addActionListener(this);
 		
 		add(conteneur,BorderLayout.PAGE_START);
-	}
-	
-	public PlatPanel(Carte carte)
-	{
-		super();
-		add = new AddItemButton();
-		this.carte = carte;
-		conteneur = new JPanel();
-		
-		setLayout(new BorderLayout());
-		conteneur.setLayout(new GridLayout(0,1));
-		conteneur.add(add);
-		add.setActionCommand("add");
-		add.addActionListener(this);
-		
-		add(conteneur,BorderLayout.PAGE_START);
-	}
-	
-	
-	
-	public void addPlat(Plat plat)
-	{
-		carte.addPlat(plat);
-		update();
-	}
-	
-	public void removePlat(Plat plat)
-	{
-		carte.removePlat(plat);
-		update();
 	}
 	
 	public void update()
@@ -73,22 +52,13 @@ public class PlatPanel extends JPanel implements ActionListener
 		
 		if(carte.getPlats().size() > 0)
 			for(Plat plat : carte.getPlats())
-				conteneur.add(new PlatCard(this,plat));
+				conteneur.add(new PlatCard(new PlatController(plat,carteController)));
 		
 		else
 			conteneur.add(new JLabel("Pas de plat à afficher"));
 		
 		validate();
 		repaint();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getActionCommand().equals("add"))
-		{
-			addPlat(new Plat());
-		}
 	}
 	
 }

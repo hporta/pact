@@ -10,20 +10,28 @@ import ui.stock.ingredient.IngredientCard;
 public class IngredientController implements ActionListener
 {
 	//View
-	//private IngredientCard card;
+	private IngredientCard card;
 	
 	//Model
 	private Ingredient ingredient;
+	
+	//Controller
 	private StockController stockController;
 	
 	//Events
 	private final String DELETE = "delete";
 	private final String VALIDATE = "validate";
 	
+	
 	public IngredientController(Ingredient ingredient, StockController stockController)
 	{
 		this.ingredient = ingredient;
 		this.stockController = stockController;
+	}
+	
+	public void setCard(IngredientCard card)
+	{
+		this.card = card;
 	}
 	
 	public Ingredient getIngredient() 
@@ -66,11 +74,10 @@ public class IngredientController implements ActionListener
 		//Events from IngredientForm
 		else if(VALIDATE.equals(e.getActionCommand()))
 		{
-			/*if(setIngredient(nom.getText(), Integer.parseInt(quantite.getText())))
+			if(setIngredient(card.getNom(), card.get)))
 			{
 				card.switchCard();
-				card.update();
-			}*/
+			}
 		}
 	}
 }

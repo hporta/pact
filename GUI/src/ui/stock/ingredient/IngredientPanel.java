@@ -32,9 +32,7 @@ public class IngredientPanel extends JPanel
 		
 		setLayout(new BorderLayout());
 		
-		add = new AddItemButton();
-		add.addActionListener(stockController);
-		add.setActionCommand("add");
+		add = new AddItemButton(stockController,"AddIngre");
 		
 		empty = new JPanel();
 		empty.add(new JLabel("Pas d'ingredient à afficher"));

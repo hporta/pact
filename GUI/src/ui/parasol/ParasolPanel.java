@@ -2,42 +2,43 @@ package ui.parasol;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
+
+import controller.RestaurantController;
+import controller.TerrasseController;
 
 import retaurant.Table;
 import retaurant.Terrasse;
 
 @SuppressWarnings("serial")
-public class ParasolPanel extends JPanel
+public class ParasolPanel extends JPanel implements Observer
 {
-
-	public ParasolPanel() 
-	{
-		super();
-		setLayout(new GridLayout(3,2));
+	//Model
+	private Terrasse terrasse;
 	
-		add(new ParasolLabel(new Table(1,true,false)));
-		add(new ParasolLabel(new Table(2,false, true)));
-		add(new ParasolLabel(new Table(3,true,true)));
-		add(new ParasolLabel(new Table(4,false,false)));
-		add(new ParasolLabel(new Table(5,true,false)));
-		add(new ParasolLabel(new Table(6,true,true)));
+	
+	public ParasolPanel(TerrasseController terrasseController) 
+	{
+		this.terrasse = terrasseController.getTerrasse();
+		terrasse.addObserver(this);
+		
+		update(terrasse,null);
 	}
 	
-	public ParasolPanel(Terrasse terrasse)
+
+	@Override
+	public void update(Observable o, Object arg) 
 	{
-		super();
-		ArrayList<Table> tables = terrasse.getTerrasse();
-		setLayout(new GridLayout(((tables.size()+1)/2),2));
+		removeAll();
+		setLayout(new GridLayout(terrasse.getTerrasse().size()/2,2));
 		
-		for(Table table : tables)
+		for(Table table : terrasse.getTerrasse())
+		{
 			add(new ParasolLabel(table));
+		}
 	}
 	
-	public void update()
-	{
-		
-	}
-
 }

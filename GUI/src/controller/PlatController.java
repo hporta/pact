@@ -1,19 +1,27 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import retaurant.Ingredient;
 import retaurant.Plat;
+import retaurant.Stock;
 
-public class PlatController 
+public class PlatController implements ActionListener
 {
+	//Model
 	private final Plat plat;
-	private final ArrayList<Ingredient> stock;
+	private final Stock stock;
 	
-	public PlatController(Plat plat, ArrayList<Ingredient> stock)
+	//Superior controller
+	CarteController carteController;
+	
+	public PlatController(Plat plat, CarteController carteController)
 	{
 		this.plat = plat;
-		this.stock = stock;
+		this.stock = carteController.getStock();
+		this.carteController = carteController;
 	}
 	
 	public Plat getPlat()
@@ -91,5 +99,13 @@ public class PlatController
 		}
 		
 		return ingredients;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getActionCommand().equals("del"))
+			carteController.removePlat(plat);
+		
 	}
 }
