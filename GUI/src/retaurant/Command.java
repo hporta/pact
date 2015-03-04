@@ -6,14 +6,14 @@ public class Command
 	
 	//private final Table table;
 	private ArrayList<Achetable> listeCommandes;
-	private String etat;// etat de la commande
+	private String etat;
 	private int id;
 	
 	
 	public Command(Table table)
 	{
 		listeCommandes = new ArrayList<Achetable>();
-		etat = new String("En cours");// lorsqu'on cr�e une commande elle sera en cours
+		etat = new String("En cours");
 		//this.table= table;
 	}
 	

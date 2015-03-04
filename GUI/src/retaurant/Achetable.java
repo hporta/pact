@@ -1,13 +1,15 @@
 package retaurant;
 
-// on cr�e une interface qui r�cup�re l'ensemble des propri�t�s d'un produit que l'on peut consommer au caf�
+//Interface des produits achetables
 public interface Achetable 
 {
 	//renvoie le prix
 	public float getPrix();
+	public void setPrix(float prix);
 	
 	//renvoie le nom
 	public String getNom();
+	public void setNom(String nom);
 	
 	//indique si l'achetable est disponible (test de quantité)
 	public boolean disponible();

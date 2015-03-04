@@ -27,7 +27,7 @@ public class Carte extends Observable
 		
 	}
 	
-	// on ajoute un elment � la carte en v�rifiant qu'il est disponible ou pas d�j� pr�sent
+	
 	public void addElement(Achetable element)
 	{
 		carte.add(element);

@@ -1,3 +1,9 @@
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import communication.Host;
+
 import controller.RestaurantController;
 import retaurant.Restaurant;
 import ui.App;
@@ -6,7 +12,8 @@ import ui.App;
 public class MainTest 
 {
 	public static void main(String[] args) 
-	{
+	{	
+		
 		//Model
 		Restaurant restaurant = new Restaurant();
 		
@@ -15,5 +22,11 @@ public class MainTest
 		
 		//View
 		App test = new App(restaurantController);
+	
+		//Host
+		Host host = new Host();
+		
 	}
+	
+	
 }
