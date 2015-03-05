@@ -2,7 +2,10 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import retaurant.Achetable;
 import retaurant.Consommable;
 import retaurant.Ingredient;
 import retaurant.Stock;
@@ -57,6 +60,19 @@ public class StockController implements ActionListener
 			addConsommable(new Consommable());
 		}
 		
+	}
+
+	public ArrayList<Achetable> parse(String commande) 
+	{
+		ArrayList<Achetable> liste = new ArrayList<Achetable>();
+		
+		for(Consommable consommable : stock.getConsommables())
+		{
+			if(consommable.getNom().equals(commande))
+				liste.add(consommable);
+		}
+		
+		return liste;
 	}
 	
 }

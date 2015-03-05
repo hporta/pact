@@ -23,8 +23,6 @@ public class Carte extends Observable
 		menus.get(0).add(plats.get(0));
 		menus.get(0).add(plats.get(1));
 		menus.get(0).add(plats.get(2));
-		
-		
 	}
 	
 	

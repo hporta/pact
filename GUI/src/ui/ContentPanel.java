@@ -59,10 +59,10 @@ public class ContentPanel extends JPanel implements ActionListener
 		
 		//Main panel
 		conteneur = new JPanel(new CardLayout());
-		conteneur.add(NOTIFICATION,new NotificationPanel());
+		conteneur.add(NOTIFICATION,new NotificationPanel(restaurantController));
 		conteneur.add(STOCK,new StockPanel(restaurantController.getStockController()));
 		conteneur.add(CARTE,new CartePanel(restaurantController.getCarteController(),restaurantController.getStockController()));
-		conteneur.add(COMMANDE,new CommandePanel());
+		conteneur.add(COMMANDE,new CommandePanel(restaurantController.getCompteController()));
 		
 		add(conteneur);
 	}

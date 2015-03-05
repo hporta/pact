@@ -1,7 +1,3 @@
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-
 import communication.Host;
 
 import controller.RestaurantController;
@@ -24,7 +20,7 @@ public class MainTest
 		App test = new App(restaurantController);
 	
 		//Host
-		Host host = new Host();
+		Host host = new Host(restaurantController);
 		
 	}
 	

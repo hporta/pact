@@ -16,22 +16,18 @@ public class Client {
 		
 		
 				Socket socket;
-				BufferedReader in;
 				PrintWriter out;
 				
-				Audio audio= new  Audio("the a la menthe");
+				Audio audio= new  Audio("Coca");
 				System.out.println(audio.getResultReco());
 				try {
 			
-				     socket = new Socket(InetAddress.getByName("Dynalink"),2025); // Connexion au serveur sur port 2025
-				     
-				     in = new BufferedReader (new InputStreamReader (socket.getInputStream()));
-				        String message_distant = in.readLine();
-				        System.out.println(message_distant);
+				     socket = new Socket(InetAddress.getLocalHost(),2025); // Connexion au serveur sur port 2025
 				        
-				        out = new PrintWriter(socket.getOutputStream());
-				        out.println(audio.getResultReco());
-				        out.flush();
+				     out = new PrintWriter(socket.getOutputStream());
+				     out.println(audio.getResultReco());
+				     out.flush();
+				     
 			         socket.close();   // Fermeture socket
 
 				}catch (UnknownHostException e) {

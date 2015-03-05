@@ -30,5 +30,10 @@ public class Restaurant
 		return carte;
 	}
 	
+	public final Compte getCompte()
+	{
+		return compte;
+	}
+	
 	
 }

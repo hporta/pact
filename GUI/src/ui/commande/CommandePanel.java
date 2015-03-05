@@ -8,42 +8,39 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.CompteController;
+
 import retaurant.Command;
+import retaurant.Compte;
 import retaurant.Plat;
 
 
 @SuppressWarnings("serial")
-public class CommandePanel extends JPanel implements ActionListener
+public class CommandePanel extends JPanel implements ActionListener, Observer
 {
-	private ArrayList<Command> commandes;
+	private Compte compte;
 	
 	private JPanel conteneur;
 	private JPanel aside;
 	private JPanel buttonPanel;
 	
-	public CommandePanel() 
+	public CommandePanel(CompteController compteController) 
 	{
-		this.commandes = new ArrayList<Command>();
-		
-		commandes.add(new Command(2));
-		commandes.add(new Command(3));
-		commandes.add(new Command(4));
-		commandes.add(new Command(5));
-		commandes.add(new Command(17));
-		commandes.add(new Command(8));
-		
+		this.compte = compteController.getCompte();
+		compte.addObserver(this);		
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		c.gridheight = 1;
-		c.gridwidth = 2;
+		c.gridwidth = 3;
 
-		
 		c.weightx = 0.25;
 		c.weighty = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -57,6 +54,12 @@ public class CommandePanel extends JPanel implements ActionListener
 		aside.add(buttonPanel);
 		
 
+		c.weightx = 0.3;
+		c.weighty = 1;
+		c.fill = GridBagConstraints.BOTH;
+		add(new JPanel(),c);
+		
+		
 		c.weightx = 0.75;
 		c.weighty = 1;
 		c.fill = GridBagConstraints.BOTH;
@@ -72,16 +75,15 @@ public class CommandePanel extends JPanel implements ActionListener
 		buttonPanel.removeAll();
 		conteneur.removeAll();
 		
-		for(int i=0; i < commandes.size(); i++)
+		for(Command com : compte.getCommandes())
 		{
-			Command com = commandes.get(i);
 			JButton bouton = new JButton("Commande n°" + com.getId());
 			bouton.addActionListener(this);
 			bouton.setActionCommand(com.getId() +"");
 			bouton.setPreferredSize(new Dimension(bouton.getWidth(),85));
 			
 			buttonPanel.add(bouton);
-			conteneur.add(new CommandeItem(commandes.get(i)),""+com.getId());
+			conteneur.add(new CommandeItem(com),com.getId());
 		}
 	}
 
@@ -90,6 +92,25 @@ public class CommandePanel extends JPanel implements ActionListener
 	{		
 		CardLayout cl = (CardLayout) conteneur.getLayout();
 		cl.show(conteneur, e.getActionCommand());
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) 
+	{
+		buttonPanel.removeAll();
+		conteneur.removeAll();
+		
+		for(Command com : compte.getCommandes())
+		{
+			JButton bouton = new JButton("Commande n°" + com.getId());
+			bouton.addActionListener(this);
+			bouton.setActionCommand(com.getId() +"");
+			bouton.setPreferredSize(new Dimension(bouton.getWidth(),85));
+			
+			buttonPanel.add(bouton);
+			conteneur.add(new CommandeItem(com),""+com.getId());
+		}
+		
 	}
 	
 

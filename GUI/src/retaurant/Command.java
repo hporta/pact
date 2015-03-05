@@ -22,6 +22,15 @@ public class Command
 		listeCommandes = new ArrayList<Achetable>();
 		etat = new String("En cours");
 		this.id = id;
+		add(new Plat("Entrée","l'entrée",1.0f));
+		add(new Plat("le plat","le plat de résistance",2.0f));
+		add(new Plat("Dessert", "le dessert", 6.0f));
+	}
+
+	public Command(int id, ArrayList<Achetable> liste) 
+	{
+		this.id = id;
+		this.listeCommandes = liste;
 	}
 
 	public void add(Achetable achat)
