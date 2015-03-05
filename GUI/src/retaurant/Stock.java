@@ -18,6 +18,8 @@ public class Stock extends Observable
 		addConsommable(new Consommable("Chips",10,1.5f));
 		addConsommable(new Consommable("Perrier",7,3.0f));
 		addConsommable(new Consommable("Coca",5,1.2f));
+		addConsommable(new Consommable("Eau",10,1.5f));
+		addConsommable(new Consommable("Thé à la menthe",7,3.0f));
 
 		addIngredient(new Ingredient("Pommes de terre",15));
 		addIngredient(new Ingredient("Carrotes",7));
