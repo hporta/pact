@@ -1,18 +1,20 @@
 package ui.notification;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import retaurant.Compte;
-
 import controller.RestaurantController;
 import controller.StockController;
 
@@ -22,6 +24,7 @@ public class NotificationPanel extends JPanel implements Observer
 {
 	private ArrayList<Notification> liste;
 	private JPanel content;
+	private JLabel empty;
 	
 	public NotificationPanel(RestaurantController controller) 
 	{
@@ -31,53 +34,49 @@ public class NotificationPanel extends JPanel implements Observer
 		setLayout(new BorderLayout());
 		content = new JPanel();
 		content.setLayout(new GridLayout(0,1));
+		empty = new JLabel("Pas de notification");
+		empty.setHorizontalAlignment(JLabel.CENTER);
 		
 		add(content,BorderLayout.PAGE_START);
 		
-		update();
+		update(null,-1);
 	}
 	
 	public void removeNotification(Notification notification)
 	{
 		liste.remove(notification);
-		update();
+		update(null,-1);
 	}
 	
 	public void addNotification(Notification notification)
 	{
 		liste.add(notification);
-		update();
-	}
-	
-	//update the contentPanel by filling it with all the notifications of liste
-	public void update()
-	{
-		content.removeAll();
-		
-		if(liste.size() > 0)
-			for(Notification notification : liste)
-				content.add(notification);
-		
-		else
-			content.add(new JLabel("Pas de notification"));
-		
-		validate();
-		repaint();
+		update(null,-1);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		liste.add(new CommandeNotification(this, (int) arg));
+		if((int) arg > 0)
+			liste.add(new CommandeNotification(this, (int) arg));
 		
+		removeAll();
 		content.removeAll();
 		
 		if(liste.size() > 0)
+		{
 			for(Notification notification : liste)
 				content.add(notification);
+			
+			add(content,BorderLayout.PAGE_START);
+		}
 		
 		else
-			content.add(new JLabel("Pas de notification"));
+		{
+			add(empty,BorderLayout.CENTER);
+			empty.setHorizontalAlignment(JLabel.CENTER);
+		}
+
 		
 		validate();
 		repaint();

@@ -1,7 +1,7 @@
 package retaurant;
 
 public class Restaurant 
-{
+{	
 	private final Terrasse terrasse;
 	private final Stock stock;
 	private final Carte carte;
@@ -33,7 +33,5 @@ public class Restaurant
 	public final Compte getCompte()
 	{
 		return compte;
-	}
-	
-	
+	}	
 }

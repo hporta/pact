@@ -11,7 +11,7 @@ public class App extends JFrame
 	
 	public App(RestaurantController restaurantController) 
 	{
-		super("Interface du Dome");		
+		super("Interface du Dome");	
 		
 		main = new MainPanel(restaurantController);
 		setContentPane(main);

@@ -3,27 +3,36 @@ package ui.commande;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.CommandeController;
 import retaurant.Achetable;
 import retaurant.Command;
 
 
 @SuppressWarnings("serial")
-public class CommandeItem extends JPanel
+public class CommandeItem extends JPanel implements Observer
 {	
 	private Command commande;
+	private CommandeController controller;
 	
-	public CommandeItem(Command commande)
+	public CommandeItem(CommandeController controller)
 	{
-		this.commande = commande;
-		update();
+		this.commande = controller.getCommande();
+		this.controller = controller;
+		this.commande.addObserver(this);
+		update(null,null);
 	}
 	
-	public void update()
+	@Override
+	public void update(Observable o, Object args)
 	{
+		removeAll();
 		setLayout(new GridBagLayout());
 		GridBagConstraints cstr = new GridBagConstraints();
 		
@@ -62,5 +71,22 @@ public class CommandeItem extends JPanel
 		cstr.gridx = 1;
 		cstr.gridy = 2;
 		add(new JLabel(commande.getTotal() + "€"),cstr);
+		
+		cstr.gridx = 0;
+		cstr.gridy = 3;
+		JPanel temp = new JPanel();
+		if(commande.getEtat() == "N")
+		{
+			JButton confirm = new JButton("Commander");
+			confirm.addActionListener(controller);
+			confirm.setActionCommand("confirmer");
+			temp.add(confirm);
+		}
+		
+		else if(commande.getEtat() == "O")
+		{
+			temp.add(new JLabel("Commande confirmée"));
+		}
+		add(temp,cstr);
 	}
 }

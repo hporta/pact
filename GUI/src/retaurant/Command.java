@@ -1,10 +1,11 @@
 package retaurant;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Command
+public class Command extends Observable
 {
 	
-	//private final Table table;
+	private Table table;
 	private ArrayList<Achetable> listeCommandes;
 	private String etat;
 	private int id;
@@ -13,24 +14,26 @@ public class Command
 	public Command(Table table)
 	{
 		listeCommandes = new ArrayList<Achetable>();
-		etat = new String("En cours");
+		etat = new String("N");
 		//this.table= table;
 	}
 	
 	public Command(int id)
 	{
 		listeCommandes = new ArrayList<Achetable>();
-		etat = new String("En cours");
+		etat = new String("N");
 		this.id = id;
 		add(new Plat("Entrée","l'entrée",1.0f));
 		add(new Plat("le plat","le plat de résistance",2.0f));
 		add(new Plat("Dessert", "le dessert", 6.0f));
 	}
 
-	public Command(int id, ArrayList<Achetable> liste) 
+	public Command(Table table, int id, ArrayList<Achetable> liste) 
 	{
 		this.id = id;
+		this.etat = "N";
 		this.listeCommandes = liste;
+		this.table = table;
 	}
 
 	public void add(Achetable achat)
@@ -45,11 +48,11 @@ public class Command
 		
 		listeCommandes.remove(achat);
 	}
-	/*
+	
 	public Table getTable()
 	{	
 		return table;
-	}*/
+	}
 	
 	public ArrayList<Achetable> getListeCommandes()
 	{	
@@ -65,6 +68,9 @@ public class Command
 	public void setEtat(String etat)
 	{
 		this.etat = etat;
+		table.setCommande(true);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public float getTotal()

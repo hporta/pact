@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import controller.CarteController;
 import controller.PlatController;
-
 import retaurant.Carte;
 import retaurant.Plat;
 import ui.AddItemButton;
@@ -34,7 +33,6 @@ public class PlatPanel extends JPanel
 		
 		conteneur = new JPanel();
 		add = new AddItemButton(carteController,Constantes.ADD_PLAT);
-		
 		
 		setLayout(new BorderLayout());
 		conteneur.setLayout(new GridLayout(0,1));

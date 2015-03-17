@@ -2,7 +2,7 @@ package retaurant;
 
 import java.util.Observable;
 
-//cette classe repr�sente l'ensemble de ce qui est en stock
+//cette classe représente l'ensemble de ce qui est en stock
 public abstract class Produit extends Observable
 {
 	private String nom;

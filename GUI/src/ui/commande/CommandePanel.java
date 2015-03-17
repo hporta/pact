@@ -14,8 +14,8 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.CommandeController;
 import controller.CompteController;
-
 import retaurant.Command;
 import retaurant.Compte;
 import retaurant.Plat;
@@ -33,7 +33,7 @@ public class CommandePanel extends JPanel implements ActionListener, Observer
 	public CommandePanel(CompteController compteController) 
 	{
 		this.compte = compteController.getCompte();
-		compte.addObserver(this);		
+		compte.addObserver(this);		 
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -54,7 +54,7 @@ public class CommandePanel extends JPanel implements ActionListener, Observer
 		aside.add(buttonPanel);
 		
 
-		c.weightx = 0.3;
+		c.weightx = 0.1;
 		c.weighty = 1;
 		c.fill = GridBagConstraints.BOTH;
 		add(new JPanel(),c);
@@ -83,13 +83,13 @@ public class CommandePanel extends JPanel implements ActionListener, Observer
 			bouton.setPreferredSize(new Dimension(bouton.getWidth(),85));
 			
 			buttonPanel.add(bouton);
-			conteneur.add(new CommandeItem(com),com.getId());
+			conteneur.add(new CommandeItem(new CommandeController(com)),com.getId());
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
-	{		
+	{
 		CardLayout cl = (CardLayout) conteneur.getLayout();
 		cl.show(conteneur, e.getActionCommand());
 	}
@@ -108,7 +108,7 @@ public class CommandePanel extends JPanel implements ActionListener, Observer
 			bouton.setPreferredSize(new Dimension(bouton.getWidth(),85));
 			
 			buttonPanel.add(bouton);
-			conteneur.add(new CommandeItem(com),""+com.getId());
+			conteneur.add(new CommandeItem(new CommandeController(com)),""+com.getId());
 		}
 		
 	}

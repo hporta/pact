@@ -6,62 +6,58 @@ import java.util.Observable;
 public class Table extends Observable
 {
 	private int no;
-	private boolean propre; //propre ou sale
-	private float note;
-	private boolean libre; // libre ou occup�
+	private boolean commande; 
+	private boolean libre;
 	
 	public Table(int no)
 	{
 		this.no = no;
-		this.propre = true;
+		this.commande = false;
 		this.libre = true;
 	}
 	
-	public Table(int no, boolean propre, boolean libre)
+	public Table(int no, boolean commande, boolean libre)
 	{
 		this.no = no;
-		this.propre = propre;
+		this.commande = commande;
 		this.libre = libre;
 	}
-
-	public void addNote(int prixCommande)
-	{
-		note += prixCommande;
+    
+	public final void setCommande(boolean commande)
+	{	
+		this.commande = commande;
+		setChanged();
+		notifyObservers();
 	}
 	
-    public void clearNote()
-    {
-    	note = 0;
-    }
-    
-	public void setEtat(boolean etat)
-	{	
-		propre = etat;
+	public final boolean isCommande()
+	{
+		return commande;
+	}
+	
+	public final void setLibre(boolean libre)
+	{
+		this.libre = libre;
 		setChanged();
 		notifyObservers();
 	}
 
+	public final boolean isLibre()
+	{
+		return libre;
+	}
 	
 	public final int getNo()
 	{	
 		return no;
 	}
 	
-	public boolean isLibre()
-	{
-		return libre;
-	}
 
 	
-	public boolean getPropre()
-	{	
-		return propre;
-	}
-	
 	//Si la table est prope on a une rreur
-	public void clean() throws Exception
+	/*public void clean() throws Exception
 	{
-		if(propre == false)
+		if(commande == false)
 			System.out.println("envoyer un serveur nettoyer table" + no);
 	}
 	
@@ -75,7 +71,7 @@ public class Table extends Observable
 	}
 	
 	//on reconnait des achetables dans les paroles que l'on r�cup�rent du module audio
-	/*public Command passerCommande(ArrayList<String> paroles) throws Exception
+	public Command passerCommande(ArrayList<String> paroles) throws Exception
 	{
 		if(libre == true)
 			throw new Exception("Erreur il n'y a personne à  table");

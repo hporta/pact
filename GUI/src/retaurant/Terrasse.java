@@ -2,6 +2,8 @@ package retaurant;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import database.Connector;
+
 
 
 public class Terrasse extends Observable
@@ -16,10 +18,8 @@ public class Terrasse extends Observable
 	public Terrasse()
 	{
 		this.terrasse = new ArrayList<Table>();
-		
-		//remplissage de table
-		for(int i =0; i < 9; i++)
-			terrasse.add(new Table(i,i%3==0,i%2==0));
+		Connector con = new Connector();
+		this.terrasse = con.getTables();				
 	}
 
 
@@ -40,6 +40,17 @@ public class Terrasse extends Observable
 	public ArrayList<Table> getTerrasse()
 	{	
 		return terrasse;
+	}
+	
+	public Table getTableById(int id)
+	{
+		for(Table table : terrasse)
+		{
+			if(table.getNo() == id)
+				return table;
+		}
+		
+		return null;
 	}
 	
 }

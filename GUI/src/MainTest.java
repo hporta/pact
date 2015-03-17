@@ -22,7 +22,5 @@ public class MainTest
 		//Host
 		Host host = new Host(restaurantController);
 		
-	}
-	
-	
+	}	
 }

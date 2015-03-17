@@ -16,7 +16,7 @@ public class Compte extends Observable
 	{
 		commandes.add(command);
 		setChanged();
-		notifyObservers(command.getId());
+		notifyObservers(command.getTable().getNo());
 	}
 	
 	public void remove(Command command)

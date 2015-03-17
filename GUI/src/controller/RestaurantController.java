@@ -1,5 +1,7 @@
 package controller;
 
+import image.Analyst;
+
 import java.util.ArrayList;
 
 import retaurant.Achetable;
@@ -18,7 +20,7 @@ public class RestaurantController
 		terrasseController = new TerrasseController(restaurant.getTerrasse());
 		carteController = new CarteController(restaurant.getCarte(), restaurant.getStock());
 		stockController = new StockController(restaurant.getStock());
-		compteController = new CompteController(restaurant.getCompte());
+		compteController = new CompteController(restaurant.getCompte(),restaurant.getTerrasse());
 	}
 	
 	public CarteController getCarteController()
@@ -47,6 +49,11 @@ public class RestaurantController
 	public CompteController getCompteController() 
 	{
 		return compteController;
+	}
+	
+	public void traiteImage()
+	{
+		terrasseController.getTerrasse().getTableById(1).setLibre(Analyst.isLibre());
 	}
 
 }
