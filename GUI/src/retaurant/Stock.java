@@ -17,9 +17,8 @@ public class Stock extends Observable
 		consommables = new ArrayList<Consommable>();
 		ingredients = new ArrayList<Ingredient>();
 
-		Connector con = new Connector();
-		consommables = con.getConsommables();
-		ingredients = con.getIngredients();
+		consommables = Connector.getConsommables();
+		ingredients = Connector.getIngredients();
 	}
 
 	public void addProduct(Produit produit)

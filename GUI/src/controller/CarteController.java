@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import retaurant.Achetable;
 import retaurant.Carte;
-import retaurant.Command;
 import retaurant.Menu;
 import retaurant.Plat;
 import retaurant.Stock;

@@ -1,5 +1,7 @@
 package retaurant;
 
+import database.Connector;
+
 // ex boisson chips tous ce qui est consommable � l'unit�
 public class Consommable extends Produit implements Achetable
 {
@@ -25,6 +27,7 @@ public class Consommable extends Produit implements Achetable
 	public void setPrix(float prix)
 	{
 		this.prix = prix;
+    	updateDatabase();
 		setChanged();
 		notifyObservers();
 	}
@@ -41,5 +44,18 @@ public class Consommable extends Produit implements Achetable
 	{
 		this.removeProduct(1);
 	}
+	
+    public void removeProduct(int quantity) throws Exception
+    {    	
+    	setNoInStock(getNoInStock() - quantity);
+ 		updateDatabase();
+    	setChanged();
+		notifyObservers();
+	}
+    
+    public void updateDatabase()
+    {
+    	Connector.setConsommable(getNom(),getNom(),getNoInStock(),getPrix());
+    }
 
 }

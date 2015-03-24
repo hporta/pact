@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
 
 import retaurant.Command;
 import retaurant.Consommable;
@@ -16,17 +17,11 @@ import retaurant.Table;
 
 public class Connector 
 {
-	private final String url = "jdbc:mysql://localhost/restaurant";
-	private final String username = "root";
-	private final String pwd = "";
+	private static final String url = "jdbc:mysql://localhost/restaurant";
+	private static final String username = "root";
+	private static final String pwd = "";	
 	
-	public Connector()
-	{		
-
-	}
-	
-	
-	public ArrayList<Ingredient> getIngredients()
+	public static ArrayList<Ingredient> getIngredients()
 	{
 		ArrayList<Ingredient> liste = new ArrayList<Ingredient>();
 		try
@@ -58,7 +53,32 @@ public class Connector
 		return liste;
 	}
 	
-	public ArrayList<Consommable> getConsommables()
+	public static void setIngredient(String name, String newName, int newQuantite)
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url, username, pwd);
+	        String req = "UPDATE ingredient SET nom = ?, quantite = ? WHERE nom = ?";
+	        PreparedStatement stmt = con.prepareStatement(req);
+	        stmt.setString(1, newName);
+	        stmt.setInt(2, newQuantite);
+	        stmt.setString(3, name);
+	        stmt.executeUpdate();
+		}
+		
+    	catch (ClassNotFoundException e) 
+		{
+        	System.out.println("Erreur lors de l'initialisation de la classe");
+    	}
+	    
+	    catch(SQLException e)
+	    {
+	    	System.out.println("Erreur lors de la requete SQL (update)");
+	    }
+	}
+	
+	public static ArrayList<Consommable> getConsommables()
 	{
 		ArrayList<Consommable> liste = new ArrayList<Consommable>();
 		try
@@ -91,17 +111,44 @@ public class Connector
 		return liste;
 	}
 	
-	public ArrayList<Plat> getPlats()
+	public static void setConsommable(String name, String newName, int newQuantity, float newPrice)
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url, username, pwd);
+	        PreparedStatement stmt = con.prepareStatement("UPDATE Produit SET nom = ?, quantite = ?, prix = ? WHERE nom = ?");
+	        stmt.setString(1, newName);
+	        stmt.setInt(2, newQuantity);
+	        stmt.setFloat(3, newPrice);
+	        stmt.setString(4, name);
+	        System.out.println(stmt);
+	        stmt.executeUpdate();	
+	        stmt.close();
+		}
+		
+    	catch (ClassNotFoundException e) 
+		{
+        	System.out.println("Erreur lors de l'initialisation de la classe");
+    	}
+	    
+	    catch(SQLException e)
+	    {
+	    	System.out.println("Erreur lors de la requete SQL (update consommabel)");
+	    }
+	}
+	
+	public static ArrayList<Plat> getPlats()
 	{
 		return new ArrayList<Plat>();
 	}
 	
-	public ArrayList<Menu> getMenus()
+	public static ArrayList<Menu> getMenus()
 	{
 		return new ArrayList<Menu>();
 	}
 	
-	public ArrayList<Table> getTables()
+	public static ArrayList<Table> getTables()
 	{
 		ArrayList<Table> liste = new ArrayList<Table>();
 		try
@@ -132,7 +179,7 @@ public class Connector
 		return liste;
 	}
 	
-	public ArrayList<Command> getCommandes()
+	public static ArrayList<Command> getCommandes()
 	{
 		return new ArrayList<Command>();
 	}
