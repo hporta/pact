@@ -1,6 +1,7 @@
 package retaurant;
 
 import database.Connector;
+import database.ConsommableConnector;
 
 // ex boisson chips tous ce qui est consommable � l'unit�
 public class Consommable extends Produit implements Achetable
@@ -55,7 +56,7 @@ public class Consommable extends Produit implements Achetable
     
     public void updateDatabase()
     {
-    	Connector.setConsommable(getNom(),getNom(),getNoInStock(),getPrix());
+    	ConsommableConnector.setConsommable(getNom(),getNom(),getNoInStock(),getPrix());
     }
 
 }

@@ -1,3 +1,4 @@
+package audio;
 import java.io.*;
 import javax.sound.sampled.*;
 
@@ -8,10 +9,11 @@ public class AudioRecorder {
     private ByteArrayOutputStream outputStream;
     private AudioFormat audioFormat;
     private static final AudioFileFormat.Type targetType = AudioFileFormat.Type.WAVE;
+    public static final long RECORDTIME = 2000;
 
     public void record() {
 
-        audioFormat = new AudioFormat(44100, 16, 2, true, true);
+        audioFormat = new AudioFormat(16000, 16, 2, true, true);
         DataLine.Info info = new DataLine.Info(TargetDataLine.class, audioFormat);
 
         if (!AudioSystem.isLineSupported(info)) {
@@ -31,15 +33,21 @@ public class AudioRecorder {
             e.printStackTrace();
         } catch (IOException e1) {
             e1.printStackTrace();
-        } finally {
-        	try {
-            	line.stop();
-            	line.close();
-                audioInputStream.close();
-            } catch (IOException e) {}
-        }
+        } //finally {
+        	//try {
+            	//line.stop();
+            	//line.close();
+                //audioInputStream.close();
+            //} catch (IOException e) {}
+        //}
     }
 
+    public void finish() {
+    	line.stop();
+    	line.close();
+    	System.out.println("enregistrement terminé");
+    }
+    
     public void setFile(File file) {
         this.file = file;
     }

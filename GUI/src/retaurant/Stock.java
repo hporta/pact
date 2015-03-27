@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import database.Connector;
+import database.ConsommableConnector;
+import database.IngredientConnector;
 
 
 public class Stock extends Observable
@@ -17,8 +19,8 @@ public class Stock extends Observable
 		consommables = new ArrayList<Consommable>();
 		ingredients = new ArrayList<Ingredient>();
 
-		consommables = Connector.getConsommables();
-		ingredients = Connector.getIngredients();
+		consommables = ConsommableConnector.getConsommables();
+		ingredients = IngredientConnector.getIngredients();
 	}
 
 	public void addProduct(Produit produit)

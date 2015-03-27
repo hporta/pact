@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 
 import retaurant.Consommable;
 import ui.Constantes;
+import ui.Recorder;
 import ui.stock.consommable.ConsommableCard;
 import ui.stock.consommable.ConsommableFields;
 
 public class ConsommableController implements ActionListener
 {
+	private Recorder rec;
 	//View
 	private ConsommableCard card;
 	private ConsommableFields fields; 
@@ -91,6 +93,12 @@ public class ConsommableController implements ActionListener
 			{
 				card.switchCard();
 			}
+		}
+		
+		else if(Constantes.RECORD.equals(e.getActionCommand()))
+		{
+			rec = new Recorder(consommable);
+			System.out.println("Creation de la fenetre always on top");
 		}
 	}
 	

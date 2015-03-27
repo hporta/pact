@@ -1,4 +1,5 @@
 package audio;
+
 import java.io.*;
 
 import javax.sound.sampled.*;
@@ -30,8 +31,7 @@ public class AudioPlayer implements Runnable {
         
       
         audioFormat = audioInputStream.getFormat();
-        //System.out.println(audioFormat);
-            
+               
         DataLine.Info info = new DataLine.Info(SourceDataLine.class,
                 audioFormat);
 
@@ -86,4 +86,6 @@ public class AudioPlayer implements Runnable {
 	
 
 }
+
+
 

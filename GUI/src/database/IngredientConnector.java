@@ -8,27 +8,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import retaurant.Consommable;
+import retaurant.Ingredient;
 
-public class ConsommableConnector extends Connector
+public class IngredientConnector extends Connector
 {
-	public static ArrayList<Consommable> getConsommables()
+	public static ArrayList<Ingredient> getIngredients()
 	{
-		ArrayList<Consommable> liste = new ArrayList<Consommable>();
+		ArrayList<Ingredient> liste = new ArrayList<Ingredient>();
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-	        String req = "SELECT * from Produit";
+	        String req = "SELECT * from Ingredient";
 	        Statement stmt = con.createStatement();
 	        ResultSet result = stmt.executeQuery(req);
 	        
         	while(result.next())
         	{
         		String nom = result.getString("nom");
-        		float prix = result.getFloat("prix");
         		int quantite = result.getInt("quantite");
-        		liste.add(new Consommable(nom,quantite,prix));
+        		liste.add(new Ingredient(nom,quantite));
         	}
 		}
 		
@@ -45,20 +44,18 @@ public class ConsommableConnector extends Connector
 		return liste;
 	}
 	
-	public static void setConsommable(String name, String newName, int newQuantity, float newPrice)
+	public static void setIngredient(String name, String newName, int newQuantite)
 	{
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-	        PreparedStatement stmt = con.prepareStatement("UPDATE Produit SET nom = ?, quantite = ?, prix = ? WHERE nom = ?");
+	        String req = "UPDATE ingredient SET nom = ?, quantite = ? WHERE nom = ?";
+	        PreparedStatement stmt = con.prepareStatement(req);
 	        stmt.setString(1, newName);
-	        stmt.setInt(2, newQuantity);
-	        stmt.setFloat(3, newPrice);
-	        stmt.setString(4, name);
-	        System.out.println(stmt);
-	        stmt.executeUpdate();	
-	        stmt.close();
+	        stmt.setInt(2, newQuantite);
+	        stmt.setString(3, name);
+	        stmt.executeUpdate();
 		}
 		
     	catch (ClassNotFoundException e) 
@@ -68,7 +65,7 @@ public class ConsommableConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (update consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (update)");
 	    }
 	}
 }

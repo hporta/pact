@@ -9,7 +9,7 @@ public class Transfert
 	public static void transfert(InputStream in, OutputStream out, boolean closeOnExit)
 	throws IOException
 	{
-		byte buf[] = new byte[1024];
+		byte buf[] = new byte[4096];
 		
 		int n;
 		int i = 0;

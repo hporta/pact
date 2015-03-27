@@ -24,7 +24,7 @@ public class ImageThread extends Thread
 		
 		catch(Exception e)
 		{
-			System.err.println("Erreur lors de l'initialisation du serveur (port 2025");
+			System.err.println("[Fichier] Erreur lors de l'initialisation du serveur (port 2026");
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class ImageThread extends Thread
 		
 		catch (IOException e) 
 		{
-			System.err.println("[Fichier] Erreur pendant la connection avec le client");;
+			System.err.println("[Fichier] Erreur pendant la connection avec le client");
 		}
 	}
 	

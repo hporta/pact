@@ -84,6 +84,15 @@ public class ConsommableForm extends JPanel implements Observer
 		ret.setActionCommand(Constantes.SWITCH);
 		add(ret,c);
 		
+		c.gridx=0;
+		c.gridy=3;
+		c.weightx = 1;
+		c.weighty = 0.12;
+		JButton rec = new JButton("Enregistrements");
+		rec.addActionListener(controller);
+		rec.setActionCommand(Constantes.RECORD);
+		add(rec,c);
+		
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		controller.setFields(new ConsommableFields(nom,prix,quantite));
 		update();
