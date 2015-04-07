@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.CommandeController;
-import retaurant.Achetable;
-import retaurant.Command;
+import restaurant.Achetable;
+import restaurant.Command;
 
 
 @SuppressWarnings("serial")

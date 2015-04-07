@@ -9,9 +9,8 @@ import javax.swing.JPanel;
 
 import controller.ConsommableController;
 import controller.StockController;
-
-import retaurant.Consommable;
-import retaurant.Stock;
+import restaurant.Consommable;
+import restaurant.Stock;
 import ui.AddItemButton;
 import ui.Constantes;
 

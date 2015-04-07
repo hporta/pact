@@ -1,7 +1,7 @@
 import communication.Host;
 
 import controller.RestaurantController;
-import retaurant.Restaurant;
+import restaurant.Restaurant;
 import ui.App;
 
 
@@ -20,5 +20,5 @@ public class MainTest
 	
 		//Host
 		Host host = new Host(restaurantController);
-	}	
+	}
 }

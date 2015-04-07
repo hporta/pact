@@ -1,5 +1,6 @@
-package retaurant;
+package restaurant;
 
+//Restaurant contains every part of the model
 public class Restaurant 
 {	
 	private final Terrasse terrasse;

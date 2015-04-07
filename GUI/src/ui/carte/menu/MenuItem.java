@@ -14,9 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.MenuController;
-
-import retaurant.Menu;
-import retaurant.Plat;
+import restaurant.Menu;
+import restaurant.Plat;
 import ui.Constantes;
 
 @SuppressWarnings("serial")

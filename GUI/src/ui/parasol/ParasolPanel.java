@@ -11,8 +11,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import controller.TerrasseController;
-import retaurant.Table;
-import retaurant.Terrasse;
+import restaurant.Table;
+import restaurant.Terrasse;
 
 @SuppressWarnings("serial")
 public class ParasolPanel extends JPanel implements Observer

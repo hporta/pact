@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import retaurant.Ingredient;
-import retaurant.Plat;
-import retaurant.Stock;
+import restaurant.Ingredient;
+import restaurant.Plat;
+import restaurant.Stock;
 import ui.Constantes;
 import ui.carte.plat.PlatCard;
 import ui.carte.plat.PlatFields;

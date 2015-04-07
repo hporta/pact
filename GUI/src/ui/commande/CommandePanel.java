@@ -16,9 +16,9 @@ import javax.swing.JPanel;
 
 import controller.CommandeController;
 import controller.CompteController;
-import retaurant.Command;
-import retaurant.Compte;
-import retaurant.Plat;
+import restaurant.Command;
+import restaurant.Compte;
+import restaurant.Plat;
 
 
 @SuppressWarnings("serial")

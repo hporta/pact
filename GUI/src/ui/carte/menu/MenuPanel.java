@@ -8,9 +8,8 @@ import javax.swing.JPanel;
 
 import controller.CarteController;
 import controller.MenuController;
-
-import retaurant.Carte;
-import retaurant.Menu;
+import restaurant.Carte;
+import restaurant.Menu;
 import ui.AddItemButton;
 import ui.Constantes;
 

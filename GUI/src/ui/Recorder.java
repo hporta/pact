@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import database.Connector;
-import retaurant.Achetable;
+import restaurant.Achetable;
 
 @SuppressWarnings("serial")
 public class Recorder extends JFrame

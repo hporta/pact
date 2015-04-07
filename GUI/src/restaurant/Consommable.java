@@ -1,4 +1,4 @@
-package retaurant;
+package restaurant;
 
 import database.ConsommableConnector;
 

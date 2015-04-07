@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import retaurant.Carte;
-import retaurant.Menu;
-import retaurant.Plat;
+import restaurant.Carte;
+import restaurant.Menu;
+import restaurant.Plat;
 import ui.Constantes;
 import ui.carte.menu.MenuCard;
 import ui.carte.menu.MenuFields;

@@ -19,10 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.PlatController;
-
-import retaurant.Ingredient;
-import retaurant.Plat;
-import retaurant.Stock;
+import restaurant.Ingredient;
+import restaurant.Plat;
+import restaurant.Stock;
 import ui.Constantes;
 
 @SuppressWarnings("serial")

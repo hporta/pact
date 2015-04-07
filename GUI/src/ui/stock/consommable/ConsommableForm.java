@@ -15,9 +15,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import retaurant.Consommable;
+import restaurant.Consommable;
 import ui.Constantes;
-
 import controller.ConsommableController;
 
 @SuppressWarnings("serial")

@@ -1,4 +1,4 @@
-package retaurant;
+package restaurant;
 import java.util.ArrayList;
 import java.util.Observable;
 

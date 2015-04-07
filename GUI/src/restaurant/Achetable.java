@@ -1,4 +1,4 @@
-package retaurant;
+package restaurant;
 
 //Interface des produits achetables
 public interface Achetable 

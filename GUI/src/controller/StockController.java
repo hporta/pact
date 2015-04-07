@@ -4,10 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import retaurant.Achetable;
-import retaurant.Consommable;
-import retaurant.Ingredient;
-import retaurant.Stock;
+import restaurant.Achetable;
+import restaurant.Consommable;
+import restaurant.Ingredient;
+import restaurant.Stock;
 import ui.Constantes;
 
 public class StockController implements ActionListener

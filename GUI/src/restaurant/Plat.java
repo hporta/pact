@@ -1,12 +1,13 @@
-package retaurant;
+package restaurant;
 import java.util.ArrayList;
 import java.util.Observable;
+
+import database.PlatConnector;
 
 
 
 public class Plat extends Observable implements Achetable
 {
-	
 	private String nom; 
 	private String description;
 	private float prix;
@@ -27,6 +28,39 @@ public class Plat extends Observable implements Achetable
 		return id;
 	}
 	
+	public String getNom()
+	{	
+		return nom;
+	}
+
+	public final void setNom(String nom)
+	{
+		this.nom = nom;
+		update();
+	}
+
+	public final float getPrix()
+	{	
+		return prix;
+	}
+	
+	public final void setPrix(float prix)
+	{	
+		this.prix = prix;
+		update();
+	}
+
+	public final String getDescription()
+	{
+		return description;
+	}
+	
+	public void setDescription(String description)
+	{	
+		this.description = description;
+		update();
+	}
+
 	//toujours un plat est disponible si tous les ingr�dients sont pr�sents
 	public boolean disponible()
 	{		
@@ -46,48 +80,32 @@ public class Plat extends Observable implements Achetable
 			ingredient.removeProduct(1);
 	}
 	
-	public String getNom()
-	{	
-		return nom;
-	}
-	
-	// si erreur d'ortographe
-	public void setDescription(String description)
-	{	
-		this.description = description;
-		update();
-	}
-	
-	public float getPrix()
-	{	
-		return prix;
-	}
-	
-	public void setPrix(float prix)
-	{	
-		this.prix = prix;
-		update();
-	}
-	
-	public ArrayList<Ingredient> getIngredients()
+	public final ArrayList<Ingredient> getIngredients()
 	{
 		return listeingredient;
 	}
 	
-	public String getDescription()
-	{
-		return description;
-	}
-		
-	public final void setNom(String nom)
-	{
-		this.nom = nom;
-		update();
-	}
-	
+	/**
+	 * Set the ingredients
+	 * Doesn't call database because it's only used during initialization
+	 * @param liste
+	 */
 	public final void setIngredients(ArrayList<Ingredient> liste)
 	{
 		listeingredient = liste;
+		update();
+	}
+	
+	/**
+	 * Add ingredient
+	 * @param ingredient
+	 */
+	public final void addIngredient(Ingredient ingredient)
+	{
+		PlatConnector.insertIngredientToPlat(ingredient.getId(), getId());
+		
+		listeingredient.add(ingredient);
+		
 		update();
 	}
 	

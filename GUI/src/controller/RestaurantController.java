@@ -4,8 +4,8 @@ import image.Analyst;
 
 import java.util.ArrayList;
 
-import retaurant.Achetable;
-import retaurant.Restaurant;
+import restaurant.Achetable;
+import restaurant.Restaurant;
 
 public class RestaurantController 
 {
@@ -54,6 +54,11 @@ public class RestaurantController
 	public void traiteImage()
 	{
 		terrasseController.getTerrasse().getTableById(1).setLibre(Analyst.isLibre());
+	}
+	
+	public void traiteAudio()
+	{
+		
 	}
 
 }

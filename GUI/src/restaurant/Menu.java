@@ -1,4 +1,4 @@
-package retaurant;
+package restaurant;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -10,22 +10,32 @@ public class Menu extends Observable implements Achetable
 	private String nom;
 	private float prix;
 	private final int id;
+	private String description;
 
 	
-	public Menu(String nom, float prix, int id)
+	public Menu(String nom, String description, float prix, int id)
 	{
 		this.menu = new ArrayList<Plat>();
 		this.nom = nom;
 		this.prix = prix;
 		this.id = id;
+		this.description = description;
 	}
 	
-	public Menu()
+	public final int getId()
 	{
-		this("Nom",0.f,-1);
+		return id;
 	}
 	
+	public final void setDescription(String description)
+	{
+		this.description = description;
+	}
 	
+	public final String getDescription()
+	{
+		return description;
+	}
 	
 	public void add(Plat plat)
 	{
@@ -49,13 +59,6 @@ public class Menu extends Observable implements Achetable
 		return true;
 	}
 	
-	@Override
-	public void diminution() throws Exception
-	{
-		for(Plat plat : menu)
-			plat.diminution();
-	}
-	
 	public ArrayList<Plat> getMenu()
 	{	
 		return menu;
@@ -65,13 +68,6 @@ public class Menu extends Observable implements Achetable
 	public float getPrix()
 	{
 		return prix;
-	}
-	
-	@Override
-	public String getNom()
-	{
-		return nom;
-		
 	}
 	
 	public void removePlat(Plat plat) throws Exception
@@ -90,23 +86,29 @@ public class Menu extends Observable implements Achetable
 	public final void setPlats(ArrayList<Plat> menu) 
 	{
 		this.menu = menu;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 
 	public final void setPrix(float prix) 
 	{
 		this.prix = prix;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 
 	public final void setNom(String nom) 
 	{
 		this.nom = nom;
+		update();
+	}
+	
+	public final void setPlat(ArrayList<Plat> plats)
+	{
+		this.menu = plats;
+	}
+	
+	public final void update()
+	{
 		setChanged();
 		notifyObservers();
 	}
-	
-
 }

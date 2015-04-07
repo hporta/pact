@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import retaurant.Consommable;
+import restaurant.Consommable;
 import ui.Constantes;
 import ui.Recorder;
 import ui.stock.consommable.ConsommableCard;

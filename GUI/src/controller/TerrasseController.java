@@ -1,6 +1,6 @@
 package controller;
 
-import retaurant.Terrasse;
+import restaurant.Terrasse;
 
 public class TerrasseController 
 {

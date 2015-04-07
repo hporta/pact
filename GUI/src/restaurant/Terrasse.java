@@ -1,8 +1,7 @@
-package retaurant;
+package restaurant;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import database.Connector;
 import database.TableConnector;
 
 
@@ -11,7 +10,7 @@ import database.TableConnector;
  */
 public class Terrasse extends Observable
 {
-	//M
+	//Model
 	private ArrayList<Table> terrasse;
 	
 	/**

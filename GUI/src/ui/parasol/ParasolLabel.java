@@ -14,7 +14,7 @@ import java.util.Observer;
 
 import javax.swing.JLabel;
 
-import retaurant.Table;
+import restaurant.Table;
 
 
 @SuppressWarnings("serial")

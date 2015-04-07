@@ -3,10 +3,10 @@ package controller;
 
 import java.util.ArrayList;
 
-import retaurant.Achetable;
-import retaurant.Command;
-import retaurant.Compte;
-import retaurant.Terrasse;
+import restaurant.Achetable;
+import restaurant.Command;
+import restaurant.Compte;
+import restaurant.Terrasse;
 
 public class CompteController
 {

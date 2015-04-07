@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import retaurant.Compte;
+import restaurant.Compte;
 import controller.RestaurantController;
 import controller.StockController;
 

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import retaurant.Table;
+import restaurant.Table;
 
 public class TableConnector extends Connector
 {

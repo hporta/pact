@@ -2,7 +2,7 @@ package database;
 
 import java.util.ArrayList;
 
-import retaurant.Command;
+import restaurant.Command;
 
 public class CommandeConnector 
 {

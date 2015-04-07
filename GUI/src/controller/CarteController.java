@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import retaurant.Achetable;
-import retaurant.Carte;
-import retaurant.Menu;
-import retaurant.Plat;
-import retaurant.Stock;
+import restaurant.Achetable;
+import restaurant.Carte;
+import restaurant.Menu;
+import restaurant.Plat;
+import restaurant.Stock;
 import ui.Constantes;
 
 public class CarteController implements ActionListener

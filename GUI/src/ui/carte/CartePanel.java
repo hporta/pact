@@ -14,10 +14,10 @@ import javax.swing.JPanel;
 import controller.CarteController;
 import controller.StockController;
 
-import retaurant.Carte;
-import retaurant.Ingredient;
-import retaurant.Plat;
-import retaurant.Stock;
+import restaurant.Carte;
+import restaurant.Ingredient;
+import restaurant.Plat;
+import restaurant.Stock;
 import ui.carte.menu.MenuPanel;
 import ui.carte.plat.PlatPanel;
 

@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import retaurant.Ingredient;
+import restaurant.Ingredient;
 import ui.Constantes;
 import ui.stock.ingredient.IngredientCard;
 import ui.stock.ingredient.IngredientFields;

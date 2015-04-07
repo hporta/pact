@@ -3,9 +3,9 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import retaurant.Achetable;
-import retaurant.Command;
-import retaurant.Consommable;
+import restaurant.Achetable;
+import restaurant.Command;
+import restaurant.Consommable;
 
 public class CommandeController implements ActionListener
 {

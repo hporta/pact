@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.StockController;
-import retaurant.Stock;
+import restaurant.Stock;
 import ui.stock.consommable.ConsommablePanel;
 import ui.stock.ingredient.IngredientPanel;
 
