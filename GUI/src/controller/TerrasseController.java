@@ -4,6 +4,7 @@ import restaurant.Terrasse;
 
 public class TerrasseController 
 {
+	//Model
 	private Terrasse terrasse;
 	
 	public TerrasseController(Terrasse terrasse)

@@ -47,6 +47,7 @@ public class Carte extends Observable
 	public void addPlat()
 	{
 		//Insert Plat in database
+		Plat plat = PlatConnector.insertPlat();
 		
 		//
 		plats.add(plat);

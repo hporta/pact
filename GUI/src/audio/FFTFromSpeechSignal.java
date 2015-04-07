@@ -1,8 +1,7 @@
 import java.io.*;
 
-import org.apache.commons.math.complex.Complex;
-import org.apache.commons.math.transform.FastFourierTransformer;
-
+import audio.org.apache.commons.math.complex.Complex;
+import audio.org.apache.commons.math.transform.FastFourierTransformer;
 import WavFile.WavFile;
 import WavFile.WavFileException;
 
