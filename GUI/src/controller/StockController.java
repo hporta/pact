@@ -15,48 +15,53 @@ public class StockController implements ActionListener
 	//Model
 	private Stock stock;
 
+	/**
+	 * 
+	 * @param stock
+	 */
 	public StockController(Stock stock) 
 	{
 		this.stock = stock;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Stock getStock()
 	{
 		return stock;
 	}
 	
+	/**
+	 * 
+	 * @param ingredient
+	 */
 	public void removeIngredient(Ingredient ingredient)
 	{
 		stock.removeIngredient(ingredient);
 	}
 	
-	public void addIngredient(Ingredient ingredient)
-	{
-		stock.addIngredient(ingredient);
-	}
-	
+	/**
+	 * 
+	 * @param consommable
+	 */
 	public void removeConsommable(Consommable consommable)
 	{
 		stock.removeConsommable(consommable);
 	}
-	
-	public void addConsommable(Consommable consommable)
-	{
-		stock.addConsommable(consommable);
-	}
-
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getActionCommand().equals(Constantes.ADD_INGREDIENTS))
 		{
-			addIngredient(new Ingredient());
+			stock.addIngredient();
 		}
 		
 		else if(e.getActionCommand().equals(Constantes.ADD_CONSOMMABLE))
 		{
-			addConsommable(new Consommable());
+			stock.addConsommable();
 		}
 		
 	}

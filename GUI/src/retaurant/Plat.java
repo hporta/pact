@@ -11,18 +11,20 @@ public class Plat extends Observable implements Achetable
 	private String description;
 	private float prix;
 	private ArrayList<Ingredient> listeingredient;
+	private final int id;
 	
-	public Plat(String nom, String description, float prix)
+	public Plat(String nom, String description, float prix, int id)
 	{
 		this.nom = nom;
 		this.description = description;
 		this.prix = prix;
 		listeingredient = new ArrayList<Ingredient>();
+		this.id = id;
 	}
 	
-	public Plat()
+	public final int getId()
 	{
-		this("Nom","Description",0.f);
+		return id;
 	}
 	
 	//toujours un plat est disponible si tous les ingr�dients sont pr�sents
@@ -53,8 +55,7 @@ public class Plat extends Observable implements Achetable
 	public void setDescription(String description)
 	{	
 		this.description = description;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public float getPrix()
@@ -65,8 +66,7 @@ public class Plat extends Observable implements Achetable
 	public void setPrix(float prix)
 	{	
 		this.prix = prix;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public ArrayList<Ingredient> getIngredients()
@@ -78,22 +78,24 @@ public class Plat extends Observable implements Achetable
 	{
 		return description;
 	}
-	
-	public void addIngredient(Ingredient ingredient)
-	{
-		listeingredient.add(ingredient);
-	}
-	
-	public void setNom(String nom)
+		
+	public final void setNom(String nom)
 	{
 		this.nom = nom;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
-	public void setIngredients(ArrayList<Ingredient> liste)
+	public final void setIngredients(ArrayList<Ingredient> liste)
 	{
 		listeingredient = liste;
+		update();
+	}
+	
+	/**
+	 * Notify observers for update
+	 */
+	public void update()
+	{
 		setChanged();
 		notifyObservers();
 	}

@@ -11,7 +11,7 @@ public class Restaurant
 	{
 		this.terrasse = new Terrasse();
 		this.stock = new Stock();
-		this.carte = new Carte();
+		this.carte = new Carte(stock);
 		this.compte = new Compte();
 	}
 

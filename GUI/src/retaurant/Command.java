@@ -4,7 +4,6 @@ import java.util.Observable;
 
 public class Command extends Observable
 {
-	
 	private Table table;
 	private ArrayList<Achetable> listeCommandes;
 	private String etat;
@@ -23,9 +22,6 @@ public class Command extends Observable
 		listeCommandes = new ArrayList<Achetable>();
 		etat = new String("N");
 		this.id = id;
-		add(new Plat("Entrée","l'entrée",1.0f));
-		add(new Plat("le plat","le plat de résistance",2.0f));
-		add(new Plat("Dessert", "le dessert", 6.0f));
 	}
 
 	public Command(Table table, int id, ArrayList<Achetable> liste) 

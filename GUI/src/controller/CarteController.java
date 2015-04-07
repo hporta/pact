@@ -34,11 +34,6 @@ public class CarteController implements ActionListener
 		return stock;
 	}
 	
-	public final void addPlat(Plat plat)
-	{
-		carte.addPlat(plat);
-	}
-	
 	public final void removePlat(Plat plat)
 	{
 		carte.removePlat(plat);
@@ -48,20 +43,15 @@ public class CarteController implements ActionListener
 	{
 		carte.removeMenu(menu);
 	}
-	
-	public final void addMenu(Menu menu)
-	{
-		carte.addMenu(menu);
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getActionCommand().equals(Constantes.ADD_PLAT))
-			addPlat(new Plat());
+			carte.addPlat();
 		
 		else if(e.getActionCommand().equals(Constantes.ADD_MENU))
-			addMenu(new Menu());
+			carte.addMenu();
 		
 	}
 

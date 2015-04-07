@@ -25,7 +25,7 @@ public class TableConnector extends Connector
         	while(result.next())
         	{
         		int id = (int) result.getInt("idTable");
-        		liste.add(new Table(id,false,true));
+        		liste.add(new Table(id));
         	}
 		}
 		

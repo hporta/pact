@@ -1,62 +1,54 @@
 package retaurant;
 
-import database.Connector;
 import database.ConsommableConnector;
 
 // ex boisson chips tous ce qui est consommable � l'unit�
 public class Consommable extends Produit implements Achetable
 {
 	private float prix;
-	
-	public Consommable(String nom, int noinstock, float price)
+
+	/**
+	 * 
+	 * @param nom
+	 * @param noinstock
+	 * @param price
+	 * @param id
+	 */
+	public Consommable(String nom, int noinstock, float price, int id)
 	{
-		super(nom, noinstock);
+		super(nom, noinstock,id);
 		this.prix = price;
 	}
 	
-	public Consommable()
-	{
-		super("Nom",0);
-		this.prix = 0.f;
-	}
-	
-	public float getPrix()
+	/**
+	 * 
+	 */
+	public final float getPrix()
 	{
 		return prix;
 	}
 	
-	public void setPrix(float prix)
+	/**
+	 * 
+	 */
+	public final void setPrix(float prix)
 	{
 		this.prix = prix;
-    	updateDatabase();
-		setChanged();
-		notifyObservers();
-	}
-	
-	//méthode de l'interface
-	@Override
-	public boolean disponible()
-	{
-		return (this.getNoInStock() != 0 );
+		update();
 	}
 	
 	@Override
-	public void diminution() throws Exception
+	public final boolean disponible()
 	{
-		this.removeProduct(1);
-	}
-	
-    public void removeProduct(int quantity) throws Exception
-    {    	
-    	setNoInStock(getNoInStock() - quantity);
- 		updateDatabase();
-    	setChanged();
-		notifyObservers();
+		return (getNoInStock() > 0);
 	}
     
-    public void updateDatabase()
+    /**
+     * Update the database according to current values
+     */
+    public final void updateDatabase()
     {
-    	ConsommableConnector.setConsommable(getNom(),getNom(),getNoInStock(),getPrix());
+    	ConsommableConnector.setConsommable(getId(),getNom(),getNoInStock(),getPrix());
     }
 
 }

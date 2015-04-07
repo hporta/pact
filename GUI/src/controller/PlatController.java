@@ -123,10 +123,6 @@ public class PlatController implements ActionListener
 		
 		else if(e.getActionCommand().equals(Constantes.VALIDATE))
 		{
-			System.out.println(fields.getNom());
-			System.out.println(fields.getDescription());
-			System.out.println(fields.getPrix());
-			System.out.println(fields.getIngredients());
 			if(setPlat(fields.getNom(),fields.getDescription(),fields.getPrix(),fields.getIngredients()))
 				card.switchCard();
 		}

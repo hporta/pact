@@ -6,54 +6,81 @@ import java.util.Observable;
 public abstract class Produit extends Observable
 {
 	private String nom;
-	private int noinstock; //nombre de produit dans les stock
+	private int noinstock;
+	private final int id;
 	
-	public Produit(String nom, int noinstock)
+	/**
+	 * 
+	 * @param nom
+	 * @param noinstock
+	 * @param id
+	 */
+	public Produit(String nom, int noinstock, int id)
 	{
 		this.nom = nom;
 		this.noinstock = noinstock;
+		this.id = id;
 	}
 	
-	public String getNom()
+	/**
+	 * 
+	 * @return
+	 */
+	public final String getNom()
 	{	
 		return nom;
 	}
 	
-	public void setNom(String nom)
+	/**
+	 * 
+	 * @param nom
+	 */
+	public final void setNom(String nom)
 	{
 		this.nom = nom;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
-	public int getNoInStock()
+	/**
+	 * 
+	 * @return
+	 */
+	public final int getNoInStock()
 	{	
 		return noinstock;
 	}
 	
-	public void setNoInStock(int noinstock)
+	/**
+	 * 
+	 * @param noinstock
+	 */
+	public final void setNoInStock(int noinstock)
 	{
 		this.noinstock = noinstock;
-		setChanged();
-		notifyObservers();
-	}
+		update();
+	}	
 	
-	
-	public void addProduct(int quantity)
+	/**
+	 * 
+	 * @return
+	 */
+	public final int getId()
 	{
-		noinstock += quantity;
+		return id;
+	}
+	
+	/**
+	 * Update the database and the notify the observers
+	 */
+	public void update()
+	{
+		updateDatabase();
 		setChanged();
 		notifyObservers();
 	}
-	
-    public void removeProduct(int quantity) throws Exception
-    {
-    	if (noinstock == 0)
-    		throw new Exception("on a plus de" + nom);
-    	
-    	noinstock -= quantity;
-		setChanged();
-		notifyObservers();
-	}
-	
+
+	/**
+	 * 
+	 */
+	public abstract void updateDatabase();
 }

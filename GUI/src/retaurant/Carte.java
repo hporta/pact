@@ -2,93 +2,112 @@ package retaurant;
 import java.util.ArrayList;
 import java.util.Observable;
 
-//La carte contient tout ce qui peut être fait dans le restaurant
+import database.MenuConnector;
+import database.PlatConnector;
+
+/**
+ * Carte contains both Plats and Menus
+ * They are composed types
+ */
 public class Carte extends Observable
 {
-	private ArrayList<Achetable> carte;
 	private ArrayList<Plat> plats;
 	private ArrayList<Menu> menus;
 	
-	public Carte()
+	/**
+	 * Default constructor using the database content
+	 */
+	public Carte(Stock stock)
 	{
-		this.carte = new ArrayList<Achetable>();
-		this.plats = new ArrayList<Plat>();
-		this.menus = new ArrayList<Menu>();
-		
-		addPlat(new Plat("Entrée","l'entrée",1.0f));
-		addPlat(new Plat("le plat","le plat de résistance",2.0f));
-		addPlat(new Plat("Dessert", "le dessert", 6.0f));
-		
-		addMenu(new Menu("Royal", 10.f));
-		menus.get(0).add(plats.get(0));
-		menus.get(0).add(plats.get(1));
-		menus.get(0).add(plats.get(2));
+		this.plats = PlatConnector.getPlats(stock);
+		this.menus = MenuConnector.getMenus(this);
 	}
 	
-	
-	public void addElement(Achetable element)
-	{
-		carte.add(element);
-	}
-	
-	public void removeElement(Achetable element) throws Exception
-	{
-		if(carte.size() == 0)
-			throw new Exception("la carte est vide");
-		
-		carte.remove(element);
-	}
-	
-	public void addPlat(Plat plat)
-	{
-		plats.add(plat);
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void removePlat(Plat plat)
-	{
-		plats.remove(plat);
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void addMenu(Menu menu)
-	{
-		menus.add(menu);
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void removeMenu(Menu menu)
-	{
-		menus.remove(menu);
-		setChanged();
-		notifyObservers();
-	}
-	
-	// on enleve les elements de la carte qui ne sont plus disponible
-	public void gestionCarte()
-	{
-		for(Achetable element : carte)
-		{
-			if(element.disponible() == false)
-				carte.remove(element);
-		}
-	}
-	
-	public final ArrayList<Achetable> getCarte()
-	{
-		return carte;
-	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public final ArrayList<Plat> getPlats() 
 	{
 		return plats;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public final ArrayList<Menu> getMenus()
 	{
 		return menus;
+	}
+	
+	/**
+	 * 
+	 */
+	public void addPlat()
+	{
+		//Insert Plat in database
+		
+		//
+		plats.add(plat);
+		
+		//Update
+		update();
+	}
+	
+	/**
+	 * Remove Plat
+	 * @param plat
+	 */
+	public void removePlat(Plat plat)
+	{
+		plats.remove(plat);
+		update();
+	}
+	
+	/**
+	 * 
+	 * @param menu
+	 */
+	public void addMenu(Menu menu)
+	{
+		menus.add(menu);
+		update();
+	}
+	
+	/**
+	 * 
+	 * @param menu
+	 */
+	public void removeMenu(Menu menu)
+	{
+		menus.remove(menu);
+		update();
+	}
+	
+	/**
+	 * 
+	 * @param idPlat
+	 * @return
+	 */
+	public final Plat findPlatById(int idPlat)
+	{
+		for(Plat plat : plats)
+		{
+			if(plat.getId() == idPlat)
+				return plat;
+		}
+		
+		return null;
+	}
+
+	
+	/**
+	 * Notify observers for update
+	 */
+	public final void update()
+	{
+		setChanged();
+		notifyObservers();
 	}
 }

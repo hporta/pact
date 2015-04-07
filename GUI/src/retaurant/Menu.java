@@ -9,18 +9,20 @@ public class Menu extends Observable implements Achetable
 	private ArrayList<Plat> menu;
 	private String nom;
 	private float prix;
+	private final int id;
 
 	
-	public Menu(String nom, float prix)
+	public Menu(String nom, float prix, int id)
 	{
 		this.menu = new ArrayList<Plat>();
 		this.nom = nom;
 		this.prix = prix;
+		this.id = id;
 	}
 	
 	public Menu()
 	{
-		this("Nom",0.f);
+		this("Nom",0.f,-1);
 	}
 	
 	
