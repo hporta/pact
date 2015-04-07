@@ -1,25 +1,18 @@
 package ui.stock.ingredient;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.util.Observable;
+import java.util.Observer;
 
 import controller.IngredientController;
 import controller.StockController;
 import restaurant.Ingredient;
 import restaurant.Stock;
-import ui.AddItemButton;
 import ui.Constantes;
+import ui.ListPanel;
 
 @SuppressWarnings("serial")
-public class IngredientPanel extends JPanel
+public class IngredientPanel extends ListPanel implements Observer
 {
-	private AddItemButton add;
-	private JPanel conteneur;
-	private JPanel empty;
-	
 	//Controller
 	private StockController stockController;
 	
@@ -28,40 +21,23 @@ public class IngredientPanel extends JPanel
 		
 	public IngredientPanel(StockController stockController)
 	{
+		super(stockController, Constantes.ADD_INGREDIENTS);
 		this.stockController = stockController;
 		this.stock = stockController.getStock();
 		
-		setLayout(new BorderLayout());
+		this.stock.addObserver(this);
 		
-		add = new AddItemButton(stockController,Constantes.ADD_INGREDIENTS);
-		
-		empty = new JPanel();
-		empty.add(new JLabel("Pas d'ingredient à afficher"));
-		
-		conteneur = new JPanel();
-		conteneur.setLayout(new GridLayout(0,1));		
-		add(conteneur,BorderLayout.PAGE_START);
-		
-		update();
+		update(null);
 	}
 
-	
-	public void update()
+	@Override
+	public void update(Observable a, Object b)
 	{
-		conteneur.removeAll();
-		
-		conteneur.add(add);
-		
-		if(stock.getIngredients().size() == 0)
-			conteneur.add(empty);
+		clean();
 		
 		for(Ingredient ingredient : stock.getIngredients())
-		{
-			conteneur.add(new IngredientCard(new IngredientController(ingredient, stockController)));
-		}
-		
-		
-		validate();
-		repaint();
+			addElement(new IngredientCard(new IngredientController(ingredient, stockController)));
+
+		show();
 	}
 }

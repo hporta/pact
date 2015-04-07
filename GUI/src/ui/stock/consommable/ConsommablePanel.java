@@ -1,26 +1,18 @@
 package ui.stock.consommable;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.util.Observable;
+import java.util.Observer;
 
 import controller.ConsommableController;
 import controller.StockController;
 import restaurant.Consommable;
 import restaurant.Stock;
-import ui.AddItemButton;
 import ui.Constantes;
+import ui.ListPanel;
 
 @SuppressWarnings("serial")
-public class ConsommablePanel extends JPanel
+public class ConsommablePanel extends ListPanel implements Observer
 {
-	private AddItemButton add;
-	private JPanel conteneur;
-	private JPanel empty;
-	
 	//Model
 	private Stock stock;
 	
@@ -30,40 +22,25 @@ public class ConsommablePanel extends JPanel
 	
 	public ConsommablePanel(StockController stockController)
 	{
+		super(stockController, Constantes.ADD_CONSOMMABLE);
 		this.stockController = stockController;
 		this.stock = stockController.getStock();
 		
-		setLayout(new BorderLayout());
-		add = new AddItemButton(stockController,Constantes.ADD_CONSOMMABLE);
+		this.stock.addObserver(this);
 		
-		empty = new JPanel();
-		empty.setLayout(new BorderLayout());
-		empty.add(new JLabel("Pas de consommables à afficher"),BorderLayout.CENTER);
-		empty.setPreferredSize(new Dimension(this.getWidth(),100));
-		
-		conteneur = new JPanel();
-		conteneur.setLayout(new GridLayout(0,1));
-		
-		add(conteneur,BorderLayout.PAGE_START);
-		
-		update();
+		update(null);
 	}
 	
-	public void update()
+	@Override
+	public void update(Observable a, Object b)
 	{
-		conteneur.removeAll();
-		
-		conteneur.add(add);
-		
-		if(stock.getConsommables().size() == 0)
-			conteneur.add(empty);
+		clean();
 		
 		for(Consommable consommable : stock.getConsommables())
-			conteneur.add(new ConsommableCard(
+			addElement(new ConsommableCard(
 					new ConsommableController(consommable,stockController)));
 		
-		validate();
-		repaint();
+		show();
 	}
 	
 }

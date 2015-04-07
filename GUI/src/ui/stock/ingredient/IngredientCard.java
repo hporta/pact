@@ -9,7 +9,6 @@ public class IngredientCard extends CardPanel
 {		
 	public IngredientCard(IngredientController ingredientController)
 	{
-		//Indique au model de notifier la vue
 		ingredientController.setCard(this);
 		
 		//Création des 2 panels

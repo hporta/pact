@@ -27,10 +27,6 @@ public class IngredientItem extends JPanel implements Observer
 	private JLabel nom;
 	private JLabel quantite;
 	
-	private final String CIRCLE_ICON_PATH = "data/img/circle.png";
-	private final String CLOSE_ICON_PATH = "data/img/close.png";
-	
-	
 	IngredientItem(IngredientCard parent,IngredientController controller)
 	{
 		this.ingredient = controller.getIngredient();
@@ -70,7 +66,7 @@ public class IngredientItem extends JPanel implements Observer
 		cstr.gridy=0;
 		cstr.weightx = 0.2;
 		cstr.weighty = 0.5;
-		ImageIcon edit = new ImageIcon(CIRCLE_ICON_PATH);
+		ImageIcon edit = new ImageIcon(Constantes.CIRCLE_ICON_PATH);
 		edit = new ImageIcon(edit.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		JButton setButton = new JButton("Modifier",edit);
 		setButton.addActionListener(parent);
@@ -81,7 +77,7 @@ public class IngredientItem extends JPanel implements Observer
 		cstr.gridy=1;
 		cstr.weightx = 0.2;
 		cstr.weighty = 0.5;
-		ImageIcon cross = new ImageIcon(CLOSE_ICON_PATH);
+		ImageIcon cross = new ImageIcon(Constantes.CLOSE_ICON_PATH);
 		cross = new ImageIcon(cross.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT));
 		JButton delButton = new JButton("Supprimer",cross);
 		delButton.addActionListener(controller);

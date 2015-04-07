@@ -158,7 +158,6 @@ public class PlatForm extends JPanel implements ActionListener
 		prix.setText(""+plat.getPrix());
 		description.setText(plat.getDescription());
 		
-		
 		validate();
 		repaint();
 	}

@@ -1,24 +1,18 @@
 package ui.carte.plat;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.util.Observable;
+import java.util.Observer;
 
 import controller.CarteController;
 import controller.PlatController;
 import restaurant.Carte;
 import restaurant.Plat;
-import ui.AddItemButton;
 import ui.Constantes;
+import ui.ListPanel;
 
 @SuppressWarnings("serial")
-public class PlatPanel extends JPanel
+public class PlatPanel extends ListPanel implements Observer
 {
-	private AddItemButton add;
-	private JPanel conteneur;
-	
 	//Model
 	private Carte carte;
 	
@@ -28,37 +22,23 @@ public class PlatPanel extends JPanel
 	
 	public PlatPanel(CarteController carteController)
 	{
+		super(carteController, Constantes.ADD_PLAT);
 		this.carteController = carteController;
 		this.carte = carteController.getCarte();
+		this.carte.addObserver(this);
 		
-		conteneur = new JPanel();
-		add = new AddItemButton(carteController,Constantes.ADD_PLAT);
-		
-		setLayout(new BorderLayout());
-		conteneur.setLayout(new GridLayout(0,1));
-		conteneur.add(add);
-		
-		add(conteneur,BorderLayout.PAGE_START);
-		
-		update();
+		update(null);
 	}
 	
-	public void update()
+	@Override
+	public void update(Observable a, Object e)
 	{
-		conteneur.removeAll();
-		
-		conteneur.add(add);
-		
-		if(carte.getPlats().size() == 0)
-			conteneur.add(new JLabel("Pas de plat à afficher"));
+		clean();
 		
 		for(Plat plat : carte.getPlats())
-				conteneur.add(new PlatCard(
+				addElement(new PlatCard(
 						new PlatController(plat,carteController)));
-		
-		validate();
-		repaint();
-
+		show();
 	}
 	
 }

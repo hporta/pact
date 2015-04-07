@@ -2,6 +2,8 @@ package restaurant;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import database.MenuConnector;
+
 
 
 public class Menu extends Observable implements Achetable
@@ -16,10 +18,12 @@ public class Menu extends Observable implements Achetable
 	public Menu(String nom, String description, float prix, int id)
 	{
 		this.menu = new ArrayList<Plat>();
+
 		this.nom = nom;
+		this.description = description;
 		this.prix = prix;
 		this.id = id;
-		this.description = description;
+
 	}
 	
 	public final int getId()
@@ -30,11 +34,23 @@ public class Menu extends Observable implements Achetable
 	public final void setDescription(String description)
 	{
 		this.description = description;
+		update();
 	}
 	
 	public final String getDescription()
 	{
 		return description;
+	}
+	
+	public final void setNom(String nom)
+	{
+		this.nom = nom;
+		update();
+	}
+	
+	public final String getNom()
+	{
+		return nom;
 	}
 	
 	public void add(Plat plat)
@@ -88,16 +104,15 @@ public class Menu extends Observable implements Achetable
 		this.menu = menu;
 		update();
 	}
+	
+	public final void addPlat(Plat plat)
+	{
+		menu.add(plat);
+	}
 
 	public final void setPrix(float prix) 
 	{
 		this.prix = prix;
-		update();
-	}
-
-	public final void setNom(String nom) 
-	{
-		this.nom = nom;
 		update();
 	}
 	
@@ -110,5 +125,10 @@ public class Menu extends Observable implements Achetable
 	{
 		setChanged();
 		notifyObservers();
+	}
+	
+	public final void updateDatabase()
+	{
+		MenuConnector.updateMenu(nom, description, prix);
 	}
 }

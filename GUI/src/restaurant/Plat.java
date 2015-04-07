@@ -12,6 +12,7 @@ public class Plat extends Observable implements Achetable
 	private String description;
 	private float prix;
 	private ArrayList<Ingredient> listeingredient;
+	
 	private final int id;
 	
 	public Plat(String nom, String description, float prix, int id)
@@ -20,6 +21,7 @@ public class Plat extends Observable implements Achetable
 		this.description = description;
 		this.prix = prix;
 		listeingredient = new ArrayList<Ingredient>();
+		
 		this.id = id;
 	}
 	
@@ -71,13 +73,6 @@ public class Plat extends Observable implements Achetable
 		}
 		
 		return true;
-	}
-	
-	// on diminue la quantit� de tous les ingr�dients
-	public void diminution () throws Exception 
-	{
-		for (Ingredient ingredient : listeingredient)
-			ingredient.removeProduct(1);
 	}
 	
 	public final ArrayList<Ingredient> getIngredients()

@@ -20,17 +20,32 @@ public class PlatConnector extends Connector
 	private static final float DEFAULT_PRICE = 0.f;
 	
 	/**
-	 * Returns a list of dishes from the database.
+	 * Returns a list of Plat from the database.
 	 * Every dish is initialized with the value found in the columns
 	 * @return the list of dishes
 	 */
 	public static ArrayList<Plat> getPlats(Stock stock)
 	{
+		ArrayList<Plat> liste = getPlats();
+		
+		for(Plat plat : liste)
+			plat.setIngredients(findIngredients(stock, plat.getId()));
+		
+		return liste;
+	}
+	
+	/**
+	 * @return
+	 */
+	private static ArrayList<Plat> getPlats()
+	{
 		ArrayList<Plat> liste = new ArrayList<Plat>();
+		
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
+			
 	        String req = "SELECT * from Plat";
 	        Statement stmt = con.createStatement();
 	        ResultSet result = stmt.executeQuery(req);
@@ -52,16 +67,8 @@ public class PlatConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL");
+	    	System.out.println("Erreur lors de la requete SQL [SELECT * Plat]");
 	    }
-		
-		/** At this point liste is filled with plats with no ingredients
-		*   we need to fill it now
-		*/
-		for(Plat plat : liste)
-		{
-			plat.setIngredients(findIngredients(stock, plat.getId()));
-		}
 		
 		return liste;
 	}

@@ -14,6 +14,5 @@ public class ConsommableCard extends CardPanel
 		//Ajout des 2 panels
 		add(new ConsommableItem(this,controller));
 		add(new ConsommableForm(this,controller));
-
 	}
 }

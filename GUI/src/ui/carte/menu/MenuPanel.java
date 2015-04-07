@@ -1,24 +1,18 @@
 package ui.carte.menu;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.util.Observable;
+import java.util.Observer;
 
 import controller.CarteController;
 import controller.MenuController;
 import restaurant.Carte;
 import restaurant.Menu;
-import ui.AddItemButton;
 import ui.Constantes;
+import ui.ListPanel;
 
 @SuppressWarnings("serial")
-public class MenuPanel extends JPanel
+public class MenuPanel extends ListPanel implements Observer
 {
-	private AddItemButton add;
-	private JPanel conteneur;
-	
 	//Model
 	private Carte carte;
 	
@@ -27,37 +21,23 @@ public class MenuPanel extends JPanel
 		
 	public MenuPanel(CarteController carteController)
 	{
+		super(carteController, Constantes.ADD_MENU);
 		this.carte = carteController.getCarte();
 		this.carteController = carteController;
 		
-		add = new AddItemButton(carteController,Constantes.ADD_MENU);
-		conteneur = new JPanel();
-			
-		setLayout(new BorderLayout());
-		conteneur.setLayout(new GridLayout(0,1));
-		conteneur.add(add);
+		this.carte.addObserver(this);
 		
-		add(conteneur,BorderLayout.PAGE_START);
-		
-		update();
+		update(null);
 	}
 	
-	
-	public void update()
+	@Override
+	public void update(Observable arg0, Object arg1) 
 	{
-		conteneur.removeAll();
+		clean();
 		
-		conteneur.add(add);
-		
-		if(carte.getMenus().size() > 0)
-			for(Menu menu : carte.getMenus())
-				conteneur.add(new MenuCard(new MenuController(menu, carteController)));
-		
-		else
-			conteneur.add(new JLabel("Pas de menu à afficher"));
-		
-		validate();
-		repaint();
+		for(Menu menu : carte.getMenus())
+			addElement(new MenuCard(new MenuController(menu, carteController)));
+
+		show();
 	}
-	
 }

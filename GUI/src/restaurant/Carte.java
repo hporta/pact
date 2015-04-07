@@ -24,7 +24,7 @@ public class Carte extends Observable
 	}
 	
 	/**
-	 * 
+	 * Return an ArrayList of Plat
 	 * @return
 	 */
 	public final ArrayList<Plat> getPlats() 
@@ -33,7 +33,7 @@ public class Carte extends Observable
 	}
 	
 	/**
-	 * 
+	 * Return an ArrayList of Menu
 	 * @return
 	 */
 	public final ArrayList<Menu> getMenus()
@@ -49,7 +49,7 @@ public class Carte extends Observable
 		//Insert Plat in database
 		Plat plat = PlatConnector.insertPlat();
 		
-		//
+		//Add the object to the model
 		plats.add(plat);
 		
 		//Update
@@ -62,7 +62,13 @@ public class Carte extends Observable
 	 */
 	public void removePlat(Plat plat)
 	{
+		//Remove Plat from database
+		PlatConnector.deletePlat(plat.getId());
+		
+		//Remove Plat from model
 		plats.remove(plat);
+		
+		//Update
 		update();
 	}
 	
@@ -70,9 +76,15 @@ public class Carte extends Observable
 	 * 
 	 * @param menu
 	 */
-	public void addMenu(Menu menu)
+	public void addMenu()
 	{
+		//Insert Menu in database
+		Menu menu = MenuConnector.insertMenu();
+		
+		//Add the object to the model
 		menus.add(menu);
+		
+		//Update
 		update();
 	}
 	
@@ -82,12 +94,19 @@ public class Carte extends Observable
 	 */
 	public void removeMenu(Menu menu)
 	{
+		//Remove from the database
+		MenuConnector.deleteMenu(menu.getId());
+		
+		//Remove from the model
 		menus.remove(menu);
+		
+		//Update
 		update();
 	}
 	
 	/**
-	 * 
+	 * Return Plat from Carte chosing by Id
+	 * If not found, return null
 	 * @param idPlat
 	 * @return
 	 */

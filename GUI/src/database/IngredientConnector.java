@@ -54,7 +54,7 @@ public class IngredientConnector extends Connector
 	
 	/**
 	 * Updates the values of an ingredient 
-	 * @param name
+	 * @param id
 	 * @param newName
 	 * @param newQuantite
 	 */

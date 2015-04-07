@@ -7,7 +7,6 @@ import controller.PlatController;
 @SuppressWarnings("serial")
 public class PlatCard extends CardPanel
 {	
-	
 	public PlatCard(PlatController platController)
 	{
 		platController.setCard(this);

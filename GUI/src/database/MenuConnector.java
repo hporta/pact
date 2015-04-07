@@ -298,4 +298,9 @@ public class MenuConnector extends Connector
 		
 		return liste;
 	}
+
+	public static void updateMenu(String nom, String description, float prix) 
+	{
+		
+	}
 }

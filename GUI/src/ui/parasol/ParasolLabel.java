@@ -5,10 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -29,7 +25,7 @@ public class ParasolLabel extends JLabel implements Observer
 
 	private static final Color GREEN = new Color(0,200,0);
 	private static final Color RED = new Color(200,0,0);
-	private static final Color ORANGE = new Color(236,67,48);
+	//private static final Color ORANGE = new Color(236,67,48);
 	
 	private Table table;
 	

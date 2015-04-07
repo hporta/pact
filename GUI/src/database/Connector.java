@@ -11,6 +11,10 @@ public class Connector
 	protected static final String username = "root";
 	protected static final String pwd = "";
 	
+	/**
+	 * Not used in this version
+	 * @return
+	 */
 	public static Connection getConnection()
 	{
 		Connection connect = null;

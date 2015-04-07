@@ -36,7 +36,6 @@ public class ConsommableItem extends JPanel implements Observer
 		this.nom = new JLabel();
 		this.prix = new JLabel();
 		this.quantite = new JLabel();
-		update();
 		
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -50,15 +49,6 @@ public class ConsommableItem extends JPanel implements Observer
 		c.weightx = 0.6;
 		c.weighty = 0.5;
 		add(nom,c);
-		
-		/*
-		 * Partie pour la description du produit
-		c.gridx=0;
-		c.gridy=1;
-		c.weightx = 0.6;
-		c.weighty = 0.5;
-		add(new JLabel("Une description"),c);
-		*/
 		
 		c.gridx=1;
 		c.gridy=0;
@@ -94,15 +84,9 @@ public class ConsommableItem extends JPanel implements Observer
 		delButton.setActionCommand(Constantes.DELETE);
 		add(delButton,c);
 		
+		update(null);
 	}
 	
-	public void update()
-	{
-		nom.setText("Nom : " + consommable.getNom());
-		prix.setText("Prix : " + consommable.getPrix() +"€");
-		quantite.setText("Quantité : " + consommable.getNoInStock() + " unités");
-	}
-
 	@Override
 	public void update(Observable o, Object arg) 
 	{

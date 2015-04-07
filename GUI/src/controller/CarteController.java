@@ -16,7 +16,6 @@ public class CarteController implements ActionListener
 	//Model
 	private Carte carte;
 	private Stock stock;
-
 	
 	public CarteController(Carte carte, Stock stock) 
 	{

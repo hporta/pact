@@ -1,22 +1,15 @@
 package ui.notification;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-import restaurant.Compte;
 import controller.RestaurantController;
-import controller.StockController;
 
 
 @SuppressWarnings("serial")

@@ -64,7 +64,5 @@ public class MainPanel extends JPanel
 		c.weightx = 0.66;
 		c.weighty = 0.8;
 		add(content = new ContentPanel(restaurantController),c);
-
 	}
-	
 }
