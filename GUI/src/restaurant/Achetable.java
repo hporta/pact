@@ -9,4 +9,7 @@ public interface Achetable
 	
 	//indique si l'achetable est disponible (test de quantité)
 	public boolean disponible();
+	
+	//Confirm la commande et diminue la quantité de chaque élément nécessaire
+	public void commander();
 }

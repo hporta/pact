@@ -75,6 +75,12 @@ public class Plat extends Observable implements Achetable
 		return true;
 	}
 	
+	public void commander()
+	{
+		for(Ingredient ingredient : listeingredient)
+			ingredient.diminution();
+	}
+	
 	public final ArrayList<Ingredient> getIngredients()
 	{
 		return listeingredient;

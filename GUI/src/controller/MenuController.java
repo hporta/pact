@@ -4,27 +4,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import restaurant.Carte;
+import restaurant.Recette;
 import restaurant.Menu;
 import restaurant.Plat;
 import ui.Constantes;
-import ui.carte.menu.MenuCard;
-import ui.carte.menu.MenuFields;
+import ui.recette.menu.MenuCard;
+import ui.recette.menu.MenuFields;
 
 public class MenuController implements ActionListener
 {
 	//Model
 	private Menu menu;
-	private Carte carte;
+	private Recette carte;
 	
 	//controller
-	private CarteController carteController;
+	private RecetteController carteController;
 
 	//View
 	private MenuCard menuCard;
 	private MenuFields fields;
 	
-	public MenuController(Menu menu, CarteController carteController)
+	public MenuController(Menu menu, RecetteController carteController)
 	{
 		this.menu = menu;
 		this.carte = carteController.getCarte();
@@ -130,7 +130,7 @@ public class MenuController implements ActionListener
 		this.menuCard = menuCard;
 	}
 
-	public CarteController getCarteController()
+	public RecetteController getCarteController()
 	{
 		return carteController;
 	}

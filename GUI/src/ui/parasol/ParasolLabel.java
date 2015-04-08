@@ -16,26 +16,24 @@ import restaurant.Table;
 @SuppressWarnings("serial")
 public class ParasolLabel extends JLabel implements Observer
 {
-	
-	@Override
-	public void update(Observable arg0, Object arg1) 
-	{
-		repaint();
-	}
-
 	private static final Color GREEN = new Color(0,200,0);
 	private static final Color RED = new Color(200,0,0);
 	//private static final Color ORANGE = new Color(236,67,48);
 	
+	//Model
 	private Table table;
 	
 	public ParasolLabel(Table table)
 	{
-		super();
+		//Model + observer
 		this.table = table;
-		table.addObserver(this);
+		this.table.addObserver(this);
+		
+		//Graphic settings
 		setOpaque(true);
 		
+		//Update
+		update(table,null);
 	}
 	
 	public void paintComponent(Graphics g)
@@ -77,6 +75,10 @@ public class ParasolLabel extends JLabel implements Observer
 			return Color.orange;
 	}
 	
-	
-
+	@Override
+	public void update(Observable arg0, Object arg1) 
+	{
+		validate();
+		repaint();
+	}	
 }

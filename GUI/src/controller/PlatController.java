@@ -8,8 +8,8 @@ import restaurant.Ingredient;
 import restaurant.Plat;
 import restaurant.Stock;
 import ui.Constantes;
-import ui.carte.plat.PlatCard;
-import ui.carte.plat.PlatFields;
+import ui.recette.plat.PlatCard;
+import ui.recette.plat.PlatFields;
 
 public class PlatController implements ActionListener
 {
@@ -23,10 +23,10 @@ public class PlatController implements ActionListener
 	private final Stock stock;
 	
 	//Superior controller
-	CarteController carteController;
+	RecetteController carteController;
 
 	
-	public PlatController(Plat plat, CarteController carteController)
+	public PlatController(Plat plat, RecetteController carteController)
 	{
 		this.plat = plat;
 		this.stock = carteController.getStock();

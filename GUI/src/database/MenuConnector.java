@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import restaurant.Plat;
 import restaurant.Menu;
-import restaurant.Carte;
+import restaurant.Recette;
 
 public class MenuConnector extends Connector
 {
@@ -24,7 +24,7 @@ public class MenuConnector extends Connector
 	 * Every Menu is initialized with the value found in the columns
 	 * @return the list of Menu
 	 */
-	public static ArrayList<Menu> getMenus(Carte carte)
+	public static ArrayList<Menu> getMenus(Recette carte)
 	{
 		ArrayList<Menu> liste = new ArrayList<Menu>();
 		
@@ -258,7 +258,7 @@ public class MenuConnector extends Connector
 	 * @param idMenu
 	 * @return
 	 */
-	private static ArrayList<Plat> findPlats(Carte carte, int idMenu)
+	private static ArrayList<Plat> findPlats(Recette carte, int idMenu)
 	{
 		ArrayList<Plat> liste = new ArrayList<Plat>();
 		ArrayList<Integer> listeId = new ArrayList<Integer>();

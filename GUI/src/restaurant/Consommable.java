@@ -42,6 +42,12 @@ public class Consommable extends Produit implements Achetable
 	{
 		return (getNoInStock() > 0);
 	}
+	
+	@Override
+	public final void commander()
+	{
+		diminution();
+	}
     
     /**
      * Update the database according to current values

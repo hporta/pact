@@ -23,10 +23,15 @@ public class CommandeItem extends JPanel implements Observer
 	
 	public CommandeItem(CommandeController controller)
 	{
-		this.commande = controller.getCommande();
+		//Set the attributes
+		commande = controller.getCommande();
 		this.controller = controller;
-		this.commande.addObserver(this);
-		update(null,null);
+		
+		//Add observer
+		commande.addObserver(this);
+		
+		//Update
+		update(commande,null);
 	}
 	
 	@Override

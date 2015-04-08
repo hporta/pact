@@ -84,7 +84,7 @@ public class ConsommableItem extends JPanel implements Observer
 		delButton.setActionCommand(Constantes.DELETE);
 		add(delButton,c);
 		
-		update(null);
+		update(consommable, null);
 	}
 	
 	@Override

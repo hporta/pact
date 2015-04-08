@@ -1,10 +1,9 @@
 package ui;
 
 import controller.RestaurantController;
-
-import ui.carte.CartePanel;
 import ui.commande.CommandePanel;
 import ui.notification.NotificationPanel;
+import ui.recette.RecettePanel;
 import ui.stock.StockPanel;
 
 @SuppressWarnings("serial")
@@ -20,7 +19,7 @@ public class ContentPanel extends TabPanel
 	{
 		addTab(NOTIFICATION,new NotificationPanel(restaurantController));
 		addTab(STOCK,new StockPanel(restaurantController.getStockController()));
-		addTab(CARTE,new CartePanel(restaurantController.getCarteController()));
+		addTab(CARTE,new RecettePanel(restaurantController.getCarteController()));
 		addTab(COMMANDE,new CommandePanel(restaurantController.getCompteController()));
 	}
 }

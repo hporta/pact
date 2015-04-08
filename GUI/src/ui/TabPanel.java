@@ -44,6 +44,8 @@ public class TabPanel extends JPanel implements ActionListener
 		buttonPanel.setLayout(new GridLayout(1,map.size()));
 		
 		map.put(tabName, bouton);
+		
+		update();
 	}
 	
 	private void enableButton(String tabName)

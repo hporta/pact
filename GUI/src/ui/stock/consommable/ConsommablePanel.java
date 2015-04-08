@@ -24,11 +24,11 @@ public class ConsommablePanel extends ListPanel implements Observer
 	{
 		super(stockController, Constantes.ADD_CONSOMMABLE);
 		this.stockController = stockController;
-		this.stock = stockController.getStock();
 		
-		this.stock.addObserver(this);
+		stock = stockController.getStock();
+		stock.addObserver(this);
 		
-		update(null);
+		update(stock, null);
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class ConsommablePanel extends ListPanel implements Observer
 			addElement(new ConsommableCard(
 					new ConsommableController(consommable,stockController)));
 		
-		show();
+		showList();
 	}
 	
 }

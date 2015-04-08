@@ -30,10 +30,9 @@ public class IngredientForm extends JPanel implements Observer
 	private JTextField nom;
 	private JFormattedTextField quantite;
 	
-	
-	public IngredientForm(IngredientCard parent,IngredientController controller)
+	public IngredientForm(IngredientCard parent, IngredientController controller)
 	{
-		this.ingredient = controller.getIngredient();
+		ingredient = controller.getIngredient();
 		ingredient.addObserver(this);
 		
 		setLayout(new GridBagLayout());
@@ -100,6 +99,7 @@ public class IngredientForm extends JPanel implements Observer
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		controller.setFields(new IngredientFields(nom, quantite));
+		update(ingredient, null);
 	}
 
 
@@ -109,6 +109,4 @@ public class IngredientForm extends JPanel implements Observer
 		nom.setText(ingredient.getNom());
 		quantite.setValue(ingredient.getNoInStock());
 	}
-	
-	
 }

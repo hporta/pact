@@ -17,22 +17,26 @@ public class ParasolPanel extends JPanel implements Observer
 	//Model
 	private Terrasse terrasse;
 	
+	//
+	private GridBagConstraints cstr;
 	
 	public ParasolPanel(TerrasseController terrasseController) 
 	{
-		this.terrasse = terrasseController.getTerrasse();
+		//Model + observer
+		terrasse = terrasseController.getTerrasse();
 		terrasse.addObserver(this);
 		
-		update(terrasse,null);
+		//Prepare the layout
+		buildLayout();
+		
+		//Update with model
+		update(terrasse, null);
 	}
 	
-
-	@Override
-	public void update(Observable o, Object arg) 
+	public void buildLayout()
 	{
-		removeAll();
 		setLayout(new GridBagLayout());
-		GridBagConstraints cstr = new GridBagConstraints();
+		cstr = new GridBagConstraints();
 		cstr.fill = GridBagConstraints.BOTH;
 		cstr.anchor = GridBagConstraints.PAGE_START;
 		cstr.gridwidth = 2;
@@ -40,12 +44,19 @@ public class ParasolPanel extends JPanel implements Observer
 		cstr.gridy = 0;
 		cstr.weightx = 0.5;
 		cstr.weighty = 1;
-		
+	}
+	
+
+	@Override
+	public void update(Observable o, Object arg) 
+	{
+		removeAll();
 		
 		for(Table table : terrasse.getTerrasse())
-		{
 			add(new ParasolLabel(table),cstr);
-		}
+		
+		validate();
+		repaint();
 	}
 	
 }

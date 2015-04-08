@@ -1,4 +1,4 @@
-package ui.carte.plat;
+package ui.recette.plat;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -27,9 +27,6 @@ import ui.Constantes;
 @SuppressWarnings("serial")
 public class PlatForm extends JPanel implements ActionListener
 {
-	//Controller
-	private PlatController controller;
-	
 	//Model
 	private Plat plat;
 	private Stock stock;
@@ -51,7 +48,6 @@ public class PlatForm extends JPanel implements ActionListener
 	
 	public PlatForm(PlatCard parent, PlatController controller)
 	{
-		this.controller = controller;
 		this.stock = controller.getStock();
 		this.plat = controller.getPlat();
 		this.listeIngredients = stock.getIngredients();

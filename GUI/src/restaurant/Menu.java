@@ -75,6 +75,13 @@ public class Menu extends Observable implements Achetable
 		return true;
 	}
 	
+	@Override
+	public void commander()
+	{
+		for(Plat plat : menu)
+			plat.commander();
+	}
+	
 	public ArrayList<Plat> getMenu()
 	{	
 		return menu;

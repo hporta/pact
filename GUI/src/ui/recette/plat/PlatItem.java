@@ -1,4 +1,4 @@
-package ui.carte.plat;
+package ui.recette.plat;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -38,7 +38,6 @@ public class PlatItem extends JPanel implements Observer
 		this.nom = new JLabel();
 		this.prix = new JLabel();
 		this.description = new JLabel();
-		update(plat,null);
 		
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -87,6 +86,8 @@ public class PlatItem extends JPanel implements Observer
 		delButton.addActionListener(platController);
 		delButton.setActionCommand(Constantes.DELETE);
 		add(delButton,c);
+		
+		update(plat,null);
 	}
 	
 

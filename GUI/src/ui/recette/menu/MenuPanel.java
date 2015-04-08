@@ -1,11 +1,11 @@
-package ui.carte.menu;
+package ui.recette.menu;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import controller.CarteController;
+import controller.RecetteController;
 import controller.MenuController;
-import restaurant.Carte;
+import restaurant.Recette;
 import restaurant.Menu;
 import ui.Constantes;
 import ui.ListPanel;
@@ -14,20 +14,20 @@ import ui.ListPanel;
 public class MenuPanel extends ListPanel implements Observer
 {
 	//Model
-	private Carte carte;
+	private Recette carte;
 	
 	//Controller
-	private CarteController carteController;
+	private RecetteController carteController;
 		
-	public MenuPanel(CarteController carteController)
+	public MenuPanel(RecetteController carteController)
 	{
 		super(carteController, Constantes.ADD_MENU);
-		this.carte = carteController.getCarte();
 		this.carteController = carteController;
+
+		carte = carteController.getCarte();
+		carte.addObserver(this);
 		
-		this.carte.addObserver(this);
-		
-		update(null);
+		update(carte, null);
 	}
 	
 	@Override
@@ -38,6 +38,6 @@ public class MenuPanel extends ListPanel implements Observer
 		for(Menu menu : carte.getMenus())
 			addElement(new MenuCard(new MenuController(menu, carteController)));
 
-		show();
+		showList();
 	}
 }

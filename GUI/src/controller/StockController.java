@@ -55,15 +55,10 @@ public class StockController implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getActionCommand().equals(Constantes.ADD_INGREDIENTS))
-		{
 			stock.addIngredient();
-		}
 		
 		else if(e.getActionCommand().equals(Constantes.ADD_CONSOMMABLE))
-		{
 			stock.addConsommable();
-		}
-		
 	}
 
 	public ArrayList<Achetable> parse(String commande) 
@@ -78,5 +73,4 @@ public class StockController implements ActionListener
 		
 		return liste;
 	}
-	
 }

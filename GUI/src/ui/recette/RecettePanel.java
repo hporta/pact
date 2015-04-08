@@ -1,18 +1,18 @@
-package ui.carte;
+package ui.recette;
 
-import controller.CarteController;
+import controller.RecetteController;
 import ui.TabPanel;
-import ui.carte.menu.MenuPanel;
-import ui.carte.plat.PlatPanel;
+import ui.recette.menu.MenuPanel;
+import ui.recette.plat.PlatPanel;
 
 
 @SuppressWarnings("serial")
-public class CartePanel extends TabPanel
+public class RecettePanel extends TabPanel
 {	
 	private final String MENUS = "Menus";
 	private final String PLATS = "Plats";
 	
-	public CartePanel(CarteController carteController)
+	public RecettePanel(RecetteController carteController)
 	{
 		addTab(MENUS, new MenuPanel(carteController));
 		addTab(PLATS, new PlatPanel(carteController));

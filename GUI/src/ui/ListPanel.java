@@ -47,7 +47,7 @@ public abstract class ListPanel extends JPanel
 		vide = false;
 	}
 	
-	public void show()
+	public void showList()
 	{
 		if(vide)
 			conteneur.add(empty);

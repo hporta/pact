@@ -5,13 +5,11 @@ import java.awt.event.ActionListener;
 
 import restaurant.Consommable;
 import ui.Constantes;
-import ui.Recorder;
 import ui.stock.consommable.ConsommableCard;
 import ui.stock.consommable.ConsommableFields;
 
 public class ConsommableController implements ActionListener
 {
-	private Recorder rec;
 	//View
 	private ConsommableCard card;
 	private ConsommableFields fields; 
@@ -73,33 +71,16 @@ public class ConsommableController implements ActionListener
 		return consommable;
 	}
 	
-	
-	public void remove()
-	{
-		stockController.removeConsommable(consommable);
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(Constantes.DELETE.equals(e.getActionCommand()))
-		{
-			remove();
-		}
+			stockController.removeConsommable(consommable);
 		
 		else if(Constantes.VALIDATE.equals(e.getActionCommand()))
 		{
 			if(setConsommable(fields.getNom(), fields.getQuantite(), fields.getPrix()))
-			{
 				card.switchCard();
-			}
-		}
-		
-		else if(Constantes.RECORD.equals(e.getActionCommand()))
-		{
-			rec = new Recorder(consommable);
-			System.out.println("Creation de la fenetre always on top");
 		}
 	}
-	
 }

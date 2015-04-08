@@ -1,4 +1,4 @@
-package ui.carte.menu;
+package ui.recette.menu;
 
 import java.util.ArrayList;
 

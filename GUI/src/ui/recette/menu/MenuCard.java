@@ -1,9 +1,8 @@
-package ui.carte.menu;
+package ui.recette.menu;
 
 import ui.CardPanel;
-import ui.carte.menu.MenuForm;
-import ui.carte.menu.MenuItem;
-
+import ui.recette.menu.MenuForm;
+import ui.recette.menu.MenuItem;
 import controller.MenuController;
 
 @SuppressWarnings("serial")

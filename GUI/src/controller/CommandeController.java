@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import restaurant.Achetable;
 import restaurant.Command;
-import restaurant.Consommable;
 
 public class CommandeController implements ActionListener
 {
@@ -27,19 +26,27 @@ public class CommandeController implements ActionListener
 
 	public void confirmerCommande()
 	{
+		if(allAvailable())
+		{
+			for(Achetable achetable : commande.getListeCommandes())
+				achetable.commander();
+			
+			commande.setEtat("O");
+		}
+		
+		else
+			System.out.println("Un des éléments n'est pas commandable");
+	}
+	
+	public boolean allAvailable()
+	{
 		for(Achetable achetable : commande.getListeCommandes())
 		{
-			if(achetable.getClass() == Consommable.class && achetable.disponible())
-			{
-				Consommable con = (Consommable) achetable;
-				try {
-					con.diminution();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+			if(!achetable.disponible())
+				return false;
 		}
-		commande.setEtat("O");
+		
+		return true;
 	}
 	
 	public Command getCommande()

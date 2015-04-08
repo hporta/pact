@@ -29,12 +29,11 @@ public class IngredientItem extends JPanel implements Observer
 	
 	IngredientItem(IngredientCard parent,IngredientController controller)
 	{
-		this.ingredient = controller.getIngredient();
+		ingredient = controller.getIngredient();
 		ingredient.addObserver(this);
-		this.nom = new JLabel();
-		this.quantite = new JLabel();
-		update(ingredient, null);
 		
+		nom = new JLabel();
+		quantite = new JLabel();
 		
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -83,6 +82,8 @@ public class IngredientItem extends JPanel implements Observer
 		delButton.addActionListener(controller);
 		delButton.setActionCommand(Constantes.DELETE);
 		add(delButton,cstr);
+		
+		update(ingredient, null);
 	}
 
 

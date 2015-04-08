@@ -69,6 +69,12 @@ public abstract class Produit extends Observable
 		return id;
 	}
 	
+	public final void diminution()
+	{
+		setNoInStock(getNoInStock() - 1);
+		update();
+	}
+	
 	/**
 	 * Update the database and the notify the observers
 	 */

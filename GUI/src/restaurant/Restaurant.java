@@ -5,14 +5,14 @@ public class Restaurant
 {	
 	private final Terrasse terrasse;
 	private final Stock stock;
-	private final Carte carte;
+	private final Recette carte;
 	private final Compte compte;
 	
 	public Restaurant()
 	{
 		this.terrasse = new Terrasse();
 		this.stock = new Stock();
-		this.carte = new Carte(stock);
+		this.carte = new Recette(stock);
 		this.compte = new Compte();
 	}
 
@@ -26,7 +26,7 @@ public class Restaurant
 		return stock;
 	}
 
-	public final Carte getCarte() 
+	public final Recette getCarte() 
 	{
 		return carte;
 	}

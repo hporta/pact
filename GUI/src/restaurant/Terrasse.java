@@ -19,7 +19,7 @@ public class Terrasse extends Observable
 	 */
 	public Terrasse()
 	{
-		this.terrasse = TableConnector.getTables();				
+		this.terrasse = TableConnector.getTables();	
 	}
 
 	/**

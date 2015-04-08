@@ -9,7 +9,7 @@ import database.PlatConnector;
  * Carte contains both Plats and Menus
  * They are composed types
  */
-public class Carte extends Observable
+public class Recette extends Observable
 {
 	private ArrayList<Plat> plats;
 	private ArrayList<Menu> menus;
@@ -17,7 +17,7 @@ public class Carte extends Observable
 	/**
 	 * Default constructor using the database content
 	 */
-	public Carte(Stock stock)
+	public Recette(Stock stock)
 	{
 		this.plats = PlatConnector.getPlats(stock);
 		this.menus = MenuConnector.getMenus(this);

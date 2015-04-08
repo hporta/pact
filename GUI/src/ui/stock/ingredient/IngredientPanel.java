@@ -23,11 +23,11 @@ public class IngredientPanel extends ListPanel implements Observer
 	{
 		super(stockController, Constantes.ADD_INGREDIENTS);
 		this.stockController = stockController;
-		this.stock = stockController.getStock();
+
+		stock = stockController.getStock();
+		stock.addObserver(this);
 		
-		this.stock.addObserver(this);
-		
-		update(null);
+		update(stock, null);
 	}
 
 	@Override
@@ -38,6 +38,6 @@ public class IngredientPanel extends ListPanel implements Observer
 		for(Ingredient ingredient : stock.getIngredients())
 			addElement(new IngredientCard(new IngredientController(ingredient, stockController)));
 
-		show();
+		showList();
 	}
 }

@@ -1,4 +1,4 @@
-package ui.carte.plat;
+package ui.recette.plat;
 
 import ui.CardPanel;
 

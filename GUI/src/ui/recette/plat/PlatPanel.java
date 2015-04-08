@@ -1,11 +1,11 @@
-package ui.carte.plat;
+package ui.recette.plat;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import controller.CarteController;
+import controller.RecetteController;
 import controller.PlatController;
-import restaurant.Carte;
+import restaurant.Recette;
 import restaurant.Plat;
 import ui.Constantes;
 import ui.ListPanel;
@@ -14,20 +14,20 @@ import ui.ListPanel;
 public class PlatPanel extends ListPanel implements Observer
 {
 	//Model
-	private Carte carte;
+	private Recette carte;
 	
 	//Controller
-	private CarteController carteController;
+	private RecetteController carteController;
 	
 	
-	public PlatPanel(CarteController carteController)
+	public PlatPanel(RecetteController carteController)
 	{
 		super(carteController, Constantes.ADD_PLAT);
 		this.carteController = carteController;
 		this.carte = carteController.getCarte();
 		this.carte.addObserver(this);
 		
-		update(null);
+		update(carte, null);
 	}
 	
 	@Override
@@ -38,7 +38,6 @@ public class PlatPanel extends ListPanel implements Observer
 		for(Plat plat : carte.getPlats())
 				addElement(new PlatCard(
 						new PlatController(plat,carteController)));
-		show();
+		showList();
 	}
-	
 }

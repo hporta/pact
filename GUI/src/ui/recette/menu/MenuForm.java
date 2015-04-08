@@ -1,4 +1,4 @@
-package ui.carte.menu;
+package ui.recette.menu;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.MenuController;
-import restaurant.Carte;
+import restaurant.Recette;
 import restaurant.Menu;
 import restaurant.Plat;
 import ui.Constantes;
@@ -46,7 +46,7 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 	private JButton addPlat;
 	
 	//Model
-	private Carte carte;
+	private Recette carte;
 	
 	
 	public MenuForm(MenuCard parent, MenuController controller)

@@ -11,19 +11,19 @@ public class RestaurantController
 {
 	
 	private TerrasseController terrasseController;
-	private CarteController carteController;
+	private RecetteController carteController;
 	private StockController stockController;
 	private CompteController compteController;
 
 	public RestaurantController(Restaurant restaurant) 
 	{		
 		terrasseController = new TerrasseController(restaurant.getTerrasse());
-		carteController = new CarteController(restaurant.getCarte(), restaurant.getStock());
+		carteController = new RecetteController(restaurant.getCarte(), restaurant.getStock());
 		stockController = new StockController(restaurant.getStock());
 		compteController = new CompteController(restaurant.getCompte(),restaurant.getTerrasse());
 	}
 	
-	public CarteController getCarteController()
+	public RecetteController getCarteController()
 	{
 		return carteController;
 	}
@@ -40,10 +40,7 @@ public class RestaurantController
 
 	public void passerCommande(String commande) 
 	{
-		ArrayList<Achetable> liste = carteController.parse(commande);
-		liste.addAll(stockController.parse(commande));
-		
-		compteController.passerCommande(liste);
+
 	}
 
 	public CompteController getCompteController() 
