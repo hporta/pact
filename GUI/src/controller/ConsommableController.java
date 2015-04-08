@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import restaurant.Consommable;
 import ui.Constantes;
@@ -16,6 +17,7 @@ public class ConsommableController implements ActionListener
 	
 	//Model
 	private Consommable consommable;
+	private ArrayList<String> errors;
 	
 	//Controller
 	private StockController stockController;
@@ -24,6 +26,7 @@ public class ConsommableController implements ActionListener
 	{
 		this.consommable = consommable;
 		this.stockController = stockController;
+		errors = new ArrayList<String>();
 	}
 	
 	public void setCard(ConsommableCard card)
@@ -38,6 +41,8 @@ public class ConsommableController implements ActionListener
 	
 	public boolean setConsommable(String nom, int quantite, float price)
 	{
+		errors.clear();
+		
 		if(validateNom(nom) 
 				&& validateQuantite(quantite) 
 				&& validatePrice(price))
@@ -53,17 +58,59 @@ public class ConsommableController implements ActionListener
 	
 	public boolean validateNom(String nom)
 	{
-		return (nom != "" && nom.length() < 20 && nom != "Nom");
+		boolean valide = true;
+		
+		if(nom == "")
+		{
+			valide = false;
+			errors.add("Le nom ne doit pas être vide");
+		}
+		
+		if(nom.length() > 20)
+		{
+			valide = false;
+			errors.add("Le nom doit faire moins de 20 caractères");
+		}
+		
+		return valide;
 	}
 	
 	public boolean validateQuantite(int quantite)
 	{
-		return quantite > 0 && quantite < 999;
+		boolean valide = true;
+		
+		if(quantite < 0)
+		{
+			valide = false;
+			errors.add("La quantite doit etre positive");
+		}
+		
+		if(quantite > 999)
+		{
+			valide = false;
+			errors.add("La quantite doit etre inférieur à 999");
+		}
+		
+		return valide;
 	}
 	
 	public boolean validatePrice(float price)
 	{
-		return price > 0 && price < 999.;
+		boolean valide = true;
+		
+		if(price < 0)
+		{
+			valide = false;
+			errors.add("Le prix doit être positif");
+		}
+		
+		if(price > 999)
+		{
+			valide = false;
+			errors.add("Le prix doit être inférieur à 999€");
+		}
+		
+		return valide;
 	}
 
 	public Consommable getConsommable() 
@@ -81,6 +128,12 @@ public class ConsommableController implements ActionListener
 		{
 			if(setConsommable(fields.getNom(), fields.getQuantite(), fields.getPrix()))
 				card.switchCard();
+			
+			else
+			{
+				for(String error : errors)
+					System.out.println(error);
+			}
 		}
 	}
 }

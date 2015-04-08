@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import restaurant.Ingredient;
 import ui.Constantes;
@@ -16,6 +17,7 @@ public class IngredientController implements ActionListener
 	
 	//Model
 	private Ingredient ingredient;
+	private ArrayList<String> errors;
 	
 	//Controller
 	private StockController stockController;
@@ -25,6 +27,7 @@ public class IngredientController implements ActionListener
 	{
 		this.ingredient = ingredient;
 		this.stockController = stockController;
+		errors = new ArrayList<String>();
 	}
 	
 	public void setCard(IngredientCard card)
@@ -44,6 +47,7 @@ public class IngredientController implements ActionListener
 	
 	public boolean setIngredient(String nom, int quantite)
 	{
+		errors.clear();
 		if(validateNom(nom) && validateQuantite(quantite))
 		{
 			ingredient.setNom(nom);
@@ -56,12 +60,33 @@ public class IngredientController implements ActionListener
 	
 	public boolean validateNom(String nom)
 	{
-		return (nom != "" && nom.length() < 20 && nom != "Nom");
+		boolean valide = true;
+		if(nom == "")
+		{
+			valide = false;
+			errors.add("Le nom ne doit pas etre nul");
+		}
+		
+		if(nom.length() > 20 )
+		{
+			valide = false;
+			errors.add("Le nom doit faire moins de 20 caractères");
+		}
+		
+		return valide;
 	}
 	
 	public boolean validateQuantite(int quantite)
 	{
-		return quantite > 0;
+		boolean valide = true;
+		
+		if(quantite < 0)
+		{
+			valide = false;
+			errors.add("La quantite doit etre positive");
+		}
+	
+		return valide;
 	}
 	
 
@@ -78,8 +103,12 @@ public class IngredientController implements ActionListener
 		else if(Constantes.VALIDATE.equals(e.getActionCommand()))
 		{
 			if(setIngredient(fields.getNom(), fields.getQuantite()))
-			{
 				card.switchCard();
+
+			else
+			{
+				for(String error : errors)
+					System.out.println(error);
 			}
 		}
 	}

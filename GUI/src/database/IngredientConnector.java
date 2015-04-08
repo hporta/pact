@@ -64,7 +64,7 @@ public class IngredientConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-	        String req = "UPDATE ingredient SET nom = ?, quantite = ? WHERE idIngredient = ?";
+	        String req = "UPDATE Ingredient SET nom = ?, quantite = ? WHERE idIngredient = ?";
 	        PreparedStatement stmt = con.prepareStatement(req);
 	        stmt.setString(1, newName);
 	        stmt.setInt(2, newQuantite);
@@ -97,7 +97,7 @@ public class IngredientConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-			String req = "INSERT INTO Ingredient(nom = ?, quantite = ?)";
+			String req = "INSERT INTO Ingredient(nom, quantite) VALUES(?,?)";
 	        PreparedStatement stmt = con.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
 	        
 	        stmt.setString(1, name);
@@ -119,7 +119,7 @@ public class IngredientConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (insertion ingredient)");
 	    }
 		
 		return new Ingredient(name, quantity, id);
@@ -147,7 +147,7 @@ public class IngredientConnector extends Connector
 			Connection con = DriverManager.getConnection(url, username, pwd);
 			
 			//Prepare the statement
-			String req = "DELETE Ingredient WHERE idIngredient = ?";
+			String req = "DELETE FROM Ingredient WHERE idIngredient = ?";
 	        PreparedStatement stmt = con.prepareStatement(req);
 
 	        //Bind idIngredient with id
@@ -167,7 +167,7 @@ public class IngredientConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (delete ingredient)");
 	    }
 	}
 }
