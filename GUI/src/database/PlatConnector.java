@@ -81,7 +81,7 @@ public class PlatConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-			String req = "INSERT INTO Plat(nom = ?, description = ?, prix = ?)";
+			String req = "INSERT INTO Plat(nom, description, prix) VALUES(?,?,?)";
 	        PreparedStatement stmt = con.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
 	        
 	        stmt.setString(1, name);
@@ -131,7 +131,7 @@ public class PlatConnector extends Connector
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
 
-			String req = "INSERT INTO composerPlat(idPlat = ?, idIngredient = ?)";
+			String req = "INSERT INTO composerPlat(idPlat, idIngredient) VALUES(?,?)";
 	        PreparedStatement stmt = con.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
 	        
 	        stmt.setInt(1, idPlat);
@@ -165,7 +165,7 @@ public class PlatConnector extends Connector
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
 
-			String req = "DELETE composerPlat(idPlat = ?, idIngredient = ?)";
+			String req = "DELETE composerPlat WHERE idPlat = ? AND idIngredient = ?";
 	        PreparedStatement stmt = con.prepareStatement(req);
 	        
 	        stmt.setInt(1, idPlat);
@@ -302,5 +302,37 @@ public class PlatConnector extends Connector
 		}
 		
 		return liste;
+	}
+	
+	/**
+	 * Updates the values of a plat 
+	 * @param id
+	 * @param newName
+	 * @param newQuantite
+	 */
+	public static void setPlat(int id, String newName, String newDescription, float newPrice)
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url, username, pwd);
+	        String req = "UPDATE Plat SET nom = ?, description = ?, prix = ? WHERE idPlat = ?";
+	        PreparedStatement stmt = con.prepareStatement(req);
+	        stmt.setString(1, newName);
+	        stmt.setString(2, newDescription);
+	        stmt.setFloat(3, newPrice);
+	        stmt.setInt(4, id);
+	        stmt.executeUpdate();
+		}
+		
+    	catch (ClassNotFoundException e) 
+		{
+        	System.out.println("Erreur lors de l'initialisation de la classe");
+    	}
+	    
+	    catch(SQLException e)
+	    {
+	    	System.out.println("Erreur lors de la requete SQL (update)");
+	    }
 	}
 }

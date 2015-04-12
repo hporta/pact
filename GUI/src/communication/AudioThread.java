@@ -1,5 +1,6 @@
 package communication;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -52,20 +53,29 @@ public class AudioThread extends Thread
 			Socket client = server.accept();
 			System.out.println("[Audio] Client connecté");
 			
+			//Recherche d'un fichier disponible
+			String destinationPath = "data/record";
+			File destination;
+			
+			do{
+				destinationPath  = "data/record"+ (int) Math.random()*100 +".wav";
+				destination  = new File(destinationPath);
+			} while(destination.exists());
+			
 			//Fonction de transfert
-			Transfert.transfert(client.getInputStream(), new FileOutputStream("data/record.wav"), true);
+			Transfert.transfert(client.getInputStream(), new FileOutputStream(destination), true);
 			
 			//Fermeture des sockets
 			client.close();
 			System.out.println("[Audio] Fin de connection");
 			
-			//Traitement du fichier image
-			controller.traiteAudio();
+			//Ajout du fichier dans la liste de traitement
+			//controller.push(destination);
 		}
 		
 		catch (IOException e) 
 		{
-			System.err.println("[Fichier] Erreur pendant la connection avec le client");
+			System.err.println("[Audio] Erreur pendant la connection avec le client");
 		}
 	}
 }

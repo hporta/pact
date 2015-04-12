@@ -57,7 +57,6 @@ public class CommandeItem extends JPanel implements Observer
 		conteneur.setLayout(new GridLayout(0,2));
 		for(Achetable obj: commande.getListeCommandes())
 		{
-			conteneur.add(new JLabel(obj.getNom()));
 			conteneur.add(new JLabel(obj.getPrix() + "€"));
 		}
 		

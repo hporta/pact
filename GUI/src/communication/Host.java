@@ -14,5 +14,9 @@ public class Host
 		//Thread pour l'audio
 		Thread audio = new AudioThread(restaurantController);
 		audio.start();
+		
+		//Thread pour la video
+		Thread video = new VideoThread(restaurantController);
+		video.start();
 	}
 }

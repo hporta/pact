@@ -17,6 +17,11 @@ public class ConsommableConnector extends Connector
 	private static final int DEFAULT_QUANTITY = 0;
 	private static final float DEFAULT_PRICE = 0.f;
 	
+	private static final String SELECT_ALL = "SELECT * FROM Produit";
+	private static final String INSERT_INTO = "INSERT INTO Produit(nom, quantite, prix, description) VALUES(?,?,?,?)";
+	private static final String UPDATE = "UPDATE Produit SET nom = ?, quantite = ?, prix = ? WHERE idProduit = ?";
+	private static final String DELETE = "DELETE FROM Produit WHERE idProduit = ?";
+	
 	/**
 	 * Returns a list of consommables from the database.
 	 * Every consommable is initialized with the value found in the columns
@@ -29,7 +34,7 @@ public class ConsommableConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-	        String req = "SELECT * from Produit";
+	        String req = SELECT_ALL;
 	        Statement stmt = con.createStatement();
 	        ResultSet result = stmt.executeQuery(req);
 	        
@@ -71,7 +76,7 @@ public class ConsommableConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-			String req = "INSERT INTO Produit(nom, quantite, prix, description) VALUES(?,?,?,?)";
+			String req = INSERT_INTO;
 	        PreparedStatement stmt = con.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
 	        
 	        stmt.setString(1, name);
@@ -98,31 +103,8 @@ public class ConsommableConnector extends Connector
 	    	System.out.println("Erreur lors de la requete SQL (insertion consommable)");
 	    }
 		
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(url, username, pwd);
-			String req = "INSERT INTO Achetable(idAchetable, type) VALUES(?,?)";
-	        PreparedStatement stmt = con.prepareStatement(req);
-	        
-	        stmt.setInt(1, id);
-	        stmt.setString(2, "produit");
-	        
-	        stmt.executeUpdate();
-	        
-	        stmt.close();
-		}
-		
-    	catch (ClassNotFoundException e) 
-		{
-        	System.out.println("Erreur lors de l'initialisation de la classe");
-    	}
-	    
-	    catch(SQLException e)
-	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion achetable)");
-	    }
-		
+		AchetableConnector.insertConsommable(id);
+		StockableConnector.insertConsommable(id);
 		return new Consommable(name, quantity, price, id);
 	}
 	
@@ -154,7 +136,7 @@ public class ConsommableConnector extends Connector
 			con = DriverManager.getConnection(url, username, pwd);
 			
 			//Préparation de la requete d'update
-	        stmt = con.prepareStatement("UPDATE Produit SET nom = ?, quantite = ?, prix = ? WHERE idProduit = ?");
+	        stmt = con.prepareStatement(UPDATE);
 	        stmt.setString(1, newName);
 	        stmt.setInt(2, newQuantity);
 	        stmt.setFloat(3, newPrice);
@@ -205,7 +187,7 @@ public class ConsommableConnector extends Connector
 			con = DriverManager.getConnection(url, username, pwd);
 			
 			//Préparation de la requete d'update
-	        stmt = con.prepareStatement("DELETE FROM Produit WHERE idProduit = ?");
+	        stmt = con.prepareStatement(DELETE);
 	        stmt.setInt(1, idProduit);
 	        
 	        //Execution de la requete
@@ -235,48 +217,8 @@ public class ConsommableConnector extends Connector
 			
 			catch (Exception e){}
 		}
-		
-		
-		/**
-		 * Suppression de la table d'achetable
-		 */
-		try
-		{
-			//Connexion à la base de données
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(url, username, pwd);
-			
-			//Préparation de la requete d'update
-	        stmt = con.prepareStatement("DELETE FROM Achetable WHERE idAchetable = ? AND type = ?");
-	        stmt.setInt(1, idProduit);
-	        stmt.setString(2, "produit");
-	        
-	        //Execution de la requete
-	        stmt.executeUpdate();	    
-		}
-		
-    	catch (ClassNotFoundException e) 
-		{
-        	System.out.println("Erreur lors de l'initialisation de la classe");
-    	}
-	    
-	    catch(SQLException e)
-	    {
-	    	System.out.println("Erreur lors de la requete SQL (update consommabel)");
-	    }
-		
-		finally 
-		{
-			try
-			{
-				if(stmt != null)
-					stmt.close();
-				
-				if(con != null)
-					con.close();
-			}
-			
-			catch (Exception e){}
-		}
+
+		AchetableConnector.deleteConsommable(idProduit);
+		StockableConnector.deleteConsommable(idProduit);
 	}
 }

@@ -115,10 +115,6 @@ public class MenuController implements ActionListener
 		
 		else if(e.getActionCommand().equals(Constantes.VALIDATE))
 		{
-			System.out.println(fields.getNom());
-			//System.out.println(fields.getDescription());
-			System.out.println(fields.getPrix());
-			System.out.println(fields.getPlats());
 			if(setMenu(fields.getNom(),fields.getPrix(),fields.getPlats()))
 				menuCard.switchCard();
 		}

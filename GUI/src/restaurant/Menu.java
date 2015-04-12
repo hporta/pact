@@ -35,6 +35,7 @@ public class Menu extends Observable implements Achetable
 	{
 		this.description = description;
 		update();
+		updateDatabase();
 	}
 	
 	public final String getDescription()
@@ -46,22 +47,14 @@ public class Menu extends Observable implements Achetable
 	{
 		this.nom = nom;
 		update();
+		updateDatabase();
 	}
 	
 	public final String getNom()
 	{
 		return nom;
 	}
-	
-	public void add(Plat plat)
-	{
-		for(Plat platAuMenu : menu)
-		{
-			if(platAuMenu != plat)
-				menu.add(plat);
-		}
-	}
-	
+		
 	// un menu est disponible que si tous les plats sont disponibles
 	@Override
 	public boolean disponible()
@@ -93,12 +86,12 @@ public class Menu extends Observable implements Achetable
 		return prix;
 	}
 	
-	public void removePlat(Plat plat) throws Exception
+	@Override
+	public final void setPrix(float prix) 
 	{
-    	if(menu.size() == 0)
-    		throw new Exception("le menu est vide");
-    	
-        menu.remove(plat);
+		this.prix = prix;
+		update();
+		updateDatabase();
 	}
 
 	public ArrayList<Plat> getPlat() 
@@ -106,28 +99,51 @@ public class Menu extends Observable implements Achetable
 		return menu;
 	}
 
-	public final void setPlats(ArrayList<Plat> menu) 
+	public final void initPlats(ArrayList<Plat> menu) 
 	{
 		this.menu = menu;
 		update();
 	}
 	
+	public final void setPlats(ArrayList<Plat> newMenu)
+	{
+		ArrayList<Plat> delete = new ArrayList<Plat>();
+		ArrayList<Plat> insert = new ArrayList<Plat>();
+		
+		for(Plat plat : this.menu)
+		{
+			if(!newMenu.contains(plat))
+				delete.add(plat);
+		}
+		
+		for(Plat plat : newMenu)
+		{
+			if(!menu.contains(plat))
+				insert.add(plat);
+		}
+		
+		for(Plat plat : delete)
+			removePlat(plat);
+		
+		for(Plat plat : insert)
+			addPlat(plat);
+	}
+	
 	public final void addPlat(Plat plat)
 	{
 		menu.add(plat);
-	}
-
-	public final void setPrix(float prix) 
-	{
-		this.prix = prix;
+		MenuConnector.insertPlatToMenu(getId(), plat.getId());
 		update();
 	}
 	
-	public final void setPlat(ArrayList<Plat> plats)
+	public final void removePlat(Plat plat)
 	{
-		this.menu = plats;
+		menu.remove(plat);
+		MenuConnector.removePlatOfMenu(plat.getId(), getId());
+		update();
 	}
-	
+
+
 	public final void update()
 	{
 		setChanged();
@@ -136,6 +152,6 @@ public class Menu extends Observable implements Achetable
 	
 	public final void updateDatabase()
 	{
-		MenuConnector.updateMenu(nom, description, prix);
+		MenuConnector.updateMenu(getId(),nom, description, prix);
 	}
 }

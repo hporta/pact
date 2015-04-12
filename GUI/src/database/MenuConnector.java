@@ -62,7 +62,7 @@ public class MenuConnector extends Connector
 		*/
 		for(Menu menu : liste)
 		{
-			menu.setPlat(findPlats(carte, menu.getId()));
+			menu.initPlats(findPlats(carte, menu.getId()));
 		}
 		
 		return liste;
@@ -76,7 +76,7 @@ public class MenuConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-			String req = "INSERT INTO Menu(nom = ?, description = ?, prix = ?)";
+			String req = "INSERT INTO Menu(nom, description, prix) VALUES(?,?,?)";
 	        PreparedStatement stmt = con.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
 	        
 	        stmt.setString(1, name);
@@ -126,7 +126,7 @@ public class MenuConnector extends Connector
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
 
-			String req = "INSERT INTO composerMenu(idMenu = ?, idPlat = ?)";
+			String req = "INSERT INTO composerMenu(idMenu, idPlat) VALUES(?,?)";
 	        PreparedStatement stmt = con.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
 	        
 	        stmt.setInt(1, idMenu);
@@ -160,7 +160,7 @@ public class MenuConnector extends Connector
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
 
-			String req = "DELETE composerMenu(idMenu = ?, idPlat = ?)";
+			String req = "DELETE composerMenu WHERE idMenu = ? AND idPlat = ?";
 	        PreparedStatement stmt = con.prepareStatement(req);
 	        
 	        stmt.setInt(1, idMenu);
@@ -266,13 +266,13 @@ public class MenuConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-	        String req = "SELECT * from ********** WHERE idMenu = ?";
+	        String req = "SELECT idPlat from composerMenu WHERE idMenu = ?";
 	        Statement stmt = con.createStatement();
 	        ResultSet result = stmt.executeQuery(req);
 	        
         	while(result.next())
         	{
-        		Integer id = result.getInt("id*****");
+        		Integer id = result.getInt("idPlat");
         		listeId.add(id);
         	}
 		}
@@ -299,8 +299,29 @@ public class MenuConnector extends Connector
 		return liste;
 	}
 
-	public static void updateMenu(String nom, String description, float prix) 
+	public static void updateMenu(int id, String nom, String description, float prix) 
 	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url, username, pwd);
+	        String req = "UPDATE Menu SET nom = ?, description = ?, prix = ? WHERE idMenu = ?";
+	        PreparedStatement stmt = con.prepareStatement(req);
+	        stmt.setString(1, nom);
+	        stmt.setString(2, description);
+	        stmt.setFloat(3, prix);
+	        stmt.setInt(4, id);
+	        stmt.executeUpdate();
+		}
 		
+    	catch (ClassNotFoundException e) 
+		{
+        	System.out.println("Erreur lors de l'initialisation de la classe");
+    	}
+	    
+	    catch(SQLException e)
+	    {
+	    	System.out.println("Erreur lors de la requete SQL (update)");
+	    }
 	}
 }
