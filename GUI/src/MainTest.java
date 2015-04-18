@@ -1,5 +1,4 @@
 import communication.Host;
-
 import controller.RestaurantController;
 import restaurant.Restaurant;
 import ui.App;
@@ -20,5 +19,17 @@ public class MainTest
 	
 		//Host
 		Host host = new Host(restaurantController);
+		
+		try{
+			Thread.sleep(10000);
+			restaurantController.passerCommande("");
+			Thread.sleep(30000);
+			restaurantController.traiteImage();
+		}
+		catch(Exception e)
+		{
+			
+		}
+		restaurantController.passerCommande("");
 	}
 }

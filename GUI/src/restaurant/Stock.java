@@ -110,6 +110,17 @@ public class Stock extends Observable
 		return null;
 	}
 	
+	public final Consommable findConsommableById(int id)
+	{
+		for(Consommable consommable : consommables)
+		{
+			if(consommable.getId() == id)
+				return consommable;
+		}
+		
+		return null;
+	}
+	
 	/**
 	 * Notify observers for update
 	 */

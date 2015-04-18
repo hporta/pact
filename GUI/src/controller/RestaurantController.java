@@ -5,6 +5,7 @@ import image.Analyst;
 import java.util.ArrayList;
 
 import restaurant.Achetable;
+import restaurant.Consommable;
 import restaurant.Restaurant;
 
 public class RestaurantController 
@@ -40,7 +41,9 @@ public class RestaurantController
 
 	public void passerCommande(String commande) 
 	{
-
+		ArrayList<Achetable> listeAchetable = new ArrayList<Achetable>();
+		listeAchetable.add(stockController.getStock().findConsommableById(5));
+		compteController.passerCommande(listeAchetable);
 	}
 
 	public CompteController getCompteController() 
@@ -50,7 +53,7 @@ public class RestaurantController
 	
 	public void traiteImage()
 	{
-		terrasseController.getTerrasse().getTableById(1).setLibre(Analyst.isLibre());
+		terrasseController.getTerrasse().getTableById(1).setLibre(false);
 	}
 	
 	public void traiteAudio()

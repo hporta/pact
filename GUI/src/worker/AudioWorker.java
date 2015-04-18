@@ -1,23 +1,45 @@
 package worker;
 
-import java.io.File;
-import java.util.Observable;
-import java.util.Observer;
+import image.Analyst;
+import controller.RestaurantController;
 
-public class AudioWorker extends Thread implements Observer
+public class AudioWorker implements Runnable
 {
-	private AudioList tasks;
+	private TaskList audioTaskList;
+	private RestaurantController controller;
 	
-	public AudioWorker(AudioList tasks)
+	public AudioWorker(TaskList audioTaskList, RestaurantController controller)
 	{
-		tasks.addObserver(this);
+		this.audioTaskList = audioTaskList;
+		this.controller = controller;
 	}
 	
 	@Override
-	public void update(Observable arg0, Object arg1) 
+	public void run()
 	{
-		File newFile = (File) arg0;
-		// TODO Auto-generated method stub
+		try
+		{
+			while(true)
+			{
+				Thread.sleep(30000);
+				String pathName = audioTaskList.next();
+				
+				if(pathName != null)
+				{
+					//Passer par l'analyse audio pour obtenir un achetable
+					//envoyer au controller+
+				}
+				
+				else
+				{
+					//On ne fait rien : on attend
+				}
+			}
+		}
 		
+		catch(InterruptedException e)
+		{
+			System.out.println(Thread.currentThread().getName() + " has stopped");
+		}
 	}
 }

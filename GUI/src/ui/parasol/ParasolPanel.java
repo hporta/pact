@@ -17,7 +17,7 @@ public class ParasolPanel extends JPanel implements Observer
 	//Model
 	private Terrasse terrasse;
 	
-	//
+	//GridBagContraints
 	private GridBagConstraints cstr;
 	
 	public ParasolPanel(TerrasseController terrasseController) 

@@ -29,7 +29,6 @@ import ui.Constantes;
 @SuppressWarnings("serial")
 public class MenuForm extends JPanel implements ActionListener, Observer
 {
-	private MenuController controller;
 	private Menu menu;
 	private ArrayList<Plat> listePlats;
 	
@@ -51,13 +50,14 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 	
 	public MenuForm(MenuCard parent, MenuController controller)
 	{
-		carte = controller.getCarteController().getCarte();
 		menu = controller.getMenu();
-		
 		menu.addObserver(this);
 		
 		this.listePlats = carte.getPlats();
 		plats = new ArrayList<JComboBox<String>>();
+		
+		for(Plat plat : menu.getPlat())
+			addJComboBox(plat.getNom());
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -69,7 +69,7 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 		c.gridy=0;
 		c.weightx = 0.6;
 		c.weighty = 0.5;
-		add(this.nom = new JTextField(menu.getNom()),c);
+		add(nom = new JTextField(menu.getNom()),c);
 		
 		/*
 		c.gridx=0;
@@ -84,8 +84,8 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 		c.gridy=0;
 		c.weightx = 0.2;
 		c.weighty = 0.5;
-		add(this.prix = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
-		this.prix.setValue(new Double(menu.getPrix()));
+		add(prix = new JFormattedTextField(NumberFormat.getNumberInstance()),c);
+		prix.setValue(new Double(menu.getPrix()));
 		
 		//coin pour les ingredients
 		c.gridx=0;
@@ -136,30 +136,42 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 	{
 		if(e.getActionCommand().equals("addIn"))
 		{
-			JComboBox<String> temp = new JComboBox<String>();
-			fillComboBoxWithPlats(temp);
-			plats.add(temp);
-			aside.add(temp);
-			update(menu, null);
+			addJComboBox();
 		}
 		
+	}
+	
+	private void addJComboBox()
+	{
+		JComboBox<String> temp = new JComboBox<String>();
+		fillComboBoxWithPlats(temp);
+		plats.add(temp);
+		aside.add(temp);
+		update(menu, null);
+	}
+	
+	private void addJComboBox(String plat)
+	{
+		JComboBox<String> temp = new JComboBox<String>();
+		fillComboBoxWithPlats(temp);
+		temp.setSelectedItem(plat);
+		plats.add(temp);
+		aside.add(temp);
+		update(menu, null);
 	}
 	
 	private void fillComboBoxWithPlats(JComboBox<String> box)
 	{
 		for(Plat plat : listePlats)
-		{
 			box.addItem(plat.getNom());
-		}
 	}
 	
 	public ArrayList<String> getPlats()
 	{
 		ArrayList<String> liste = new ArrayList<String>();
+
 		for(JComboBox<String> box : plats)
-		{
 			liste.add((String) box.getSelectedItem());
-		}
 		
 		return liste;
 	}
