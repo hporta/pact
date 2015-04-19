@@ -54,7 +54,7 @@ public class MenuConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL");
+	    	System.out.println("Erreur lors de la requete SQL getMenus");
 	    }
 		
 		/** At this point liste is filled with Menus with no Plats
@@ -99,7 +99,7 @@ public class MenuConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (insertion menu)");
 	    }
 		
 		return new Menu(name, description, price, id);
@@ -144,7 +144,7 @@ public class MenuConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (insertion plat to menu)");
 	    }
 	}
 	
@@ -178,7 +178,7 @@ public class MenuConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (morve plat of menu)");
 	    }
 	}
 	
@@ -216,7 +216,7 @@ public class MenuConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (delete menu)");
 	    }
 	}
 	
@@ -248,7 +248,7 @@ public class MenuConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (delete associated menu)");
 	    }
 	}
 	
@@ -266,9 +266,10 @@ public class MenuConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-	        String req = "SELECT idPlat from composerMenu WHERE idMenu = ?";
-	        Statement stmt = con.createStatement();
-	        ResultSet result = stmt.executeQuery(req);
+	        String req = "SELECT idPlat FROM composerMenu WHERE idMenu = ?";
+	        PreparedStatement stmt = con.prepareStatement(req);
+	        stmt.setInt(1, idMenu);
+	        ResultSet result = stmt.executeQuery();
 	        
         	while(result.next())
         	{
@@ -284,7 +285,7 @@ public class MenuConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL");
+	    	System.out.println("Erreur lors de la requete SQL findMenu");
 	    }
 		
 		/*
@@ -321,7 +322,7 @@ public class MenuConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (update)");
+	    	System.out.println("Erreur lors de la requete SQL (update menu)");
 	    }
 	}
 }

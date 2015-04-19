@@ -2,7 +2,7 @@ package audio.mfcc;
 
 import java.io.File;
 
-import WavFile.WavFile;
+import audio.WavFile.WavFile;
 
 public class Signal {
 
@@ -10,11 +10,11 @@ public class Signal {
 	private long sampleRate; // fréquence d'échantillonnage
 	private double[] samples; // échantillons contenus dans le fichier
 	private double[] energyPerRaster; // énergie de chaque trame
+	private double[] energyPlot; // énergie non nulles pour les courbes
 	private double[] firstCepstralCoefficients; // c(0) de chaque trame
 	private Raster[] rasters; // vecteur des trames
 	private Raster[] trimmedRasters; // vecteur des trames d'énergie non nulle
 	private double[][] cepstres; // vecteur des coefficients cepstraux de chaque trame
-	private double[][] realCepstres;
 	private int numberOfRasters;
 	private int paddedRasterLength;
 	
@@ -29,73 +29,74 @@ public class Signal {
 			sampleRate = file.getSampleRate();
 			
 			numberOfRasters = (int)(size*100/sampleRate);
+			//System.out.println(fileName + ": " +numberOfRasters);
 			samples = new double[(int)(2*size)];
 			file.readFrames(samples, (int)size);
 			
 			paddedRasterLength = getPaddedRasterLength();
 			
 			rasters = new Raster[numberOfRasters];
+			for (int i=0; i<numberOfRasters; i++) rasters[i] = new Raster(i, this);
+			
 			energyPerRaster = new double[numberOfRasters];
-			int p = 0;
-			for (int i=0; i<numberOfRasters; i++)
-			{
-				rasters[i] = new Raster(i, this);
+			for (int i=0; i<numberOfRasters; i++) 
 				energyPerRaster[i] = rasters[i].energy();
-				if(energyPerRaster[i] != 0.)
-					p++;
-			}
-			
-			trimmedRasters = new Raster[p];
-			cepstres = new double[p][paddedRasterLength];
-			firstCepstralCoefficients = new double[p];
-			
-			for(int i=0; i<p; i++)
+						
+			int p = 0;
+			while (p < numberOfRasters && energyPerRaster[p] != 0.) 
 			{
-				trimmedRasters[i] = rasters[i];
-				cepstres[i] = rasters[i].getCepstre();
-				firstCepstralCoefficients[i] = cepstres[i][0];
-			}				
+				p++;
+			}
+
+			trimmedRasters = new Raster[p];
+			for (int i=0; i<p; i++) trimmedRasters[i] = rasters[i];
 			
+			energyPlot = new double[p];
+			for (int k=0; k<p; k++) energyPlot[k] = energyPerRaster[k];
 			
-			int[] realSignal = vocalActivityDetection();
-			int realLength = realSignal[1]-realSignal[0];
-			realCepstres = new double[realLength][paddedRasterLength];
+			cepstres = new double[p][paddedRasterLength];
+			for (int i=0; i<p; i++) cepstres[i] = rasters[i].getCepstre();
 			
-			int index = realSignal[0];
-			for (int i=0; i<realLength; i++) 
-				realCepstres[i] = rasters[index+i].getCepstre();
+			firstCepstralCoefficients = new double[p];
+			for (int i=0; i<p; i++) firstCepstralCoefficients[i] = cepstres[i][0];
 			
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
+			
 		}
 		
 	}
 	
-	public long getSampleRate() 
-	{
+	public long getSampleRate() {
+		
 		return sampleRate;
+		
 	}
 	
-	public double[] getSamples() 
-	{
+	public double[] getSamples() {
+		
 		return samples;
+		
 	}
 	
-	public double[] getEnergyPerRaster() 
-	{
+	public double[] getEnergyPerRaster() {
+		
 		return energyPerRaster;
+		
 	}
 	
-	public double[] getFirstCepstralCoefficients() 
-	{
+	public double[] getFirstCepstralCoefficients() {
+		
 		return firstCepstralCoefficients;
+		
 	}
 	
-	public int getNumberOfRasters() 
-	{
+	public int getNumberOfRasters() {
+		
 		return numberOfRasters;
+		
 	}
 	
 	public int getPaddedRasterLength() {
@@ -105,7 +106,7 @@ public class Signal {
 		long length = sampleRate*2/100;
 		long p = 1;
 		while (p < length) {
-			p*=2;
+			p=2*p;
 		}
 		length = p;
 		return (int)length;
@@ -140,38 +141,11 @@ public class Signal {
 		
 		return bruit/5;
 	}
-	public int[] vocalActivityDetection() {
-		int[] result = new int[2];
-		boolean startFound = false;
-		boolean endFound = false;
-		int i = 5;
-		int j = numberOfRasters-1;
-		double bruit = noiseLevel();
-		while (i<j && !startFound) {
-			if (energyPerRaster[i]>2*bruit) {
-				startFound = true;
-			} else i++;
-		}
-		if (startFound) result[0] = i; else result[0] = 0;
-		while (j>i && !endFound) {
-			if (2*energyPerRaster[j]<bruit) {
-				endFound = true;
-			} else j--;
-		}
-		if (endFound) result[1] = j; else result[1]=numberOfRasters-1;
-		return result;
-	}
+
 	
-	public double[][] getRealCepstres() {
+	public void printEnergyPerRaster() {
 		
-		return realCepstres;
-	}
-	
-	public void printEnergyPerRaster() 
-	{
-		
-		for (double truc : energyPerRaster) 
-			System.out.println(truc);
+		for (double truc : energyPerRaster) System.out.println(truc);
 	}
 	
 }

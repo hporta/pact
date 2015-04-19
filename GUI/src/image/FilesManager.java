@@ -1,3 +1,4 @@
+package image;
 
 public class FilesManager {
 	

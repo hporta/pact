@@ -50,6 +50,7 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 	
 	public MenuForm(MenuCard parent, MenuController controller)
 	{
+		carte = controller.getCarteController().getCarte();
 		menu = controller.getMenu();
 		menu.addObserver(this);
 		
@@ -143,20 +144,18 @@ public class MenuForm extends JPanel implements ActionListener, Observer
 	
 	private void addJComboBox()
 	{
-		JComboBox<String> temp = new JComboBox<String>();
-		fillComboBoxWithPlats(temp);
-		plats.add(temp);
-		aside.add(temp);
+		JComboBox<String> box = new JComboBox<String>();
+		fillComboBoxWithPlats(box);
+		plats.add(box);
 		update(menu, null);
 	}
 	
 	private void addJComboBox(String plat)
 	{
-		JComboBox<String> temp = new JComboBox<String>();
-		fillComboBoxWithPlats(temp);
-		temp.setSelectedItem(plat);
-		plats.add(temp);
-		aside.add(temp);
+		JComboBox<String> box = new JComboBox<String>();
+		fillComboBoxWithPlats(box);
+		box.setSelectedItem(plat);
+		plats.add(box);
 		update(menu, null);
 	}
 	

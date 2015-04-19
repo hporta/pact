@@ -21,18 +21,12 @@ public class ImageWorker implements Runnable
 		{
 			while(true)
 			{
-				Thread.sleep(30000);
 				String pathName = imageTaskList.next();
 				
 				if(pathName != null)
 				{
-					//Passer par l'analyse image
-					//envoyer au controller+
-				}
-				
-				else
-				{
-					//On ne fait rien : on attend
+					boolean libre = Analyst.isLibre(pathName);
+					controller.changeEtat(1,libre);
 				}
 			}
 		}

@@ -1,3 +1,4 @@
+package image;
 
 public class ProjectiveCorrection {
 
@@ -8,7 +9,7 @@ public class ProjectiveCorrection {
 	//Le schema serait
 	
 	//SobelEdgeDetector pour detecter les contours
-	//ProjectiveCorrection avec modèle pour calibrer
+	//ProjectiveCorrection avec modï¿½le pour calibrer
 	//RANSAC pour detecter la table sur l'image re-calibree
 	//SobelEdgeDetector au niveau de la table pour detecter les contours
 }

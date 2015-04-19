@@ -1,3 +1,5 @@
+package image;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -153,7 +155,7 @@ public class ImageProcessor {
 			// Classify points, inliers or outliers
 			for (i = 0; i < n; i++) {
 
-				if (value == "Optimisé")
+				if (value == "Optimise")
 					circle.trier(listePoints.get(i), thresholdInlier);
 
 				else if (value == "Naif") {

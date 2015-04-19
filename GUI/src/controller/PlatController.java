@@ -8,6 +8,7 @@ import restaurant.Ingredient;
 import restaurant.Plat;
 import restaurant.Stock;
 import ui.Constantes;
+import ui.ErrorDialog;
 import ui.recette.plat.PlatCard;
 import ui.recette.plat.PlatFields;
 
@@ -22,6 +23,8 @@ public class PlatController implements ActionListener
 	private final Plat plat;
 	private final Stock stock;
 	
+	private ArrayList<String> errors;
+	
 	//Superior controller
 	RecetteController carteController;
 
@@ -31,6 +34,8 @@ public class PlatController implements ActionListener
 		this.plat = plat;
 		this.stock = carteController.getStock();
 		this.carteController = carteController;
+		
+		errors = new ArrayList<String>();
 	}
 	
 	public Plat getPlat()
@@ -64,17 +69,53 @@ public class PlatController implements ActionListener
 	
 	public boolean validateNom(String nom)
 	{
-		return nom.length() <= 20 && nom != "";
+		boolean valide = true;
+		
+		if(nom.equals(""))
+		{
+			valide = false;
+			errors.add("Le nom ne doit pas être nul");
+		}
+		
+		if(nom.length() > 20)
+		{
+			valide = false;
+			errors.add("Le nom doit faire moins de 20 caractères");
+		}
+		
+		return valide;
 	}
 	
 	public boolean validateDescription(String description)
 	{
-		return description.length() <= 150 && description != "";
+		boolean valide = true;
+		
+		if(description.length() > 150)
+		{
+			valide = false;
+			errors.add("La description doit faire moins de 150 caractères");
+		}
+		
+		if(description.equals(""))
+		{
+			valide = false;
+			errors.add("La description ne doit pas être nul");
+		}
+		
+		return valide;
 	}
 	
 	public boolean validatePrice(float price)
 	{
-		return price > 0;
+		boolean valide = true;
+		
+		if(price < 0)
+		{
+			valide = false;
+			errors.add("Le prix ne peut pas être négatif");
+		}
+		
+		return valide;
 	}
 	
 	public boolean validateIngredients(ArrayList<String> liste)
@@ -125,6 +166,9 @@ public class PlatController implements ActionListener
 		{
 			if(setPlat(fields.getNom(),fields.getDescription(),fields.getPrix(),fields.getIngredients()))
 				card.switchCard();
+			
+			else
+				new ErrorDialog(errors);
 		}
 		
 	}

@@ -60,5 +60,10 @@ public class RestaurantController
 	{
 		
 	}
+	
+	public void changeEtat(int num, boolean libre)
+	{
+		terrasseController.getTerrasse().getTableById(num).setLibre(libre);
+	}
 
 }

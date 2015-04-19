@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import restaurant.Consommable;
 import ui.Constantes;
+import ui.ErrorDialog;
 import ui.stock.consommable.ConsommableCard;
 import ui.stock.consommable.ConsommableFields;
 
@@ -130,10 +131,7 @@ public class ConsommableController implements ActionListener
 				card.switchCard();
 			
 			else
-			{
-				for(String error : errors)
-					System.out.println(error);
-			}
+				new ErrorDialog(errors);
 		}
 	}
 }

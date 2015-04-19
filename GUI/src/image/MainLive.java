@@ -1,3 +1,5 @@
+package image;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.io.ByteArrayInputStream;
@@ -19,10 +21,9 @@ import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.videoio.VideoCapture;
 
 public class MainLive {
 
@@ -108,7 +109,7 @@ public class MainLive {
 					detector.process("Optimisation");
 
 					listeDePoints = SobelEdgeDetectorLive.getListPoints();
-					//$cercle.ransac(listeDePoints, "Optimisé");
+					//$cercle.ransac(listeDePoints, "Optimisï¿½");
 
 					edges = detector.getEdgesImage();
 					ImageIcon image0 = new ImageIcon(edges);

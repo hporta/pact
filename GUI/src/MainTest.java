@@ -24,7 +24,7 @@ public class MainTest
 			Thread.sleep(10000);
 			restaurantController.passerCommande("");
 			Thread.sleep(30000);
-			restaurantController.traiteImage();
+			//restaurantController.traiteImage();
 		}
 		catch(Exception e)
 		{

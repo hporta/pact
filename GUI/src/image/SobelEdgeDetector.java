@@ -124,7 +124,14 @@ public class SobelEdgeDetector {
 			
 		if(cercleTrace==1){
 			Circle cercle=new Circle(A,B,C);
-			Circle bestCircle = cercle.getBestCircle();
+			Circle bestCircle = cercle;
+			
+			/**
+			 * A voir avec Patrick
+			 */
+			//cercle.getBestCircle();
+			
+			
 			x = bestCircle.circleCenter().getX();
 			y = bestCircle.circleCenter().getY();
 			radius = bestCircle.radius();

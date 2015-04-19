@@ -21,7 +21,6 @@ public class AudioWorker implements Runnable
 		{
 			while(true)
 			{
-				Thread.sleep(30000);
 				String pathName = audioTaskList.next();
 				
 				if(pathName != null)

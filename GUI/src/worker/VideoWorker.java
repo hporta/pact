@@ -21,7 +21,6 @@ public class VideoWorker implements Runnable
 		{
 			while(true)
 			{
-				Thread.sleep(30000);
 				String pathName = videoTaskList.next();
 				
 				if(pathName != null)

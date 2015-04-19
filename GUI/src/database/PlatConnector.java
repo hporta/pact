@@ -29,7 +29,7 @@ public class PlatConnector extends Connector
 		ArrayList<Plat> liste = getPlats();
 		
 		for(Plat plat : liste)
-			plat.setIngredients(findIngredients(stock, plat.getId()));
+			plat.initIngredients(findIngredients(stock, plat.getId()));
 		
 		return liste;
 	}
@@ -104,7 +104,7 @@ public class PlatConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (insertion plat)");
 	    }
 		
 		return new Plat(name, description, price, id);
@@ -149,7 +149,7 @@ public class PlatConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (insertion ingredient plat)");
 	    }
 	}
 	
@@ -183,7 +183,7 @@ public class PlatConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (remove plat ingredient");
 	    }
 	}
 	
@@ -221,7 +221,7 @@ public class PlatConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (delte plat)");
 	    }
 	}
 	
@@ -253,7 +253,7 @@ public class PlatConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (insertion consommabel)");
+	    	System.out.println("Erreur lors de la requete SQL (delete associated plat)");
 	    }
 	}
 	
@@ -271,13 +271,16 @@ public class PlatConnector extends Connector
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection(url, username, pwd);
-	        String req = "SELECT * from ********** WHERE idPlat = ?";
-	        Statement stmt = con.createStatement();
-	        ResultSet result = stmt.executeQuery(req);
+	        String req = "SELECT * from composerPlat WHERE idPlat = ?";
+	        
+	        PreparedStatement stmt = con.prepareStatement(req);
+	        stmt.setInt(1, idPlat);
+	        
+	        ResultSet result = stmt.executeQuery();
 	        
         	while(result.next())
         	{
-        		Integer id = result.getInt("id*****");
+        		Integer id = result.getInt("idIngredient");
         		listeId.add(id);
         	}
 		}
@@ -289,7 +292,7 @@ public class PlatConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL");
+	    	System.out.println("Erreur lors de la requete SQL : findIngredient");
 	    }
 		
 		/*
@@ -332,7 +335,7 @@ public class PlatConnector extends Connector
 	    
 	    catch(SQLException e)
 	    {
-	    	System.out.println("Erreur lors de la requete SQL (update)");
+	    	System.out.println("Erreur lors de la requete SQL (update plat)");
 	    }
 	}
 }

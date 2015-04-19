@@ -1,14 +1,13 @@
 package audio.mfcc;
 
-public class Cepstre
-{
+public class Cepstre {
 
 	private double[][] cepstre;
 	
-	public Cepstre(String fileName) 
-	{
+	public Cepstre(String fileName) {
+		
 		Signal signal = new Signal(fileName);
-		cepstre = signal.getRealCepstres();
+		cepstre = signal.getCepstres();
 	}
 	
 	public Cepstre(double[][] cepstre) {

@@ -4,8 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import restaurant.Ingredient;
 import ui.Constantes;
+import ui.ErrorDialog;
 import ui.stock.ingredient.IngredientCard;
 import ui.stock.ingredient.IngredientFields;
 
@@ -61,7 +67,7 @@ public class IngredientController implements ActionListener
 	public boolean validateNom(String nom)
 	{
 		boolean valide = true;
-		if(nom == "")
+		if(nom.equals(""))
 		{
 			valide = false;
 			errors.add("Le nom ne doit pas etre nul");
@@ -106,10 +112,7 @@ public class IngredientController implements ActionListener
 				card.switchCard();
 
 			else
-			{
-				for(String error : errors)
-					System.out.println(error);
-			}
+				new ErrorDialog(errors);
 		}
 	}
 }
