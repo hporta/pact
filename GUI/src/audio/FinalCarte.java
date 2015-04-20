@@ -15,7 +15,7 @@ public class FinalCarte {
 
 	private Cepstre[][] carte;
 
-	public FinalCarte() throws IOException, WavFileException {
+	public FinalCarte() {
 
 		products = new String[size];
 		products[0] = "bierebrune";
@@ -30,7 +30,7 @@ public class FinalCarte {
 		products[9] = "menumaritime";
 		products[10] = "menuvegetarien";
 		carte = new Cepstre[size][numberOfSpeakers];
-		this.fill();
+		this.fillCarte();
 
 	}
 
@@ -62,38 +62,49 @@ public class FinalCarte {
 		return carte;
 	}
 
-	public String result(int min) {
+	public int result(int min) {
 		
 		switch (min) {
+		//bière brune
 		case 0 : 
-			return "bi�re brune";
+			return 1;
+		//café expresso
 		case 1 :
-			return "caf� expresso";
+			return 5;
+		//coca cola
 		case 2 :
-			return "Coca-Cola";
+			return 2;
+		//jus d'orange
 		case 3 :
-			return "jus d'orange";
+			return 4;
+		//thé à la menthe
 		case 4 :
-			return "th� � la menthe";
+			return 3;
+		//eau gazeuse
 		case 5 :
-			return "eau gazeuse";
-		case 6:
-			return "Menu Carnivore";
-		case 7:
-			return "Menu Enfants";
-		case 8:
-			return "Menu Gourmet";
-		case 9:
-			return "Menu Maritime";
-		case 10:
-			return "Menu V�g�tarien";
+			return 6;
+		//menu carnivore
+		//case 6:
+		//	return "Menu Carnivore";
+		//menu enfants
+		//case 7:
+		//	return "Menu Enfants";
+		//menu gourmet
+		//case 8:
+		//	return "Menu Gourmet";
+		//menu maritime
+		//case 9:
+		//	return "Menu Maritime";
+		//menu végétarien
+		//case 10:
+		//	return "Menu Végétarien";
 		default : 
-			return "nope";
+			return 1;
 		}
 		
 	}
 
-	public String recognize(String recordName) {
+	public int recognize(String recordName) {
 
 		Cepstre sample = new Cepstre(recordName);
 		double[][] warpingDistances = new double[size][numberOfTemplates];
@@ -147,6 +158,35 @@ public class FinalCarte {
 							}
 						}
 						pw.close();
+				}
+			}
+		} catch (IOException exception) {
+			System.out.println("Erreur lors de la lecture : "+ exception.getMessage());
+		}
+	}
+	
+	public void fillCarte()
+	{
+		Cepstre[][] obj = getCarte();
+		
+		try {
+			for (int i = 0; i < size; i++) {
+				for (int j = 0; j < numberOfSpeakers; j++){
+						File f = new File("data/base/cepstre" + i + j + ".txt");
+						BufferedReader reader = new BufferedReader(new FileReader(f));
+						int nbLignes = Integer.parseInt(reader.readLine());
+						int nbColonnes = Integer.parseInt(reader.readLine());
+						
+						double[][] cepstre = new double[nbLignes][nbColonnes];
+
+						for (int k = 0; k < nbLignes; k++) {
+							for (int l = 0; l < nbColonnes; l++) {
+								cepstre[k][l] = Double.parseDouble(reader.readLine());
+							}
+						}
+						
+						obj[i][j] = new Cepstre(cepstre);
+						reader.close();
 				}
 			}
 		} catch (IOException exception) {

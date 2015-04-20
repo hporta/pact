@@ -10,12 +10,14 @@ public class Table extends Observable
 	private final int no;
 	private boolean commande; 
 	private boolean libre;
+	private boolean propre;
 	
 	public Table(int no)
 	{
 		this.no = no;
 		this.commande = false;
 		this.libre = true;
+		this.propre = true;
 	}
 
 	public final boolean isCommande()
@@ -40,6 +42,17 @@ public class Table extends Observable
 		update();
 	}
 	
+	public void setPropre(boolean propre)
+	{
+		this.propre = propre;
+		update();
+	}
+	
+	public final boolean isPropre()
+	{
+		return propre;
+	}
+	
 	public final int getNo()
 	{	
 		return no;
@@ -53,4 +66,6 @@ public class Table extends Observable
 		setChanged();
 		notifyObservers();		
 	}
+
+
 }

@@ -1,11 +1,8 @@
 package controller;
 
-import image.Analyst;
-
 import java.util.ArrayList;
 
 import restaurant.Achetable;
-import restaurant.Consommable;
 import restaurant.Restaurant;
 
 public class RestaurantController 
@@ -39,10 +36,10 @@ public class RestaurantController
 		return stockController;
 	}
 
-	public void passerCommande(String commande) 
+	public void passerCommande(int achetable) 
 	{
 		ArrayList<Achetable> listeAchetable = new ArrayList<Achetable>();
-		listeAchetable.add(stockController.getStock().findConsommableById(5));
+		listeAchetable.add(stockController.getStock().findConsommableById(achetable));
 		compteController.passerCommande(listeAchetable);
 	}
 
@@ -51,17 +48,12 @@ public class RestaurantController
 		return compteController;
 	}
 	
-	public void traiteImage()
+	public void changeEtat(int num, boolean propre)
 	{
-		terrasseController.getTerrasse().getTableById(1).setLibre(false);
+		terrasseController.getTerrasse().getTableById(num).setPropre(propre);
 	}
 	
-	public void traiteAudio()
-	{
-		
-	}
-	
-	public void changeEtat(int num, boolean libre)
+	public void changeLibre(int num, boolean libre)
 	{
 		terrasseController.getTerrasse().getTableById(num).setLibre(libre);
 	}

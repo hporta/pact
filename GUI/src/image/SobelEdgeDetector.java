@@ -111,7 +111,6 @@ public class SobelEdgeDetector {
 	    double r=0;
 	    double angle;
 	    
-	    
 	    //Selectionner 3 points
 		Point A=new Point(-10,0,0);
 		Point B=new Point(10,12,1);
@@ -124,14 +123,7 @@ public class SobelEdgeDetector {
 			
 		if(cercleTrace==1){
 			Circle cercle=new Circle(A,B,C);
-			Circle bestCircle = cercle;
-			
-			/**
-			 * A voir avec Patrick
-			 */
-			//cercle.getBestCircle();
-			
-			
+			Circle bestCircle = ImageProcessor.getBestCircle();
 			x = bestCircle.circleCenter().getX();
 			y = bestCircle.circleCenter().getY();
 			radius = bestCircle.radius();

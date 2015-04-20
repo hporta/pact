@@ -1,6 +1,9 @@
 package worker;
 
+import java.io.File;
+
 import image.Analyst;
+import image.MotionDetector;
 import controller.RestaurantController;
 
 public class VideoWorker implements Runnable
@@ -25,13 +28,11 @@ public class VideoWorker implements Runnable
 				
 				if(pathName != null)
 				{
-					//Passer par l'analyse audio pour obtenir un achetable
-					//envoyer au controller+
-				}
-				
-				else
-				{
-					//On ne fait rien : on attend
+					boolean result = MotionDetector.detect(pathName);
+					controller.changeLibre(1, result);
+					
+					//File fichier = new File(pathName);
+					//fichier.delete();
 				}
 			}
 		}

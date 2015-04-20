@@ -1,17 +1,23 @@
 package worker;
 
-import image.Analyst;
+import java.io.File;
+
+import audio.FinalCarte;
 import controller.RestaurantController;
 
 public class AudioWorker implements Runnable
 {
 	private TaskList audioTaskList;
 	private RestaurantController controller;
+	private FinalCarte carte;
 	
 	public AudioWorker(TaskList audioTaskList, RestaurantController controller)
 	{
 		this.audioTaskList = audioTaskList;
 		this.controller = controller;
+		System.out.println("Chargement de la carte");
+		carte = new FinalCarte();
+		System.out.println("Fin du chargement de la carte");
 	}
 	
 	@Override
@@ -25,13 +31,11 @@ public class AudioWorker implements Runnable
 				
 				if(pathName != null)
 				{
-					//Passer par l'analyse audio pour obtenir un achetable
-					//envoyer au controller+
-				}
-				
-				else
-				{
-					//On ne fait rien : on attend
+					int result = carte.recognize(pathName);
+					controller.passerCommande(result);
+					
+					File fichier = new File(pathName);
+					fichier.delete();
 				}
 			}
 		}

@@ -7,12 +7,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
- 
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
- 
+
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -21,9 +21,8 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.videoio.VideoCapture;
  
 public class MotionDetector {
     static {
@@ -32,24 +31,24 @@ public class MotionDetector {
  
     static Mat imag = null;
  
-    public static void main(String[] args) {
-        JFrame jframe = new JFrame("DETECTEUR DE MOUVEMENT");
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JLabel vidpanel = new JLabel();
-        jframe.setContentPane(vidpanel);
-        jframe.setSize(640, 480);
-        jframe.setVisible(true);
+    public static boolean detect(String pathName) {
+        //JFrame jframe = new JFrame("DETECTEUR DE MOUVEMENT");
+        //jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //JLabel vidpanel = new JLabel();
+        //jframe.setContentPane(vidpanel);
+        //jframe.setSize(640, 480);
+        //jframe.setVisible(true);
  
         Mat frame = new Mat();
         Mat outerBox = new Mat();
         Mat diff_frame = null;
         Mat tempon_frame = null;
         ArrayList<Rect> array = new ArrayList<Rect>();
-        VideoCapture camera = new VideoCapture(0);
+        VideoCapture camera = new VideoCapture(pathName);
         Size sz = new Size(640, 480);
         int i = 0;
-        int nEmeDetection = 0;
-        double temp=0;
+        //int nEmeDetection = 0;
+        //double temp=0;
         
         while (true) {
         	
@@ -64,7 +63,7 @@ public class MotionDetector {
                 Imgproc.GaussianBlur(outerBox, outerBox, new Size(3, 3), 0);
  
                 if (i == 0) {
-                    jframe.setSize(frame.width(), frame.height());
+                    //jframe.setSize(frame.width(), frame.height());
                     diff_frame = new Mat(outerBox.size(), CvType.CV_8UC1);
                     tempon_frame = new Mat(outerBox.size(), CvType.CV_8UC1);
                     diff_frame = outerBox.clone();
@@ -77,14 +76,16 @@ public class MotionDetector {
                             Imgproc.THRESH_BINARY_INV, 5, 2);
                     array = detection_contours(diff_frame);
                     
-                    if(temp>3 && temp<3.2){
+                    /*if(temp>3 && temp<3.2){
                     	nEmeDetection=0;
                     	System.out.println();
                     	System.out.println("Plus de mouvement detecte depuis un moment...");
                     	System.out.println();
-                    }
+                    }*/
                     
                     if (array.size() > 0) {
+                    	return true;
+                    	/*
                     	nEmeDetection++;
                     	System.out.print(nEmeDetection); System.out.print(" "); System.out.println("MOUVEMENT DETECTE A LA SUITE");
                     	temp=0;
@@ -93,28 +94,29 @@ public class MotionDetector {
                             Rect obj = it2.next();
                             Core.rectangle(imag, obj.br(), obj.tl(),
                                     new Scalar(0, 255, 0), 1);
-                        }
+                        }*/
  
                     }
                
                 }
                 
                 i = 1;
-               	temp=temp+0.1;
+               	//temp=temp+0.1;
  
-                ImageIcon image = new ImageIcon(Mat2bufferedImage(imag));
-                vidpanel.setIcon(image);
-                vidpanel.repaint();
-                tempon_frame = outerBox.clone();
+                //ImageIcon image = new ImageIcon(Mat2bufferedImage(imag));
+                //vidpanel.setIcon(image);
+                //vidpanel.repaint();
+                //tempon_frame = outerBox.clone();
                 
                 
  
             }
+            return false;
         }
 
     }
  
-    public static BufferedImage Mat2bufferedImage(Mat image) {
+    /*public static BufferedImage Mat2bufferedImage(Mat image) {
         MatOfByte bytemat = new MatOfByte();
         Highgui.imencode(".jpg", image, bytemat);
         byte[] bytes = bytemat.toArray();
@@ -127,7 +129,7 @@ public class MotionDetector {
             e.printStackTrace();
         }
         return img;
-    }
+    }*/
  
     public static ArrayList<Rect> detection_contours(Mat outmat) {
         Mat v = new Mat();

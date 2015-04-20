@@ -59,20 +59,24 @@ public class ParasolLabel extends JLabel implements Observer
 	
 	private Color getColor()
 	{
-		//pas de commande, personne n'est là
-		if(!table.isCommande() && table.isLibre())
-		{
-			return GREEN;
-		}
-		
-		//une commande, et une table --> il faut aller servir
-		else if(table.isCommande() && table.isLibre())
+		//Trié par ordre d'importance
+		if(table.isCommande())
 		{
 			return RED;
 		}
 		
+		else if(!table.isLibre())
+		{
+			return Color.ORANGE;
+		}
+		
+		else if(!table.isPropre())
+		{
+			return Color.blue;
+		}
+		
 		else
-			return Color.orange;
+			return GREEN;
 	}
 	
 	@Override
